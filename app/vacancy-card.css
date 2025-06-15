@@ -1,0 +1,36 @@
+.vacancy-card-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.vacancy-card-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url("/images/bg-stars.svg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.vacancy-card-container:hover .vacancy-card-bg {
+  opacity: 1;
+}
+
+.vacancy-card-content {
+  position: relative;
+  z-index: 2;
+}
+
+.vacancy-card {
+  transition-duration: 0.3s;
+  background-image: url("/unexisted.svg");
+}
+
+.vacancy-card:hover {
+  background-image: url("/images/bg-stars.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}

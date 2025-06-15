@@ -1,0 +1,122 @@
+.login-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  min-height: min(600px, 80vh);
+}
+
+.login-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
+  border-right: 1px solid var(--border-color, #e5e5e5);
+}
+
+.login-headline {
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--foreground, #171717);
+  margin: 0;
+}
+
+.login-image {
+  margin: 2rem 0;
+}
+
+.login-right {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.social-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.social-button {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color, #e5e5e5);
+  background: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.social-button.telegram {
+  background: #27A7E7;
+  color: white;
+}
+
+.social-button.hh {
+  background: #D6001C;
+  color: white;
+}
+
+.divider {
+  text-align: center;
+  position: relative;
+  margin: 1rem 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 45%;
+  height: 1px;
+  background-color: var(--border-color, #e5e5e5);
+}
+
+.divider::before { left: 0; }
+.divider::after { right: 0; }
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color, #e5e5e5);
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.login-button {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--primary, #0070f3);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.login-button:hover {
+  background: var(--primary-dark, #0051a2);
+}
+
+.register-link {
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.register-link a {
+  color: var(--primary, #0070f3);
+  text-decoration: none;
+  font-weight: 500;
+}

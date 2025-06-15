@@ -1,0 +1,68 @@
+.header {
+  border-bottom: 1px solid var(--border-color, #e5e5e5);
+  background: var(--background, #ffffff);
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 100%;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  gap: 32px;
+}
+
+.header-logo {
+  flex-shrink: 0;
+}
+
+.header-nav {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.header-auth {
+  flex-shrink: 0;
+}
+
+.login-button {
+  padding: 8px 24px;
+  background: var(--primary, #0070f3);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.login-button:hover {
+  background: var(--primary-dark, #0051a2);
+}
+
+/* Медиа-запрос для мобильных устройств */
+@media (max-width: 768px) {
+  .header-container {
+    padding: 0 16px;
+  }
+
+  .header-content {
+    gap: 16px;
+  }
+
+  .login-button {
+    padding: 8px 16px;
+  }
+}
