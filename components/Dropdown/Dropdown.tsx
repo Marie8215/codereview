@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./Dropdown.css";
 import Image from "next/image";
+import { wixMadeforText } from "@/app/fonts";
 
 interface DropdownProps {
   trigger: React.ReactNode;
@@ -34,7 +35,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
   return (
     <div ref={dropdownRef}>
       <div
-        className="flex items-center whitespace-nowrap gap-[5px]"
+        className={`flex items-center gap-[5px] ${wixMadeforText.className}`}
         onClick={() => setIsOpen(!isOpen)}
       >
         {trigger}

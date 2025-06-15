@@ -1,18 +1,22 @@
+import { wixMadeforText } from '@/app/fonts';
 import { ReactNode } from 'react';
 
 interface IconWithTextProps {
   icon: ReactNode;
-  text: string;
+  text: ReactNode;
   gap?: number;
+  className?: string;
 }
 
-const IconWithText = ({ icon, text, gap = 8 }: IconWithTextProps) => {
+const IconWithText = ({ icon, text, className, gap = 8 }: IconWithTextProps) => {
   return (
     <div 
-      className={`flex items-center whitespace-nowrap gap-[${gap}px]`}
+      className={`flex items-center whitespace-nowrap gap-[6px] ${className}`}
     >
-      {icon}
-      <span className="inline-block">{text}</span>
+      <span className='inline-block'>{icon}</span>
+      <span className={`inline-block font-medium text-[18px] leading-[22px] tracking-[-0.5px] ${wixMadeforText.className}`}>
+        {text}
+      </span>
     </div>
   );
 };

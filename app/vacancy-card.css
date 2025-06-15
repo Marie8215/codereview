@@ -15,6 +15,18 @@
   z-index: 1;
 }
 
+.vacancy-card-bg-small {
+  position: absolute;
+  inset: 0;
+  background-image: url("/images/bg-stars.svg");
+  background-size: cover;
+  background-position: center;
+  transition: opacity 0.3s ease-out;
+  pointer-events: none;
+  z-index: 1;
+}
+
+
 .vacancy-card-container:hover .vacancy-card-bg {
   opacity: 1;
 }

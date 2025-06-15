@@ -60,7 +60,6 @@
 .card-container:hover .card-background-short-stars,
 .card-container:hover .card-background-long-stars {
   opacity: 1;
-  /* animation: slideBackground 0.4s ease-out forwards; */
 }
 
 .card-content {

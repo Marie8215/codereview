@@ -1,7 +1,7 @@
 const Logo = () => {
   return (
     <span
-      className="font-semibold text-[22px] leading-[22px] tracking-[-1px]"
+      className="text-[22px] leading-[22px] tracking-[-1px] font-bold"
       style={{
         background: "linear-gradient(85.18deg, #2093FE 0.83%, rgba(194, 23, 254, 0.9) 91.48%)",
         WebkitBackgroundClip: "text",
@@ -9,7 +9,9 @@ const Logo = () => {
         backgroundClip: "text"
       }}
     >
-      {"<"}<span className="font-normal">code</span>{"review/>"}
+      {"<"}<span className="font-normal hidden md:inline">{"code"}</span>
+      <span className="hidden md:inline">{"review/>"}</span>
+      <span className="inline md:hidden">{"/>"}</span>
     </span>
   );
 };

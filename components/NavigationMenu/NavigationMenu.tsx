@@ -1,65 +1,42 @@
-import Image from 'next/image';
-import { Dropdown } from '../Dropdown/Dropdown';
-import IconWithText from '../IconWithText/IconWithText';
-import './NavigationMenu.css';
+import { Dropdown } from "../Dropdown/Dropdown";
+import IconWithText from "../IconWithText/IconWithText";
 
-const navigationData = [
-  {
-    category: "Разработка",
-    items: ["Frontend", "Backend", "Mobile", "DevOps", "GameDev"]
-  },
-  {
-    category: "Дизайн",
-    items: ["UI/UX", "Графический дизайн", "Веб-дизайн", "Motion"]
-  },
-  {
-    category: "Маркетинг",
-    items: ["SMM", "PR", "Контекстная реклама", "SEO"]
-  },
-  {
-    category: "Менеджмент",
-    items: ["Project Manager", "Product Manager", "Team Lead", "CTO"]
-  }
-];
+import { pageLinks } from "@/app/data/static-content";
+import { NavMenuButton } from "./NavMenuBurron";
+import { StackOptions } from "../StackOptions/StackOptions";
 
 export const NavigationMenu = () => {
-  return (
-    <Dropdown
-      align="center"
-      trigger={
-      <IconWithText text='Data Science' icon={<Image
-        src="/images/menu-icon.svg"
-        alt="menu"
-        width={18}
-        height={18}
-        priority/>}/>
+  const columnsCount = 2;
+  const rowsCount = Math.ceil(pageLinks.length / columnsCount);
+
+  // Разбиваем массив на строки по колонкам — чтобы получить порядок поколоночного заполнения
+  const reorderedLinks = [];
+
+  for (let row = 0; row < rowsCount; row++) {
+    for (let col = 0; col < columnsCount; col++) {
+      const index = col * rowsCount + row;
+      if (index < pageLinks.length) {
+        reorderedLinks.push(pageLinks[index]);
       }
-    >
-      <div className="nav-menu">
-        <div className="nav-grid">
-          {navigationData.map((section, index) => (
-            <div key={index} className="nav-section">
-              <h3 className="nav-category">{section.category}</h3>
-              <ul className="nav-items">
-                {section.items.map((item, idx) => (
-                  <li key={idx}>
-                    <a href="#" className="nav-link">
-                      {item}
-                      <span className="nav-count">24</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+    }
+  }
+
+  return (
+    <Dropdown align="center" trigger={<span className="cursor-pointer"><NavMenuButton /></span>}>
+      <div className="md:w-[584px] md:h-[270px] w-[350px] rounded-xl bg-white md:p-5 p-[15px] overflow-y-auto shadow-dropdown">
+        <StackOptions size="small"/>
+        <div className="flex flex-wrap gap-x-20 gap-y-3.5">
+          {reorderedLinks.map((link) => (
+            <IconWithText
+              key={link.title}
+              icon={link.iconFactory(20)}
+              text={
+                <span className="font-normal text-[18px] leading-[22px] tracking-[-0.5px] w-[196px] inline-block">
+                  {link.title}
+                </span>
+              }
+            />
           ))}
-        </div>
-        <div className="nav-footer">
-          <a href="#" className="nav-all">
-            Все специализации
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M4 10H16M16 10L10 4M16 10L10 16" stroke="currentColor" strokeWidth="2"/>
-            </svg>
-          </a>
         </div>
       </div>
     </Dropdown>
