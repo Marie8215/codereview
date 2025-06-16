@@ -1,15 +1,14 @@
-/* Основной контейнер */
-.login-container {
+.register-container {
   width: 800px;
-  height: 522px;
+  height: 682px;
+  display: flex;
   background-color: white;
   border-radius: 24px;
-  display: flex;
   overflow: hidden;
 }
 
 /* Левая панель */
-.login-left-panel {
+.register-left-panel {
   width: 380px;
   height: 100%;
   background-color: #F5F5F5;
@@ -20,7 +19,8 @@
   box-sizing: border-box;
 }
 
-.login-slogan {
+.register-slogan {
+  font-family: 'Wix Madefor Text', sans-serif;
   font-weight: 500;
   font-size: 22px;
   line-height: 26px;
@@ -30,13 +30,13 @@
   margin-bottom: 40px;
 }
 
-.login-image {
+.register-image {
   width: 276px;
   height: 286px;
   object-fit: contain;
 }
 
-.login-logo {
+.register-logo {
   margin-top: auto;
   margin-bottom: 30px;
   font-weight: 600;
@@ -48,68 +48,59 @@
 }
 
 /* Правая панель */
-.login-right-panel {
+.register-right-panel {
   width: calc(100% - 380px);
   height: 100%;
   background-color: white;
-  padding: 30px;
   box-sizing: border-box;
+}
+
+.register-right-content {
+  padding: 30px;
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.login-right-panel .divider-line {
+.register-right-content .divider-line {
   margin-bottom: 15px;
 }
 
-/* Социальные кнопки */
 .social-buttons {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  margin-bottom: 15px; /* добавляем отступ до разделителя */
 }
 
-/* Удаляем .social-button и .social-icon стили, так как они теперь в SocialButton.css */
-
-/* Разделитель */
-/* Удаляем стили .divider-line, .divider-line::before, .divider-line::after и .divider-text, 
-   так как они теперь в Divider.css */
-
-/* Форма входа */
-.login-form {
+.register-form {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  margin-top: 0; /* убираем margin-top если он был */
+}
+
+/* Отступы для инпутов */
+.register-form .form-group {
+  margin-bottom: 15px !important;
 }
 
 .password-wrapper {
   position: relative;
+  margin: 0;
 }
 
 .eye-toggle {
   position: absolute;
-  right: 17px;
-  top: 50%;
+  right: 15px;
+  top: calc(50% + 11px);
   transform: translateY(-50%);
   width: 24px;
   height: 24px;
   opacity: 0.54;
   cursor: pointer;
+  z-index: 1;
 }
-
-.forgot-password {
-  font-family: 'Wix Madefor Text', sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 20px;
-  letter-spacing: -0.5px;
-  color: #636469;
-  margin-bottom: 20px;
-  text-decoration: none;
-
-}
-
-/* Удаляем .submit-button стили, так как они теперь в AuthButton.css */
 
 .register-prompt {
   font-weight: 500;
@@ -119,6 +110,7 @@
   color: #636469;
   text-align: center;
   margin: 0;
+  margin-top: auto;
 }
 
 .register-link {
@@ -126,47 +118,77 @@
   text-decoration: none;
 }
 
-/* Target the form-group inside password-wrapper specifically in login form */
-.login-form .password-wrapper .form-group {
-  margin-bottom: 10px !important;
+/* Убираем дополнительные отступы у инпутов */
+.register-form .form-group {
+  margin: 0;
+  /* margin-bottom: 15px; */
+}
+
+
+/* Убираем дублирующий отступ у кнопки */
+.register-form .auth-button {
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.login-link {
+  color: #0560C9;
+  font-family: 'Wix Madefor Text', sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+}
+    
+.login-prompt {
+  font-weight: 500;
+  font-family: 'Wix Madefor Text', sans-serif;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: -0.5px;
+  color: #636469;
+  text-align: center;
+  margin: 0;
+  margin-top: auto;
+}
+
+.register-form .password-wrapper:first-of-type {
+  margin-bottom: 10px;
 }
 
 @media (max-width: 375px) {
-  .login-container {
+  .register-container {
     width: 375px;
     height: auto;
-    min-height: 450px;
+    min-height: 600px;
   }
 
-  .login-left-panel {
+  .register-left-panel {
     display: none;
   }
 
-  .login-right-panel {
+  .register-right-panel {
     width: 100%;
-    padding: 20px;
   }
 
-  .social-buttons {
-    margin-bottom: 15px;
+  .register-right-content {
+    padding: 20px;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .login-container {
+  .register-container {
     width: 90%;
     max-width: 375px;
     height: auto;
-    min-height: 450px;
+    min-height: 600px;
     margin: 0 auto;
     border-radius: 0;
   }
 
-  .login-left-panel {
+  .register-left-panel {
     display: none;
   }
 
-  .login-right-panel {
+  .register-right-panel {
     width: 100%;
   }
 }

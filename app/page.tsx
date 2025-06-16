@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <MainPageBackground />
-      <div className="flex flex-col items-center max-w-[1000px] mx-auto z-0">
+      <div className="flex flex-col items-center max-w-[1000px] mx-auto z-0 md:mt-[100px] mt-[88px]">
         <Image
           src="/images/sophy-main.png"
           alt="Sophy"

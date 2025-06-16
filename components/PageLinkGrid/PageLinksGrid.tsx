@@ -8,7 +8,7 @@ import Link from "next/link";
 export const PageLinksGrid = () => {
   return (
     <div
-      className={`mx-auto lg:w-[1020px] w-[345px] sm:w-[90%] ${wixMadeforText.className}`}
+      className={`mx-auto lg:w-[1020px] w-[345px] sm:w-[90%] ${wixMadeforText.className} mb-[50px] md:mb-[100px]`}
     >
       <div className="grid md:gap-2 md:grid-cols-4 grid-cols-2 gap-[5px]">
         {pageLinks

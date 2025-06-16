@@ -1,9 +1,10 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
+import { wixMadeforText } from "@/app/fonts";
 import "./Marquee.css";
 
 interface MarqueeProps {
-  text: string;
+  text: ReactNode;
   speed?: number; // Скорость в секундах, по умолчанию 20
 }
 
@@ -32,27 +33,42 @@ export const Marquee: React.FC<MarqueeProps> = ({ text, speed = 20 }) => {
   }, [text]);
 
   return (
-    <div className="marquee-container" ref={containerRef}>
+    <div className="marquee-container flex" ref={containerRef}>
       <div
         className="marquee-track"
         style={{ "--marquee-duration": `${speed}s` } as React.CSSProperties}
       >
-        {/* Первая копия для измерения и отображения */}
         <div className="marquee-content">
           {[...Array(copies)].map((_, index) => (
             <span
               key={index}
-              className="marquee-text"
+              className={`
+                marquee-text
+                md:text-[16px] text-[14px] 
+                md:leading-[18px] leading-[16px] 
+                tracking-[-0.5px] 
+                font-medium
+                ${wixMadeforText.className}
+              `}
               ref={index === 0 ? textRef : undefined}
             >
               {text}
             </span>
           ))}
         </div>
-        {/* Вторая копия для непрерывности */}
         <div className="marquee-content">
           {[...Array(copies)].map((_, index) => (
-            <span key={index} className="marquee-text">
+            <span
+              key={index}
+              className={`
+                marquee-text
+                md:text-[16px] text-[14px] 
+                md:leading-[18px] leading-[16px] 
+                tracking-[-0.5px] 
+                font-medium
+                ${wixMadeforText.className}
+              `}
+            >
               {text}
             </span>
           ))}

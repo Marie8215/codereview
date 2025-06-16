@@ -1,0 +1,22 @@
+.divider-line {
+  display: flex;
+  align-items: center;
+  height: 20px; /* фиксируем высоту всего блока */
+}
+
+.divider-line::before,
+.divider-line::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: #F5F5F5;
+}
+
+.divider-text {
+  padding: 0 12px;
+  font-family: 'Wix Madefor Text', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #636469;
+}

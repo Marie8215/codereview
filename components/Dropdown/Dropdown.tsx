@@ -1,19 +1,24 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import "./Dropdown.css";
-import Image from "next/image";
-import { wixMadeforText } from "@/app/fonts";
+import { DropdownTrigger } from "./DropdownTrigger";
+import React from "react";
+import ButtonLikeWrapper from "@/components/ButtonLikeWrapper/ButtonLikeWrapper";
 
 interface DropdownProps {
   trigger: React.ReactNode;
   children: React.ReactNode;
   align?: "left" | "center";
+  relative?: boolean;
+  buttonLike?: boolean;
 }
 
 export const Dropdown: React.FC<DropdownProps> = ({
   trigger,
   children,
   align = "left",
+  relative = false,
+  buttonLike = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -33,20 +38,18 @@ export const Dropdown: React.FC<DropdownProps> = ({
   }, []);
 
   return (
-    <div ref={dropdownRef}>
-      <div
-        className={`flex items-center gap-[5px] ${wixMadeforText.className}`}
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        {trigger}
-        <Image
-          src="/images/arrow-down-icon.svg"
-          alt=">"
-          width={16}
-          height={16}
-          priority
-        />
-      </div>
+    <div ref={dropdownRef} className={relative ? "relative" : ""}>
+      {buttonLike ? (
+        <ButtonLikeWrapper>
+          <DropdownTrigger onClick={() => setIsOpen(!isOpen)}>
+            {trigger}
+          </DropdownTrigger>
+        </ButtonLikeWrapper>
+      ) : (
+        <DropdownTrigger onClick={() => setIsOpen(!isOpen)}>
+          {trigger}
+        </DropdownTrigger>
+      )}
       {isOpen && (
         <div
           className={`dropdown-content ${

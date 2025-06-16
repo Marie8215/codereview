@@ -1,8 +1,14 @@
 .marquee-container {
   width: 100%;
-  height: 48px;
+  height: 40px;
   overflow: hidden;
-  background: var(--background, #ffffff);
+    background: linear-gradient(
+    90deg,
+    #F4B8B8,
+    #EAD6B5,
+    #E3EAB3,
+    #C5F1D0
+  );
   position: relative;
 }
 

@@ -36,6 +36,18 @@ export const SparklesIcon = ({ size = 26 }) => {
   return <Icon src="/images/sparkles-icon.svg" size={size} />;
 };
 
+export const WorldIcon = ({ size = 26 }) => {
+  return <Icon src="/images/world-icon.svg" size={size} />;
+};
+
+export const MoneybagIcon = ({ size = 26 }) => {
+  return <Icon src="/images/moneybag-icon.svg" size={size} />;
+};
+
+export const BlackDuckIcon = ({ size = 18 }) => {
+  return <Icon src="/images/black-duck-icon.svg" size={size} />;
+};
+
 export const PhotoContIcon = () => {
   return (
     <Icon src="/images/photo-cont-icon.svg" className="w-[115px] h-[40px]" />

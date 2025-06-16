@@ -1,0 +1,28 @@
+.social-button {
+  height: 46px;
+  background-color: #F0F1F1;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Wix Madefor Text', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  letter-spacing: -0.5px;
+  color: #232325;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 100%;
+}
+
+.social-button:hover {
+  background-color: #e0e1e1;
+}
+
+.social-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+}

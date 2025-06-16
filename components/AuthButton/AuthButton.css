@@ -1,0 +1,23 @@
+.auth-button {
+  width: 100%;
+  height: 50px; /* меняем с 56px на 50px */
+  border: none;
+  border-radius: 18px;
+  background: linear-gradient(90deg, #2093FE 0%, #C217FE 90%);
+  color: white;
+  font-family: 'Wix Madefor Text', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: -0.5px;
+  cursor: pointer;
+  /* margin-bottom: 20px; */
+}
+
+.auth-button:hover {
+  opacity: 0.9;
+}
+
+.auth-button:active {
+  transform: scale(0.98);
+}

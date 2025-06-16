@@ -4,7 +4,7 @@
   --color-neutral-10: #ffffff;
   --color-neutral-100: #f6f6f6;
   --color-neutral-700: #414246;
-  --color-neutral-700: #232325;
+  --color-neutral-800: #232325;
   --shadow-header: 0px 0px 12px 0px rgba(24, 44, 194, 0.05);
   --shadow-dropdown: 0px 1px 12px 2px rgba(36, 36, 36, 0.07);
 }
@@ -20,7 +20,24 @@
   --foreground: #171717;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+  }
 }

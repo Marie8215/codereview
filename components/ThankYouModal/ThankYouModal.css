@@ -1,0 +1,152 @@
+.thank-you-container {
+  width: 800px;
+  height: 532px;
+  display: flex;
+  background-color: white;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.thank-you-left-panel {
+  width: 380px;
+  height: 100%;
+  background-color: #F5F5F5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.hearts-image {
+  margin-top: 41px;
+  margin-bottom: 72px;
+  width: 367px;
+  height: 367px;
+  object-fit: contain;
+}
+
+.thank-you-logo {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 22px;
+  letter-spacing: -1px;
+  color: #636469;
+  text-align: center;
+}
+
+.thank-you-right-panel {
+  width: calc(100% - 380px);
+  height: 100%;
+  background-color: white;
+}
+
+.thank-you-right-content {
+  padding: 30px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.thank-you-title {
+  font-family: 'Wix Madefor Text', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: -1px;
+  color: #232325;
+  text-align: left;
+  margin: 0;
+}
+
+.thank-you-description {
+  margin-top: 20px;
+  font-family: 'Wix Madefor Text', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: -0.5px;
+  color: #232325;
+}
+
+.thank-you-description p {
+  margin: 0;
+  line-height: 22px;
+}
+
+.thank-you-description p:not(:last-child) {
+  margin-bottom: 16px;
+}
+
+.thank-you-description p:last-child {
+  white-space: nowrap;
+  font-family: 'Wix Madefor Text', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: -0.5px;
+  color: #232325;
+}
+
+.thank-you-right-content .auth-button {
+  margin-top: auto;
+}
+
+.eye-toggle {
+  position: absolute;
+  right: 15px;
+  top: calc(50% + 11px);
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  opacity: 0.54;
+  cursor: pointer;
+  z-index: 1;
+  filter: brightness(0); /* делаем иконку черной */
+}
+
+@media (max-width: 375px) {
+  .thank-you-container {
+    width: 375px;
+    height: auto;
+    min-height: 450px;
+  }
+
+  .thank-you-left-panel {
+    display: none;
+  }
+
+  .thank-you-right-panel {
+    width: 100%;
+  }
+
+  .thank-you-right-content {
+    padding: 20px;
+  }
+
+  .thank-you-title {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .thank-you-container {
+    width: 90%;
+    max-width: 375px;
+    height: auto;
+    min-height: 450px;
+    margin: 0 auto;
+    border-radius: 0;
+  }
+
+  .thank-you-left-panel {
+    display: none;
+  }
+
+  .thank-you-right-panel {
+    width: 100%;
+  }
+}
