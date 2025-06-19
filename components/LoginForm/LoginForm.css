@@ -98,7 +98,6 @@
 }
 
 .forgot-password {
-  font-family: 'Wix Madefor Text', sans-serif;
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
@@ -106,7 +105,6 @@
   color: #636469;
   margin-bottom: 20px;
   text-decoration: none;
-
 }
 
 /* Удаляем .submit-button стили, так как они теперь в AuthButton.css */
@@ -124,49 +122,4 @@
 .register-link {
   color: #0560C9;
   text-decoration: none;
-}
-
-/* Target the form-group inside password-wrapper specifically in login form */
-.login-form .password-wrapper .form-group {
-  margin-bottom: 10px !important;
-}
-
-@media (max-width: 375px) {
-  .login-container {
-    width: 375px;
-    height: auto;
-    min-height: 450px;
-  }
-
-  .login-left-panel {
-    display: none;
-  }
-
-  .login-right-panel {
-    width: 100%;
-    padding: 20px;
-  }
-
-  .social-buttons {
-    margin-bottom: 15px;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .login-container {
-    width: 90%;
-    max-width: 375px;
-    height: auto;
-    min-height: 450px;
-    margin: 0 auto;
-    border-radius: 0;
-  }
-
-  .login-left-panel {
-    display: none;
-  }
-
-  .login-right-panel {
-    width: 100%;
-  }
 }

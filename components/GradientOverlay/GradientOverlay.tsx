@@ -8,14 +8,12 @@ interface GradientOverlayProps {
   children: React.ReactNode;
   childrenRef: React.RefObject<HTMLDivElement> | React.RefObject<null>;
   cardHeight: number;
-  className?: string;
 }
 
 const GradientOverlay: React.FC<GradientOverlayProps> = ({
   children,
   childrenRef,
   cardHeight,
-  className,
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -23,13 +21,13 @@ const GradientOverlay: React.FC<GradientOverlayProps> = ({
     if (childrenRef.current && wrapperRef.current) {
       const containerHeight = childrenRef.current.clientHeight;
       wrapperRef.current.style.height = `${
-        containerHeight + 320 - cardHeight - 8 // 8px is the half of the gap between the cards
+        containerHeight + 320 - cardHeight
       }px`;
     }
   }, [childrenRef, cardHeight]);
 
   return (
-    <div ref={wrapperRef} className={`relative w-fit ${className}`}>
+    <div ref={wrapperRef} className="relative w-fit">
       {children}
       <div
         className={`absolute bottom-0 left-0 right-0 h-[320px] ${wixMadeforDisplay.className}`}
@@ -39,13 +37,13 @@ const GradientOverlay: React.FC<GradientOverlayProps> = ({
         }}
       >
         <div
-          className={`font-bold md:text-[22px] text-[20px] md:leading-[26px] leading-[24px] tracking-[-0.5px] md:text-center text-left mt-[129px] mb-2.5`}
+          className={`font-bold text-[22px] leading-[26px] tracking-[-0.5px] text-center mt-[129px] mb-2.5`}
         >
-          Получите доступ <br className="md:hidden"/>к 1200 вакансиям и стажировкам
+          Получите доступ к 1200 вакансиям и стажировкам
         </div>
-        <div className="font-medium md:text-[18px] text-[14px] md:leading-[22px] leading-[18px] tracking-[-0.5px] md:text-center text-left md:w-[626px] mx-auto text-neutral-500 mb-[25px]">
-          Сервис можно использовать бесплатно, <br className="md:hidden"/> без ограничений. <br className="hidden md:inline"/> Чтобы
-          получить полный доступ, <br className="md:hidden"/> вам необходимо зарегистрироваться.
+        <div className="font-medium text-[18px] leading-[22px] tracking-[-0.5px] text-center w-[626px] mx-auto text-neutral-500 mb-[25px]">
+          Сервис можно использовать бесплатно, без ограничений.Чтобы получить
+          полный доступ, вам необходимо зарегистрироваться.
         </div>
         <div className="flex justify-center">
           <GradientButton>Зарегистрироваться</GradientButton>

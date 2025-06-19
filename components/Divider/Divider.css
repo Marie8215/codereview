@@ -1,7 +1,6 @@
 .divider-line {
   display: flex;
   align-items: center;
-  height: 20px; /* фиксируем высоту всего блока */
 }
 
 .divider-line::before,
@@ -14,9 +13,10 @@
 
 .divider-text {
   padding: 0 12px;
-  font-family: 'Wix Madefor Text', sans-serif;
   font-weight: 500;
   font-size: 16px;
-  line-height: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
   color: #636469;
+  font-family: 'Wix Madefor Display', sans-serif;
 }

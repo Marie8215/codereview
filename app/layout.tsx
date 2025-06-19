@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="ru" className={`${wixMadeforText.className} ${wixMadeforDisplay.className}`}>
       <body>
-        <Header/>
+        <Header />
         <main className="main-content">{children}</main>
         <Footer />
       </body>

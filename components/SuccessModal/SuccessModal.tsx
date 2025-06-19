@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { AuthButton } from "../AuthButton/AuthButton";
-import Image from "next/image";
 import "./SuccessModal.css";
 
 interface SuccessModalProps {
@@ -13,13 +12,10 @@ export const SuccessModal: React.FC<SuccessModalProps> = ({ onSubscribe }) => {
     <div className="success-container">
       {/* Левая панель */}
       <div className="success-left-panel">
-        <Image 
+        <img 
           src="/images/all-chanels.svg" 
           alt="All channels"
           className="channels-image"
-          width={380}
-          height={532}
-          priority
         />
       </div>
 
@@ -32,7 +28,7 @@ export const SuccessModal: React.FC<SuccessModalProps> = ({ onSubscribe }) => {
           
           <div className="success-description">
             <p>На нашем сервисе собрано больше 1.000 вопросов с собеседований, сотни тестовых заданий, контакты рекрутеров и многое другое.</p>
-              <p>Желаем тебе быстрого поиска работы 🩵</p>
+            <p>Все это мы отдаем тебе бесплатно, взамен на подписку на наши телеграм каналы. Именно они помогают монетизировать нашу платформу и обновлять весь наш контент.</p>
           </div>
 
           <AuthButton onClick={onSubscribe}>

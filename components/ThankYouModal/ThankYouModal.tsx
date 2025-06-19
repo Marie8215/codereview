@@ -2,24 +2,16 @@
 import React from "react";
 import { AuthButton } from "../AuthButton/AuthButton";
 import "./ThankYouModal.css";
-import Image from "next/image";
 
-interface ThankYouModalProps {
-  onClose: () => void;
-}
-
-export const ThankYouModal: React.FC<ThankYouModalProps> = ({ onClose }) => {
+export const ThankYouModal: React.FC = () => {
   return (
     <div className="thank-you-container">
       {/* Левая панель */}
       <div className="thank-you-left-panel">
-        <Image 
+        <img 
           src="/images/sophi-hearts.svg" 
           alt="Sophi Hearts"
           className="hearts-image"
-          width={367}
-          height={367}
-          priority
         />
         
         <div className="thank-you-logo">
@@ -36,11 +28,10 @@ export const ThankYouModal: React.FC<ThankYouModalProps> = ({ onClose }) => {
           
           <div className="thank-you-description">
             <p>Доступ к платформе полностью открыт и будет всегда доступен для твоего аккаунта.</p>
-
             <p>Желаем тебе быстрого поиска работы 🩵</p>
           </div>
 
-          <AuthButton onClick={onClose}>
+          <AuthButton onClick={() => console.log('Thank you clicked')}>
             {"Ура, спасибо :)"}
           </AuthButton>
         </div>

@@ -74,7 +74,6 @@
 
 .thank-you-description p {
   margin: 0;
-  line-height: 22px;
 }
 
 .thank-you-description p:not(:last-child) {
@@ -106,47 +105,4 @@
   cursor: pointer;
   z-index: 1;
   filter: brightness(0); /* делаем иконку черной */
-}
-
-@media (max-width: 375px) {
-  .thank-you-container {
-    width: 375px;
-    height: auto;
-    min-height: 450px;
-  }
-
-  .thank-you-left-panel {
-    display: none;
-  }
-
-  .thank-you-right-panel {
-    width: 100%;
-  }
-
-  .thank-you-right-content {
-    padding: 20px;
-  }
-
-  .thank-you-title {
-    text-align: center;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .thank-you-container {
-    width: 90%;
-    max-width: 375px;
-    height: auto;
-    min-height: 450px;
-    margin: 0 auto;
-    border-radius: 0;
-  }
-
-  .thank-you-left-panel {
-    display: none;
-  }
-
-  .thank-you-right-panel {
-    width: 100%;
-  }
 }

@@ -11,8 +11,8 @@ export const SophyPromoCard: React.FC<SophyPromoCardProps> = ({
 }) => {
   return (
     <div className={`
-      md:w-[502px] w-[345px]
-      md:h-[204px] h-[240px]
+      w-[502px] 
+      h-[204px] 
       rounded-[8px] 
       p-[15px]
       bg-white
