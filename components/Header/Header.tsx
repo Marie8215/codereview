@@ -17,17 +17,17 @@ export const Header = () => {
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [isThankYouOpen, setIsThankYouOpen] = useState(false);
 
-  const handleLoginClick = () => {
-    setIsLoginOpen(true);
-  };
+  // const handleLoginClick = () => {
+  //   setIsLoginOpen(true);
+  // };
 
-  const handleRegisterClick = () => {
-    setIsRegisterOpen(true);
-  };
+  // const handleRegisterClick = () => {
+  //   setIsRegisterOpen(true);
+  // };
 
   return (
-    <header className="md:mt-5 mt-4 mx-auto w-fit z-10 relative">
-      <div className="rounded-[18px] md:py-[17px] md:px-5 py-[13px] px-5 gap-5 bg-neutral-10 md:mb-[100px] mb-[88px] shadow-header backdrop-blur-[8px]">
+    <header className="md:mt-5 mt-4 mx-auto w-fit z-50 relative">
+      <div className="rounded-[18px] md:py-[17px] md:px-5 py-[13px] px-5 gap-5 bg-neutral-10 shadow-header backdrop-blur-[8px]">
         <div className="flex align-center justify-between gap-5">
           <Link href="/" className="contents">
             <Logo />
@@ -37,7 +37,9 @@ export const Header = () => {
             <IconWithText
               className="hidden sm:flex"
             text={
-              <span className="font-normal md:text-[18px] md:leading-[22px] text-[16px] leading-[20px] tracking-[-0.5px]">
+              <span
+                className="font-normal md:text-[18px] md:leading-[22px] text-[16px] leading-[20px] tracking-[-0.5px] cursor-pointer"
+              >
                 Войти
               </span>
             }
@@ -93,7 +95,7 @@ export const Header = () => {
       </Modal>
 
       <Modal isOpen={isThankYouOpen} onClose={() => setIsThankYouOpen(false)}>
-        <ThankYouModal />
+        <ThankYouModal onClose={() => setIsThankYouOpen(false)} />
       </Modal>
     </header>
   );

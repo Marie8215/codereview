@@ -1,6 +1,6 @@
 .auth-button {
   width: 100%;
-  height: 56px;
+  height: 50px; /* меняем с 56px на 50px */
   border: none;
   border-radius: 18px;
   background: linear-gradient(90deg, #2093FE 0%, #C217FE 90%);

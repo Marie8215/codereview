@@ -1,3 +1,5 @@
+"use client";
+
 import { wixMadeforText } from '@/app/fonts';
 import React, { useState, useEffect } from 'react';
 

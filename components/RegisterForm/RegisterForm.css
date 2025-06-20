@@ -20,6 +20,7 @@
 }
 
 .register-slogan {
+  font-family: 'Wix Madefor Text', sans-serif;
   font-weight: 500;
   font-size: 22px;
   line-height: 26px;
@@ -132,12 +133,14 @@
 
 .login-link {
   color: #0560C9;
+  font-family: 'Wix Madefor Text', sans-serif;
   text-decoration: none;
   cursor: pointer;
 }
     
 .login-prompt {
   font-weight: 500;
+  font-family: 'Wix Madefor Text', sans-serif;
   font-size: 18px;
   line-height: 22px;
   letter-spacing: -0.5px;
@@ -145,4 +148,47 @@
   text-align: center;
   margin: 0;
   margin-top: auto;
+}
+
+.register-form .password-wrapper:first-of-type {
+  margin-bottom: 10px;
+}
+
+@media (max-width: 375px) {
+  .register-container {
+    width: 375px;
+    height: auto;
+    min-height: 600px;
+  }
+
+  .register-left-panel {
+    display: none;
+  }
+
+  .register-right-panel {
+    width: 100%;
+  }
+
+  .register-right-content {
+    padding: 20px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .register-container {
+    width: 90%;
+    max-width: 375px;
+    height: auto;
+    min-height: 600px;
+    margin: 0 auto;
+    border-radius: 0;
+  }
+
+  .register-left-panel {
+    display: none;
+  }
+
+  .register-right-panel {
+    width: 100%;
+  }
 }

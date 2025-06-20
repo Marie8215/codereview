@@ -44,9 +44,9 @@ export const Marquee: React.FC<MarqueeProps> = ({ text, speed = 20 }) => {
               key={index}
               className={`
                 marquee-text
-                text-[16px]
-                leading-[18px]
-                tracking-[-0.5px]
+                md:text-[16px] text-[14px] 
+                md:leading-[18px] leading-[16px] 
+                tracking-[-0.5px] 
                 font-medium
                 ${wixMadeforText.className}
               `}
@@ -62,9 +62,9 @@ export const Marquee: React.FC<MarqueeProps> = ({ text, speed = 20 }) => {
               key={index}
               className={`
                 marquee-text
-                text-[16px]
-                leading-[18px]
-                tracking-[-0.5px]
+                md:text-[16px] text-[14px] 
+                md:leading-[18px] leading-[16px] 
+                tracking-[-0.5px] 
                 font-medium
                 ${wixMadeforText.className}
               `}

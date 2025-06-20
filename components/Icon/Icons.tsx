@@ -67,3 +67,38 @@ export const FreeIcon = () => {
     </div>
   );
 };
+
+export const GrayAsteriskIcon = ({ size = 10 }) => {
+  return <Icon src="/images/gray-asterisk-icon.svg" size={size} />;
+};
+
+export const GreenAsteriskIcon = ({ size = 10 }) => {
+  return <Icon src="/images/green-asterisk-icon.svg" size={size} />;
+};
+
+export const RedAsteriskIcon = ({ size = 10 }) => {
+  return <Icon src="/images/red-asterisk-icon.svg" size={size} />;
+};
+
+export const YellowAsteriskIcon = ({ size = 10 }) => {
+  return <Icon src="/images/yellow-asterisk-icon.svg" size={size} />;
+};
+
+interface ArrowIconProps {
+  size?: number;
+  color?: string;
+}
+
+export const ArrowIcon = ({ size = 12, color }: ArrowIconProps) => {
+  return (
+    <Icon
+      src="/images/arrow-icon.svg"
+      size={size}
+      className={color ? `[&>*]:fill-[${color}]` : ""}
+    />
+  );
+};
+
+export const ArrowSophyIcon = ({ size = 16 }) => {
+  return <Icon src="/images/arrow-sophy.svg" size={size} />;
+};

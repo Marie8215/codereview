@@ -50,17 +50,55 @@
   line-height: 22px;
   letter-spacing: -0.5px;
   color: #232325;
-  text-align: left;
 }
 
 .success-description p {
-  margin: 0;
-}
-
-.success-description p:not(:last-child) {
-  margin-bottom: 16px;
+  line-height: 22px; /* явно задаем line-height для параграфов */
 }
 
 .success-right-content .auth-button {
   margin-top: auto;
+}
+
+@media (max-width: 375px) {
+  .success-container {
+    width: 375px;
+    height: auto;
+    min-height: 450px;
+  }
+
+  .success-left-panel {
+    display: none;
+  }
+
+  .success-right-panel {
+    width: 100%;
+  }
+
+  .success-right-content {
+    padding: 20px;
+  }
+
+  .success-title {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .success-container {
+    width: 90%;
+    max-width: 375px;
+    height: auto;
+    min-height: 450px;
+    margin: 0 auto;
+    border-radius: 0;
+  }
+
+  .success-left-panel {
+    display: none;
+  }
+
+  .success-right-panel {
+    width: 100%;
+  }
 }

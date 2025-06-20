@@ -1,0 +1,7 @@
+.action-button {
+  transition: background 0.3s ease;
+}
+
+.action-button:hover {
+  background: linear-gradient(90deg, rgba(244,184,184,0.5), rgba(227,179,234,0.5), rgba(197,201,241,0.5));
+}

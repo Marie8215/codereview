@@ -23,8 +23,8 @@ export const JobCard: React.FC<JobCardProps> = ({
 }) => {
   return (
     <div className={`
-      w-[502px] 
-      h-[204px] 
+      md:w-[502px] w-[345px]
+      md:h-[204px] h-[240px]
       rounded-[8px] 
       p-[15px] 
       border border-neutral-200
@@ -36,8 +36,8 @@ export const JobCard: React.FC<JobCardProps> = ({
       <div className="flex-1">
         <h3 className={`
         ${wixMadeforDisplay.className}
-          text-[22px] 
-          leading-[26px] 
+          md:text-[22px] text-[18px]
+          md:leading-[26px] leading-[22px]
           font-bold 
           tracking-[-0.5px] 
           text-neutral-800
