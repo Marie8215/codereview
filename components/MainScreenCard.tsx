@@ -53,7 +53,7 @@ export function  MainScreenCard({
               {text}
             </div>
           </div>
-          <div className="flex">
+          <div className="flex z-10">
             <span className="md:text-xl font-semibold md:leading-5 tracking-[-0.5px] align-bottom text-base leading-[18px]">
               {title}
             </span>

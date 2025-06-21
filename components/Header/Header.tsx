@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { NavigationMenu } from "../NavigationMenu/NavigationMenu";
 import { LoginForm } from "../LoginForm/LoginForm";
 import Logo from "../Logo/Logo";
@@ -16,20 +17,17 @@ export const Header = () => {
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [isThankYouOpen, setIsThankYouOpen] = useState(false);
+  const pathname = usePathname();
 
-  // const handleLoginClick = () => {
-  //   setIsLoginOpen(true);
-  // };
-
-  // const handleRegisterClick = () => {
-  //   setIsRegisterOpen(true);
-  // };
+  // Get the stack from the pathname if we're on a stack page
+  const currentStack = pathname.split('/')[1];
+  const logoLink = currentStack ? `/${currentStack}` : '/';
 
   return (
     <header className="md:mt-5 mt-4 mx-auto w-fit z-50 relative">
       <div className="rounded-[18px] md:py-[17px] md:px-5 py-[13px] px-5 gap-5 bg-neutral-10 shadow-header backdrop-blur-[8px]">
         <div className="flex align-center justify-between gap-5">
-          <Link href="/" className="contents">
+          <Link href={logoLink} className="contents">
             <Logo />
           </Link>
           <NavigationMenu />

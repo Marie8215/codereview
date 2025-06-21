@@ -8,7 +8,7 @@ interface ButtonLikeWrapperProps {
   size?: ButtonLikeWrapperSize;
 }
 
-const ButtonLikeWrapper: React.FC<ButtonLikeWrapperProps> = ({ 
+const  ButtonLikeWrapper: React.FC<ButtonLikeWrapperProps> = ({ 
   children, 
   className = '',
   size = 'normal'

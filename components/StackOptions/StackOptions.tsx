@@ -1,4 +1,4 @@
-import { stackOptions } from "@/store/onClient/store";
+import { stackOptions } from "@/app/data/static-content";
 import RadioGroup from "../RadioGroup/RadioGroup";
 
 export const StackOptions = ({
@@ -15,7 +15,7 @@ export const StackOptions = ({
     <div className={sizeDependingStyles}>
       <RadioGroup
         className={className}
-        items={stackOptions.map((option) => option as string)}
+        items={stackOptions}
         size={size}
       />
     </div>

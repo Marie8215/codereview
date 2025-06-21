@@ -22,7 +22,7 @@ interface pageLink {
   onMainPageTitle?: ReactNode;
   ingoreOnMainPage?: boolean;
   gradient?: GradientType;
-  link?: string;
+  baseLink?: string;
 }
 
 export const pageLinks: pageLink[] = [
@@ -32,7 +32,7 @@ export const pageLinks: pageLink[] = [
       "Актуальные junior-вакансии и стажировки с hh.ru, Habr Career, LinkedIn, Telegram и других платформ",
     iconFactory: (size = 20) => <BriefcaseIcon size={size} />,
     orderOnMainPage: 0,
-    link: "/jobs"
+    baseLink: "jobs"
   },
   {
     title: "Тестовые задания",
@@ -42,7 +42,6 @@ export const pageLinks: pageLink[] = [
     iconFactory: (size = 20) => <CodeIcon size={size} />,
     orderOnMainPage: 2,
     gradient: "light",
-    link: "/test-tasks"
   },
   {
     title: "IT-мероприятия",
@@ -87,6 +86,7 @@ export const pageLinks: pageLink[] = [
       "Реальные вопросы с интервью, сгруппированные по стеку и уровню сложности — с пояснениями и примерами ответов",
     iconFactory: (size = 20) => <MicrophoneIcon size={size} />,
     orderOnMainPage: 3,
+    baseLink: "/interviews",
   },
   {
     title: "Пет-проекты",
@@ -102,4 +102,36 @@ export const pageLinks: pageLink[] = [
     iconFactory: (size = 20) => <SparklesIcon size={size} />,
     orderOnMainPage: 7,
   },
+];
+
+export interface StackOption {
+  title: string;
+  linkId: string;
+}
+
+export const stackOptions: StackOption[] = [
+  {
+    title: "Python",
+    linkId: "python"
+  },
+  {
+    title: "Java",
+    linkId: "java"
+  },
+  {
+    title: "JavaScript",
+    linkId: "javascript"
+  },
+  {
+    title: "Data Science",
+    linkId: "data-science"
+  },
+  {
+    title: "QA",
+    linkId: "qa"
+  },
+  {
+    title: "C#",
+    linkId: "csharp"
+  }
 ];

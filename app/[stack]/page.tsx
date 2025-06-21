@@ -1,10 +1,22 @@
-import "./vacancy-card.css";
-import { PageLinksGrid } from "../components/PageLinkGrid/PageLinksGrid";
-import { MainPageBackground } from "../components/Background/MainPageBackground";
+import { stackOptions } from "../data/static-content";
+import { PageLinksGrid } from "../../components/PageLinkGrid/PageLinksGrid";
+import { MainPageBackground } from "../../components/Background/MainPageBackground";
 import { StackOptions } from "@/components/StackOptions/StackOptions";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
+import { notFound } from "next/navigation";
 
-export default function Home() {
+export async function generateStaticParams() {
+  return stackOptions.map((stack) => ({
+    stack: stack.linkId,
+  }));
+}
+
+export default function StackPage({ params }: { params: { stack: string } }) {
+  const currentStack = stackOptions.find(stack => stack.linkId === params.stack);
+  if (!currentStack) {
+    notFound();
+  }
+
   return (
     <>
       <MainPageBackground />

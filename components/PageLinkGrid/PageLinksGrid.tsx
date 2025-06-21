@@ -1,11 +1,21 @@
+"use client";
 import { Card } from "@/components/Card";
 import { PhotoContIcon, FreeIcon } from "@/components/Icon/Icons";
 import { MainScreenCard } from "@/components/MainScreenCard";
-import { pageLinks } from "../../app/data/static-content";
+import { pageLinks, stackOptions } from "@/app/data/static-content";
 import { wixMadeforText } from "@/app/fonts";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-export const PageLinksGrid = () => {
+export function PageLinksGrid() {
+  const pathname = usePathname();
+
+  const getLink = (baseLink: string | undefined) => {
+    if (!baseLink) return "#";
+    if (pathname === "/") return `/${stackOptions[0].linkId}/${baseLink}`;
+    return `${pathname}/${baseLink}`;
+  };
+
   return (
     <div
       className={`mx-auto lg:w-[1020px] w-[345px] sm:w-[90%] ${wixMadeforText.className} mb-[50px] md:mb-[100px]`}
@@ -14,25 +24,23 @@ export const PageLinksGrid = () => {
         {pageLinks
           .filter((link) => !link.ingoreOnMainPage)
           .toSorted((a, b) => a.orderOnMainPage - b.orderOnMainPage)
-          .map((link) => {
-            return (
-              <Link
+          .map((link) => (
+            <Link
+              key={link.title}
+              href={getLink(link.baseLink)}
+              className="contents"
+            >
+              <MainScreenCard
                 key={link.title}
-                href={link.link ?? "#"}
-                className="contents"
-              >
-                <MainScreenCard
-                  key={link.title}
-                  className="h-[150px] md:h-[280px]"
-                  title={link.onMainPageTitle ?? link.title}
-                  icon={link.iconFactory(26)}
-                  text={link.description}
-                  hoverType="code"
-                  gradient={link.gradient}
-                />
-              </Link>
-            );
-          })}
+                className="h-[150px] md:h-[280px]"
+                title={link.onMainPageTitle ?? link.title}
+                icon={link.iconFactory(26)}
+                text={link.description}
+                hoverType="code"
+                gradient={link.gradient}
+              />
+            </Link>
+          ))}
         <Link href={"#"} className="contents">
           <MainScreenCard
             className="col-span-full md:col-span-3 h-[121px] md:h-[157px]"
@@ -70,4 +78,4 @@ export const PageLinksGrid = () => {
       </div>
     </div>
   );
-};
+}

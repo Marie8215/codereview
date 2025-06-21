@@ -4,17 +4,14 @@ import React from "react";
 
 interface DropdownTriggerProps {
   children: React.ReactNode;
-  onClick?: () => void;
 }
 
-export const DropdownTrigger: React.FC<DropdownTriggerProps> = ({ 
+export const DropdownTrigger: React.FC<DropdownTriggerProps> = ({
   children,
-  onClick
 }) => {
   return (
     <div
       className={`flex items-center gap-[5px] w-max ${wixMadeforText.className}`}
-      onClick={onClick}
     >
       {children}
       <Image
