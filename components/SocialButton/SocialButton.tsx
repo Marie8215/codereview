@@ -1,5 +1,6 @@
-import React from 'react';
-import './SocialButton.css';
+import React from "react";
+import "./SocialButton.css";
+import Image from "next/image";
 
 interface SocialButtonProps {
   icon: string;
@@ -12,14 +13,16 @@ export const SocialButton: React.FC<SocialButtonProps> = ({
   icon,
   alt,
   children,
-  onClick
+  onClick,
 }) => {
   return (
     <button className="social-button" onClick={onClick}>
-      <img 
+      <Image
         src={icon}
         alt={alt}
         className="social-icon"
+        height={18}
+        width={18}
       />
       {children}
     </button>

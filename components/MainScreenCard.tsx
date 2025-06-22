@@ -50,11 +50,11 @@ export function  MainScreenCard({
           <div className="card-icon-container flex flex-col justify-start z-10">
             <div className="flex justify-start">{icon ?? "icon"}</div>
             <div className="card-description mt-3.5 font-medium text-base leading-5 tracking-[-0.5px] hidden md:block">
-              {text}
+              <span className="line-clamp-7">{text}</span>
             </div>
           </div>
           <div className="flex z-10">
-            <span className="md:text-xl font-semibold md:leading-5 tracking-[-0.5px] align-bottom text-base leading-[18px]">
+            <span className="xl:text-xl font-semibold md:leading-5 tracking-[-0.5px] align-bottom text-base leading-[18px]">
               {title}
             </span>
           </div>

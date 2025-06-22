@@ -5,8 +5,9 @@ import { Footer } from "../components/Footer/Footer";
 import { wixMadeforDisplay, wixMadeforText } from "./fonts";
 
 export const metadata: Metadata = {
-  title: "JunoJobs",
-  description: "Поиск работы для IT-специалистов",
+  title: "Codereview | Платформа для поиска работы в IT",
+  description:
+    "Codereview - агрегатор вакансий и стажировок для начинающих IT-специалистов. Вакансии, стажировки, тестовые задания, собеседования и карьерные советы.",
 };
 
 export default function RootLayout({
@@ -16,9 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru" className={`${wixMadeforText.className} ${wixMadeforDisplay.className}`}>
-      <body>
-        <Header/>
-        <main className="main-content">{children}</main>
+      <body className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-grow main-content">{children}</main>
         <Footer />
       </body>
     </html>

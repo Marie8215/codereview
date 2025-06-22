@@ -1,0 +1,45 @@
+"use client";
+
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { StackOption, stackOptions } from "@/app/data/static-content";
+import { useStore } from "@/store/onClient/store";
+
+export const useStackRoute = (): [
+  StackOption,
+  (stack: StackOption) => void
+] => {
+  const pathname = usePathname();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const selectedStack = useStore((state) => state.selectedStack);
+  const setSelectedStack = useStore((state) => state.setSelectedStack);
+
+  const updateStack = (stack: StackOption) => {
+    setSelectedStack(stack);
+    const pathSegments = pathname.split("/").filter(Boolean);
+    const currentParams = searchParams.toString();
+
+    if (pathSegments[0] === stack.linkId) {
+      return;
+    }
+    console.log(pathSegments, stack.linkId, "различаются");
+
+    const newPath = `/${stack.linkId}/${pathSegments.slice(1).join("/")}${
+      currentParams ? `?${currentParams}` : ""
+    }`;
+    router.push(newPath);
+  };
+
+  useEffect(() => {
+    const stackFromUrl = pathname.split("/")[1];
+    const stackOption = stackOptions.find(
+      (option) => option.linkId === stackFromUrl
+    );
+    if (stackOption) {
+      setSelectedStack(stackOption);
+    }
+  }, [pathname, setSelectedStack]);
+
+  return [selectedStack, updateStack];
+};

@@ -5,7 +5,7 @@ import { SocialButton } from "../SocialButton/SocialButton";
 import { Divider } from "../Divider/Divider";
 import { AuthButton } from "../AuthButton/AuthButton";
 import Image from "next/image";
-import { wixMadeforDisplay, wixMadeforText } from "../../app/fonts";
+import { wixMadeforText } from "../../app/fonts";
 
 interface LoginFormProps {
   onRegisterClick: () => void;

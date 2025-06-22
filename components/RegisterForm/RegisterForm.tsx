@@ -19,15 +19,41 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const handleConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setConfirmPassword(value);
+    if (!password) {
+      setPasswordError("");
+    } else if (password && value !== password) {
+      setPasswordError("Пароли не совпадают");
+    } else {
+      setPasswordError("");
+    }
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+    if (!e.target.value) {
+      setPasswordError("");
+    } else if (confirmPassword && e.target.value !== confirmPassword) {
+      setPasswordError("Пароли не совпадают");
+    } else {
+      setPasswordError("");
+    }
+  };
 
   return (
     <div
       className="
-      w-full bg-white rounded-[24px] flex flex-col overflow-hidden
-      md:w-[800px] h-[682px] md:rounded-[24px] md:flex-row
-    "
+        w-full bg-white rounded-[24px] flex flex-col
+        md:w-[800px] md:h-[682px] md:rounded-[24px] md:flex-row
+        overflow-y-auto max-h-[calc(100dvh-40px)] md:overflow-hidden md:max-h-none
+        my-[20px] md:my-0
+      "
     >
       {/* Левая часть */}
       <div className="
@@ -91,14 +117,14 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
               type="email"
               placeholder="example@mail.ru"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={e => setEmail(e.target.value)}
             />
             <CustomInput
               label="Пароль"
               type={showPassword ? "text" : "password"}
               placeholder="****"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handlePasswordChange}
               isPassword
               showPassword={showPassword}
               onTogglePassword={() => setShowPassword((v) => !v)}
@@ -108,14 +134,15 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
               type={showConfirmPassword ? "text" : "password"}
               placeholder="****"
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={handleConfirmPasswordChange}
               isPassword
               showPassword={showConfirmPassword}
               onTogglePassword={() => setShowConfirmPassword((v) => !v)}
+              error={passwordError}
             />
           </div>
 
-          <AuthButton onClick={onSuccessRegister} className="md:mb-[15px]">
+          <AuthButton onClick={onSuccessRegister} className="mb-[15px]">
             Зарегистрироваться
           </AuthButton>
 

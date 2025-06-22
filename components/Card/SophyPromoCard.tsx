@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { wixMadeforDisplay, wixMadeforText } from '@/app/fonts';
 
 interface SophyPromoCardProps {
@@ -10,24 +11,33 @@ export const SophyPromoCard: React.FC<SophyPromoCardProps> = ({
   className = ''
 }) => {
   return (
-    <div className={`
-      md:w-[502px] w-[345px]
-      md:h-[204px] h-[240px]
-      rounded-[8px] 
-      p-[15px]
-      bg-white
-      flex
-      flex-col
-      relative
-      bg-gradient-to-r from-[rgba(244,184,184,0.4)] via-[rgba(227,179,234,0.4)] to-[rgba(197,201,241,0.4)]
-      ${className}
-    `}>
+    <Link
+      href="https://jobs.yourcodereview.com/ai/"
+      className={`
+        xl:max-w-[502px] sm:w-[calc(50%-9px)] w-[345px]
+        md:h-[204px] h-[240px]
+        rounded-[8px] 
+        p-[15px]
+        bg-white
+        flex
+        flex-col
+        relative
+        bg-gradient-to-r from-[rgba(244,184,184,0.4)] via-[rgba(227,179,234,0.4)] to-[rgba(197,201,241,0.4)]
+        ${className}
+      `}
+    >
       <div className="flex-1">
         <h3 className={`
           ${wixMadeforDisplay.className}
           text-[22px] 
           leading-[24px] 
           font-bold 
+          md:text-[22px] 
+          md:leading-[24px] 
+          md:font-bold 
+           sm:text-[18px] 
+          sm:leading-[20px] 
+          sm:font-bold
           tracking-[-0.5px] 
           text-neutral-800
           max-w-[378px]
@@ -65,7 +75,7 @@ export const SophyPromoCard: React.FC<SophyPromoCardProps> = ({
           priority
         />
       </div>
-    </div>
+    </Link>
   );
 };
 

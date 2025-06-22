@@ -107,31 +107,44 @@ export const pageLinks: pageLink[] = [
 export interface StackOption {
   title: string;
   linkId: string;
+  filterId: string;
 }
 
+// Параметры для фильтрации вакансий по стеку сейчас с сервера не получить и поэтому они хранятся здесь.
+// В будущем можно будет сделать запрос на сервер. Параметры регистрозависимы
 export const stackOptions: StackOption[] = [
   {
     title: "Python",
-    linkId: "python"
+    linkId: "python",
+    filterId: "Python"
   },
   {
     title: "Java",
-    linkId: "java"
+    linkId: "java",
+    filterId: "Java"
   },
   {
     title: "JavaScript",
-    linkId: "javascript"
+    linkId: "javascript",
+    filterId: "JS"
   },
   {
     title: "Data Science",
-    linkId: "data-science"
+    linkId: "data-science",
+    filterId: "ML"
   },
   {
     title: "QA",
-    linkId: "qa"
+    linkId: "qa",
+    filterId: "QA"
   },
   {
     title: "C#",
-    linkId: "csharp"
+    linkId: "csharp",
+    filterId: "CSharp"
   }
 ];
+
+export const stackOptionsMap = new Map(
+  stackOptions.map((option) => [option.linkId, option])
+);

@@ -20,7 +20,7 @@ export default function Home() {
         }
         description="Я собрала для тебя все в одном месте, чтобы ты смог быстро найти работу"
       />
-      <div className="mx-auto">
+      <div className="mx-auto w-[345px] sm:w-[90%]">
         <StackOptions className="justify-center" />
       </div>
       <PageLinksGrid />

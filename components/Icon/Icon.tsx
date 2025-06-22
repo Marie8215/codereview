@@ -4,16 +4,17 @@ import Image from "next/image";
 interface IconProps {
   src: string;
   className?: string;
-  size?: number
+  size?: number;
+  alt: string;
 }
 
-const Icon: React.FC<IconProps> = ({ src, className, size=26 }) => {
+const Icon: React.FC<IconProps> = ({ src, className, size = 26, alt }) => {
   return (
     <Image
       width={size}
       height={size}
       src={src}
-      alt="icon"
+      alt={alt}
       className={`${className ?? ""}`}
     />
   );

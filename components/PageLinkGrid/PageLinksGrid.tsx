@@ -54,7 +54,7 @@ export function PageLinksGrid() {
             hoverType="stars-long"
           />
         </Link>
-        <Link href="#" className="contents">
+        <Link href="jobs/create" className="contents">
           <Card className="col-span-full md:col-span-1 h-[64px] md:h-[157px]">
             <div className="vacancy-card-container h-full bg-neutral-700">
               <div className="vacancy-card-bg hidden md:block"></div>

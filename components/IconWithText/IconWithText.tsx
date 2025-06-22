@@ -26,7 +26,6 @@ const IconWithText = ({
     small: 'gap-[2px]'
   };
 
-  // todo remove font
   return (
     <div 
       className={`flex items-center whitespace-nowrap ${gapStyles[size]} ${className}`}

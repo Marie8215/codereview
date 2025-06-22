@@ -2,19 +2,20 @@
 import Image from "next/image";
 import { DropdownBase } from "./DropdownBase";
 import { DropdownItem } from "./DropdownContent";
-import { useState } from "react";
+import StatsRow from "../StatsRow/StatsRow";
 
-interface DropdownListProps {
+interface DropdownListProps<T> {
   trigger: React.ReactNode;
   align?: "left" | "center";
   relative?: boolean;
   buttonLike?: boolean;
-  onSelect?: (id: DropdownItem) => void;
-  items: DropdownItem[];
+  onSelect?: (item: DropdownItem<T>, selectedItems: DropdownItem<T>[]) => void;
+  items: DropdownItem<T>[];
   multiselect?: boolean;
+  activeIds?: (string | number)[];
 }
 
-export const DropdownList: React.FC<DropdownListProps> = ({
+export const DropdownList = <T,>({
   trigger,
   align = "left",
   relative = false,
@@ -22,28 +23,27 @@ export const DropdownList: React.FC<DropdownListProps> = ({
   multiselect = true,
   onSelect,
   items,
-}) => {
-  const [selectedIds, setSelectedIds] = useState<(string | number)[]>(
-    items.filter((item) => item.isActive).map((item) => item.id)
-  );
-
-  const handleSelect = (item: DropdownItem) => {
+  activeIds = [],
+}: DropdownListProps<T>) => {
+  const handleSelect = (item: DropdownItem<T>) => {
     let newSelected: (string | number)[];
 
     if (multiselect) {
-      newSelected = selectedIds.includes(item.id)
-        ? selectedIds.filter((selectedId) => selectedId !== item.id)
-        : [...selectedIds, item.id];
+      newSelected = activeIds.includes(item.id)
+        ? activeIds.filter((selectedId) => selectedId !== item.id)
+        : [...activeIds, item.id];
     } else {
-      newSelected = selectedIds.includes(item.id) ? [] : [item.id];
+      newSelected = activeIds.includes(item.id) ? [] : [item.id];
     }
 
-    setSelectedIds(newSelected);
-    onSelect?.(item);
+    onSelect?.(
+      item,
+      items.filter((item) => newSelected.includes(item.id))
+    );
   };
 
   const itemsUi = items.map((item) => {
-    const isSelected = selectedIds.includes(item.id);
+    const isSelected = activeIds.includes(item.id);
 
     return (
       <div
@@ -62,7 +62,11 @@ export const DropdownList: React.FC<DropdownListProps> = ({
                   duration-150
                 `}
       >
-        <span>{item.title}</span>
+        {item.count ? (
+          <StatsRow label={item.title} count={item.count} />
+        ) : (
+          <span>{item.title}</span>
+        )}
         {isSelected && (
           <Image
             src="/images/checked-icon.svg"

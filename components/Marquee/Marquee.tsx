@@ -8,7 +8,7 @@ interface MarqueeProps {
   speed?: number; // Скорость в секундах, по умолчанию 20
 }
 
-export const Marquee: React.FC<MarqueeProps> = ({ text, speed = 20 }) => {
+export const Marquee: React.FC<MarqueeProps> = ({ text, speed = 60 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
   const [copies, setCopies] = useState<number>(3);

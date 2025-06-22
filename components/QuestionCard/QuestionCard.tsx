@@ -17,6 +17,7 @@ export const QuestionCard = ({
         md:w-[1020px]
         w-[345px]
         md:h-[76px]
+        max-h-[113px]
         rounded-[8px]
         p-[15px]
         bg-neutral-100
@@ -24,11 +25,11 @@ export const QuestionCard = ({
         ${className}
       `}
     >
-      <p className="md:text-[18px] text-[16px] md:leading-[24px] leading-[20px] font-bold text-neutral-800 tracking-[-0.5px] md:mb-0 mb-[5px]">
+      <p className="md:text-[18px] text-[16px] md:leading-[24px] leading-[20px] font-bold text-neutral-800 tracking-[-0.5px] md:mb-0 mb-[5px] md:line-clamp-1 line-clamp-3">
         {title}
       </p>
 
-      <p className="flex items-center gap-2 md:text-[18px] text-[14px] md:leading-[22px] leading-[18px] text-neutral-600 font-semibold">
+      <p className="flex items-center gap-2 md:text-[18px] text-[14px] md:leading-[22px] leading-[18px] text-neutral-600 font-semibold line-clamp-1">
         <span className="text-neutral-400">
           {`${stack} • ${frequency} упоминаний`}
         </span>

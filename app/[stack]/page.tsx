@@ -1,18 +1,40 @@
-import { stackOptions } from "../data/static-content";
+import { Metadata } from "next";
+import { stackOptionsMap } from "../data/static-content";
 import { PageLinksGrid } from "../../components/PageLinkGrid/PageLinksGrid";
 import { MainPageBackground } from "../../components/Background/MainPageBackground";
 import { StackOptions } from "@/components/StackOptions/StackOptions";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
 import { notFound } from "next/navigation";
 
-export async function generateStaticParams() {
-  return stackOptions.map((stack) => ({
-    stack: stack.linkId,
-  }));
+interface StackPageProps {
+  params: Promise<{
+    stack: string;
+  }>;
 }
 
-export default function StackPage({ params }: { params: { stack: string } }) {
-  const currentStack = stackOptions.find(stack => stack.linkId === params.stack);
+export async function generateMetadata({
+  params,
+}: StackPageProps): Promise<Metadata> {
+  const { stack } = await params;
+  const currentStack = stackOptionsMap.get(stack);
+
+  if (!currentStack) {
+    return {
+      title: "Страница не найдена | Codereview",
+      description: "Запрашиваемая страница не найдена",
+    };
+  }
+
+  return {
+    title: `${currentStack.title} вакансии и стажировки | Codereview`,
+    description: `Поиск работы для ${currentStack.title}-разработчиков. Вакансии, стажировки, собеседования и карьерные советы специально для ${currentStack.title}-специалистов.`,
+  };
+}
+
+export default async function StackPage({ params }: StackPageProps) {
+  const { stack } = await params;
+
+  const currentStack = stackOptionsMap.get(stack);
   if (!currentStack) {
     notFound();
   }

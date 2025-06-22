@@ -1,0 +1,111 @@
+.vacancy-content > div:not(:has(aside)):not(aside) p {
+  margin-bottom: 15px;
+}
+
+.vacancy-content > div:not(aside) div {
+  margin-bottom: 30px;
+}
+
+.vacancy-content h2 {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: -0.5px;
+  color: #232325;
+  margin-bottom: 15px;
+}
+
+.vacancy-content ul {
+  list-style-type: disc;
+  padding-left: 1.25rem;
+  margin-left: 8px;
+}
+
+.vacancy-content ul li {
+  margin-bottom: 8px;
+}
+
+.vacancy-content ul li:last-child {
+  margin-bottom: 0;
+}
+
+.vacancy-content br.mobile-break {
+  display: none;
+}
+
+.hljs {
+  /* border: 1px solid var(--color-neutral-200); */
+  background-color: var(--color-neutral-100) !important;
+  font-size: 14px;
+  overflow-x: auto;
+}
+
+code {
+  background-color: var(--color-neutral-200) !important;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-size: 0.875em;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+}
+
+pre code {
+  padding: 0 !important;
+}
+
+.code-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+  border-radius: 12px;
+  padding: 20px;
+  background-color: var(--color-neutral-100) !important;
+  font-size: 14px;
+  color: var(--color-neutral-600);
+}
+
+.code-control {
+  margin: 0 !important;
+  margin-bottom: 20px !important;
+  display: flex;
+  justify-content: space-between;
+
+  div {
+    margin: 0 !important;
+  }
+
+  button {
+    z-index: 2;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: -0.5px;
+  }
+
+  button::before {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: 5px;
+    vertical-align: middle;
+    background: url("/images/copy-icon.svg") no-repeat center center;
+    background-size: contain;
+  }
+}
+
+@media (min-width: 768px) {
+  .vacancy-content h2 {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .vacancy-content div:last-child {
+    margin-bottom: 0px;
+  }
+
+  .vacancy-content br.mobile-break {
+    display: block;
+  }
+}

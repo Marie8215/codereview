@@ -1,3 +1,4 @@
+"use client"
 import { stackOptions } from "@/app/data/static-content";
 import RadioGroup from "../RadioGroup/RadioGroup";
 

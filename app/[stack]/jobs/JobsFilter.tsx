@@ -1,0 +1,142 @@
+"use client";
+import GradientButton from "@/components/GradientButton/GradientButton";
+import Toggle from "@/components/Toggle/Toggle";
+import { wixMadeforText } from "@/app/fonts";
+import { DropdownList } from "@/components/Dropdown/DropdownList";
+import { JobsFilterState, useStore } from "@/store/onClient/store";
+import { stackOptions } from "@/app/data/static-content";
+import { useStackRoute } from "@/hooks/UseStackRoute";
+import { useSyncQueryParams } from "@/hooks/useSyncQueryParams";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useRef } from "react";
+import Link from "next/link";
+
+interface JobsFilterProps {
+  sources: string[];
+  locations: string[];
+}
+
+export const JobsFilter = ({ sources, locations }: JobsFilterProps) => {
+  const searchParams = useSearchParams();
+
+  const filters = useStore((state) => state.jobsFilter);
+  const setFilters = useStore((state) => state.setJobsFilter);
+
+  const isMounted = useRef(false);
+
+  const [selectedStack, setSelectedStack] = useStackRoute();
+  useSyncQueryParams(filters);
+
+  const updateFilters = (
+    key: keyof JobsFilterState,
+    value: string | boolean | string[]
+  ) => {
+    setFilters({
+      ...filters,
+      [key]: value,
+    });
+  };
+
+  useEffect(() => {
+    if (isMounted.current) {
+      return;
+    }
+
+    isMounted.current = false;
+
+    const sources = searchParams.get("sources")?.split("&") || [];
+    const city = searchParams.get("city")?.split("&") || [];
+    const remote = searchParams.get("remote") === "true";
+    const internship = searchParams.get("internship") === "true";
+
+    setFilters({
+      sources,
+      city,
+      remote,
+      internship,
+    });
+  }, [searchParams, setFilters]);
+
+  return (
+    <div
+      className={`md:mb-[25px] mb-[16px] md:flex md:gap-2
+        md:items-center
+        scrollbar-hide -mx-[20px] px-[20px]
+        md:mx-0 md:px-0 flex items-center gap-2 flex-wrap
+        ${wixMadeforText.className}
+        font-medium md:text-[18px] text-[16px] md:leading-[22px] leading-[20px] tracking-[-0.5px] text-neutral-800`}
+    >
+      <Link href="/jobs/create">
+        <GradientButton variant="light" size="normal" className="mr-2.5">
+          Добавить вакансию
+        </GradientButton>
+      </Link>
+
+      <DropdownList
+        relative
+        buttonLike
+        trigger={<span>{selectedStack.title}</span>}
+        onSelect={(item) => setSelectedStack(item.data)}
+        items={stackOptions.map((item) => ({
+          id: item.linkId,
+          title: item.title,
+          data: item,
+        }))}
+        multiselect={false}
+      />
+
+      <DropdownList
+        relative
+        buttonLike
+        trigger={<span>Источник</span>}
+        onSelect={(_, selectedItems) =>
+          updateFilters(
+            "sources",
+            selectedItems.map((item) => item.id)
+          )
+        }
+        multiselect={true}
+        items={sources.map((source) => ({
+          title: source,
+          count: 0, // Placeholder for count, can be updated later
+          id: source.toLowerCase().replace(/\s+/g, "-"), // Generate a unique ID
+          data: source,
+        }))}
+        activeIds={filters.sources}
+      />
+      <DropdownList
+        relative
+        buttonLike
+        trigger={<span>Город</span>}
+        onSelect={(_, selectedItems) =>
+          updateFilters(
+            "city",
+            selectedItems.map((item) => item.id)
+          )
+        }
+        multiselect={true}
+        items={locations.map((location) => ({
+          title: location,
+          count: 0, // Placeholder for count, can be updated later
+          id: location.toLowerCase().replace(/\s+/g, "-"), // Generate a unique ID
+          data: location,
+        }))}
+        activeIds={filters.city}
+      />
+      <Toggle
+        buttonLike
+        checked={filters.remote}
+        onChange={(value) => updateFilters("remote", value)}
+      >
+        <span>Удаленно</span>
+      </Toggle>
+      <Toggle
+        buttonLike
+        checked={filters.internship}
+        onChange={(value) => updateFilters("internship", value)}
+      >
+        <span>Стажировка</span>
+      </Toggle>
+    </div>
+  );
+};
