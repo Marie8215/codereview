@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { StackOption, stackOptions } from "@/app/data/static-content";
 import { userClientStore } from "@/store/onClient/store";
 
-export const useStackRoute = (): [
+export const useStackRouteFrom = (): [
   StackOption,
   (stack: StackOption) => void
 ] => {

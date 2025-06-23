@@ -9,7 +9,7 @@ import { useSyncQueryParams } from "@/hooks/useSyncQueryParams";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 import Link from "next/link";
-import { useStackRoute } from "../../../hooks/useStackRoute";
+import { useStackRouteFrom } from "../../../hooks/useStackFromRoute";
 
 interface JobsFilterProps {
   sources: string[];
@@ -21,7 +21,7 @@ export const JobsFilter = ({ sources, locations }: JobsFilterProps) => {
   const filters = userClientStore((state) => state.jobsFilter);
   const setFilters = userClientStore((state) => state.setJobsFilter);
   const isMounted = useRef(false);
-  const [selectedStack, setSelectedStack] = useStackRoute();
+  const [selectedStack, setSelectedStack] = useStackRouteFrom();
   useSyncQueryParams(filters);
 
   const updateFilters = (

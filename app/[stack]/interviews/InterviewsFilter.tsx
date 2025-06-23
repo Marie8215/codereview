@@ -7,7 +7,7 @@ import { stackOptions } from "@/app/data/static-content";
 import { InterviewsFilterState, userClientStore } from "@/store/onClient/store";
 import { useEffect } from "react";
 import { useSyncQueryParams } from "@/hooks/useSyncQueryParams";
-import { useStackRoute } from "@/hooks/useStackRoute";
+import { useStackRouteFrom } from "@/hooks/useStackFromRoute";
 
 interface InterviewsFilterProps {
   gradeOptions?: string[];
@@ -23,7 +23,7 @@ export const InterviewsFilter = ({
   const filters = userClientStore((state) => state.interviewsFilter);
   const setFilters = userClientStore((state) => state.setIterviewsFilter);
 
-  const [selectedStack, setSelectedStack] = useStackRoute();
+  const [selectedStack, setSelectedStack] = useStackRouteFrom();
   useSyncQueryParams(filters);
 
   const updateFilters = (
