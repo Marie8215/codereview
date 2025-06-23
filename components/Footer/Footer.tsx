@@ -37,7 +37,7 @@ export const Footer = () => {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <div className="py-[20px] md:pt-[60px] max-w-[345px] lg:max-w-[1020px] sm:max-w-[90%] mx-auto">
+        <div className="py-[20px] md:pt-[60px] max-w-[345px] lg:max-w-[1200px] sm:max-w-[90%] mx-auto">
           <div className="w-full xl:max-w-[1180px] mx-auto flex flex-col xl:flex-row justify-between items-start md:mb-[60px] mb-[20px] gap-y-[34px]">
             <div className="w-full md:w-[233px] order-1 xl:order-2 flex flex-col justify-between gap-y-[20px] md:gap-y-0 xl:h-[141px]">
               <div

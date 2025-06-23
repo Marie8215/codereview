@@ -5,13 +5,66 @@ import { SocialButton } from "../SocialButton/SocialButton";
 import { Divider } from "../Divider/Divider";
 import { AuthButton } from "../AuthButton/AuthButton";
 import Image from "next/image";
+import { Modal } from "../Modal/Modal";
+import { userClientStore } from "@/store/onClient/store";
+import { SuccessModal } from "../SuccessModal/SuccessModal";
+import { ThankYouModal } from "../ThankYouModal/ThankYouModal";
 
 interface RegisterFormProps {
   onLoginClick: () => void;
   onSuccessRegister: () => void;
 }
 
-export const RegisterForm: React.FC<RegisterFormProps> = ({
+export const RegisterFormModal = () => {
+  type ModalContentType = "register" | "success" | "thankYou";
+
+  const isRegisterOpen = userClientStore((state) => state.isRegisterModalOpen);
+  const setIsRegisterOpen = userClientStore((state) => state.setRegisterModalOpen);
+  const setIsLoginOpen = userClientStore((state) => state.setLoginModalOpen);
+  const [currentContent, setCurrentContent] =
+    useState<ModalContentType>("register");
+
+  const handleCloseThankYou = () => {
+    setIsRegisterOpen(false);
+    setCurrentContent("register");
+  };
+
+  const renderContent = () => {
+    switch (currentContent) {
+      case "success":
+        return (
+          <SuccessModal onSubscribe={() => setCurrentContent("thankYou")} />
+        );
+      case "thankYou":
+        return <ThankYouModal onClose={handleCloseThankYou} />;
+      case "register":
+      default:
+        return (
+          <RegisterFormModalContent
+            onLoginClick={() => {
+              setIsRegisterOpen(false);
+              setIsLoginOpen(true);
+            }}
+            onSuccessRegister={() => setCurrentContent("success")}
+          />
+        );
+    }
+  };
+
+  return (
+    <Modal
+      isOpen={isRegisterOpen}
+      onClose={() => {
+        setIsRegisterOpen(false);
+        setCurrentContent("register");
+      }}
+    >
+      {renderContent()}
+    </Modal>
+  );
+};
+
+export const RegisterFormModalContent: React.FC<RegisterFormProps> = ({
   onLoginClick,
   onSuccessRegister,
 }) => {
@@ -23,7 +76,9 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleConfirmPasswordChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const value = e.target.value;
     setConfirmPassword(value);
     if (!password) {
@@ -55,48 +110,48 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
         my-[20px] md:my-0
       "
     >
-      {/* Левая часть */}
-      <div className="
+      <div
+        className="
         flex flex-col items-center justify-center pt-[24px] pb-[16px]
         md:pt-[30px] md:pb-0 md:w-[380px] md:h-full md:bg-[#F5F5F5] md:box-border
-      ">
-        <div className="
+      "
+      >
+        <div
+          className="
           font-medium text-[18px] leading-[22px] tracking-[-1px] text-black text-center mb-[16px]
           md:text-[22px] md:leading-[26px] md:mb-[40px]
-        ">
+        "
+        >
           <div>Вы готовы к большему.</div>
           <div>Мы поможем начать.</div>
         </div>
-        <Image
-          src="/images/sophi-auth.png"
-          alt="Sophi Auth"
-          width={75}
-          height={75}
-          className="object-contain md:w-[278px] md:h-[286px]"
-        />
-        <div className="
+       <Image
+               src="/images/sophi-auth.png"
+               alt="Sophi Auth"
+               width={278}
+               height={286}
+               className="object-contain w-[75px] h-[75px] md:w-[278px] md:h-[286px]"
+             />
+        <div
+          className="
           hidden md:block mt-auto mb-[30px] font-semibold text-[22px] leading-[22px] tracking-[-1px] text-[#636469] text-center
-        ">
+        "
+        >
           &lt;codereview/&gt;
         </div>
       </div>
 
-      {/* Правая часть с формой */}
-      <div className="
+      <div
+        className="
         w-full bg-white p-[20px] flex flex-col
         md:w-[calc(100%-380px)] md:p-[30px]
-      ">
+      "
+      >
         <div className="flex flex-col gap-[8px] mb-[15px]">
-          <SocialButton
-            icon="/images/telegram-color-ico.svg"
-            alt="Telegram"
-          >
+          <SocialButton icon="/images/telegram-color-ico.svg" alt="Telegram">
             Войти через Telegram
           </SocialButton>
-          <SocialButton
-            icon="/images/hh-color-ico.svg"
-            alt="HH.ru"
-          >
+          <SocialButton icon="/images/hh-color-ico.svg" alt="HH.ru">
             Войти через HH.ru
           </SocialButton>
         </div>
@@ -117,7 +172,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
               type="email"
               placeholder="example@mail.ru"
               value={email}
-              onChange={e => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <CustomInput
               label="Пароль"

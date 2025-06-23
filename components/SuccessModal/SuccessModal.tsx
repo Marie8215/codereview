@@ -16,7 +16,6 @@ export const SuccessModal: React.FC<SuccessModalProps> = ({ onSubscribe }) => {
         lg:w-[800px] lg:h-[532px] lg:rounded-[24px] lg:flex-row
       "
     >
-      {/* Левая панель только на десктопе */}
       <div className="hidden lg:flex lg:items-center lg:justify-center lg:w-[380px] lg:h-full lg:bg-[#F5F5F5]">
         <Image
           src="/images/all-chanels.svg"
@@ -28,14 +27,12 @@ export const SuccessModal: React.FC<SuccessModalProps> = ({ onSubscribe }) => {
         />
       </div>
 
-      {/* Правая панель (в мобилке — вся модалка) */}
       <div
         className="
           w-full flex flex-col flex-1 p-[20px] relative
           lg:w-[calc(100%-380px)] lg:p-[30px]
         "
       >
-        {/* Фоновая картинка только для мобилки */}
         <div className="absolute inset-0 z-0 opacity-10 lg:hidden">
           <Image
             src="/images/all-chanels.svg"

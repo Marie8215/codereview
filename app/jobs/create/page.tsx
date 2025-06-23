@@ -57,7 +57,6 @@ export default function PostVacancy() {
             />
           </div>
 
-          {/* Чекбоксы */}
           <div className="flex flex-col mb-[40px]">
             <label className="flex items-center mb-[12px]">
               <input
@@ -107,7 +106,6 @@ export default function PostVacancy() {
               <input
                 type="file"
                 className="hidden"
-                // onChange={handleFileChange}
               />
               <span>
                 <Image

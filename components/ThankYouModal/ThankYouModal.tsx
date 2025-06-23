@@ -17,7 +17,6 @@ export const ThankYouModal: React.FC<ThankYouModalProps> = ({ onClose }) => {
 
       "
     >
-      {/* Левая панель: мобилка — сверху, десктоп — слева */}
       <div className="flex flex-col items-center md:justify-center md:w-[380px] md:h-full md:bg-[#F5F5F5] md:box-border">
         <div className="md:mt-[41px] mb-[20px] md:mb-0">
           <Image
@@ -33,8 +32,6 @@ export const ThankYouModal: React.FC<ThankYouModalProps> = ({ onClose }) => {
           &lt;codereview/&gt;
         </div>
       </div>
-
-      {/* Правая панель */}
       <div
         className={`${wixMadeforText.className} flex flex-col flex-1 text-center md:text-left md:justify-between md:p-[30px]`}
       >

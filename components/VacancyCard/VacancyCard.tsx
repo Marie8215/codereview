@@ -1,13 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { wixMadeforDisplay, wixMadeforText } from "../../app/fonts";
-// {`${wixMadeforDisplay.className}
+
 export const VacancyCard = () => {
   return (
     <div>
-      {/* Cards with 20px padding */}
       <div className="bg-[#F6F6F6] rounded-[8px] p-[20px] mb-[10px]">
-        {/* Company info */}
+
         <div className="flex mb-[15px]">
           <Image
             src="/images/test-company-image.png"
@@ -26,20 +25,19 @@ export const VacancyCard = () => {
           </div>
         </div>
 
-        {/* Buttons */}
         <Link
           href="https://jobs.yourcodereview.com/ai/"
           className={`w-full h-[44px] md:h-[46px] bg-[#F0F1F1] rounded-[12px] mb-[5px] ${wixMadeforText.className} font-medium text-[16px] leading-[20px] md:text-[18px] md:leading-[22px] tracking-[-0.5px] text-[#232325] flex items-center justify-center hover:bg-gradient-to-r from-[#F4B8B8]/50 via-[#E3B3EA]/50 to-[#C5C9F1]/50 transition-all`}
         >
           Получить оффер
         </Link>
-        {/* Response button */}
+
         <button className={`w-full h-[44px] md:h-[46px] bg-gradient-to-r from-[#F4B8B8]/50 via-[#E3B3EA]/50 to-[#C5C9F1]/50 rounded-[12px] ${wixMadeforText.className} font-medium text-[16px] leading-[20px] md:text-[18px] md:leading-[22px] md:text-[18px] md:leading-[20px] tracking-[-0.5px] text-[#232325] md:bg-[#F0F1F1] md:hover:bg-gradient-to-r md:hover:from-[#F4B8B8]/50 md:hover:via-[#E3B3EA]/50 md:hover:to-[#C5C9F1]/50 transition-all `}>
           Откликнуться
         </button>
       </div>
 
-      {/* Yellow card */}   
+
       <a
         href="#"
         className="w-full bg-[#FDF6E2] bg-[url('/images/grid-square.svg')] bg-no-repeat rounded-[8px] mb-[10px] p-[20px] flex flex-col h-[245px]"
@@ -73,13 +71,11 @@ export const VacancyCard = () => {
         </div>
       </a>
 
-      {/* Similar vacancies card */}
       <div className="bg-[#F6F6F6] rounded-[8px] p-[23px] md:p-[20px] mb-[40px] md:mb-20">
         <h3 className={`${wixMadeforDisplay.className} font-bold text-[18px] leading-[20px] tracking-[-0.5px] text-[#232325] mb-[20px]`}>
           Похожие вакансии
         </h3>
 
-        {/* First vacancy */}
         <div className="mb-[15px]">
           <p className={`${wixMadeforDisplay.className} font-semibold text-[16px] leading-[18px] tracking-[-0.5px] text-[#232325] mb-[8px]`}>
             Начинающий тестировщик / AQA Engineer (Java)
@@ -89,10 +85,8 @@ export const VacancyCard = () => {
           </p>
         </div>
 
-        {/* Divider */}
         <div className="h-[1px] bg-[#EAEAEA] mb-[15px]" />
 
-        {/* Second vacancy */}
         <div>
           <p className={`${wixMadeforDisplay.className} font-semibold text-[16px] leading-[18px] tracking-[-0.5px] text-[#232325] mb-[8px]`}>
             Тестировщик Java/QA инженер по автоматизированному тестированию Java

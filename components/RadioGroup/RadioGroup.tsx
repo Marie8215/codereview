@@ -1,8 +1,7 @@
 "use client";
 import { StackOption } from "@/app/data/static-content";
 import { wixMadeforText } from "@/app/fonts";
-// import { useStackRoute } from "@/hooks/UseStackRoute";
-import { useStore } from "@/store/onClient/store";
+import { userClientStore } from "@/store/onClient/store";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -15,9 +14,8 @@ interface RadioGroupProps {
 const RadioGroup = ({ items, className, size }: RadioGroupProps) => {
   const pathname = usePathname();
 
-  const selectedStack = useStore((state) => state.selectedStack);
-  const setSelectedStack = useStore((state) => state.setSelectedStack);
-  // const [selectedStack, setSelectedStack] = useStackRoute();
+  const selectedStack = userClientStore((state) => state.selectedStack);
+  const setSelectedStack = userClientStore((state) => state.setSelectedStack);
 
   const getLink = (linkId: string) => {
     const pathSegments = pathname.split("/").filter(Boolean);

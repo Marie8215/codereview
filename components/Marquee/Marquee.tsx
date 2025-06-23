@@ -5,7 +5,7 @@ import "./Marquee.css";
 
 interface MarqueeProps {
   text: ReactNode;
-  speed?: number; // Скорость в секундах, по умолчанию 20
+  speed?: number;
 }
 
 export const Marquee: React.FC<MarqueeProps> = ({ text, speed = 60 }) => {
@@ -20,8 +20,6 @@ export const Marquee: React.FC<MarqueeProps> = ({ text, speed = 60 }) => {
       const containerWidth = containerRef.current.offsetWidth;
       const textWidth = textRef.current.offsetWidth;
 
-      // Вычисляем сколько копий нужно для заполнения контейнера дважды
-      // (для плавной анимации) плюс запас
       const needed = Math.ceil((containerWidth * 2) / textWidth) + 1;
       setCopies(needed);
     };

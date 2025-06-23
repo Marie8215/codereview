@@ -1,5 +1,5 @@
 import React from 'react';
-import './AuthButton.css';
+
 import { wixMadeforText } from '../../app/fonts';
 
 interface AuthButtonProps {

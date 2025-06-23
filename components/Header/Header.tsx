@@ -1,30 +1,34 @@
 "use client";
-import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { NavigationMenu } from "../NavigationMenu/NavigationMenu";
-import { LoginForm } from "../LoginForm/LoginForm";
+import { LoginFormModal } from "../LoginForm/LoginForm";
 import Logo from "../Logo/Logo";
 import IconWithText from "../IconWithText/IconWithText";
 import Image from "next/image";
-import { Modal } from "../Modal/Modal";
 import Link from "next/link";
-import { RegisterForm } from "../RegisterForm/RegisterForm";
-import { SuccessModal } from "../SuccessModal/SuccessModal";
-import { ThankYouModal } from "../ThankYouModal/ThankYouModal";
+import { RegisterFormModal } from "../RegisterForm/RegisterForm";
 import { stackOptionsMap } from "@/app/data/static-content";
 import GradientButton from "../GradientButton/GradientButton";
+import { userClientStore } from "@/store/onClient/store";
 
 export const Header = () => {
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-  const [isSuccessOpen, setIsSuccessOpen] = useState(false);
-  const [isThankYouOpen, setIsThankYouOpen] = useState(false);
+  const loggedIn = userClientStore((state) => state.loggedIn);
+  const setLoggedIn = userClientStore((state) => state.setLoggedIn);
+
+  const onProfileButtonClick = () => {
+    if (loggedIn) {
+      setLoggedIn(false);
+      localStorage.removeItem("accessToken");
+    } else {
+      setIsLoginOpen(true);
+    }
+  };
+  const setIsLoginOpen = userClientStore((state) => state.setLoginModalOpen);
+
   const pathname = usePathname();
 
   const shouldShowJobsPromoButton = pathname.includes("jobs");
-
   const isHomePage = pathname.split("/").filter(Boolean).length < 2;
-
   const currentStack = stackOptionsMap.get(pathname.split("/")[1])?.linkId;
   const logoLink = currentStack ? `/${currentStack}` : "/";
 
@@ -36,12 +40,12 @@ export const Header = () => {
             <Logo monochrome={!isHomePage} />
           </Link>
           <NavigationMenu />
-          <button onClick={() => setIsLoginOpen(true)}>
+          <button onClick={onProfileButtonClick}>
             <IconWithText
               className="hidden sm:flex"
               text={
                 <span className="font-normal md:text-[18px] md:leading-[22px] text-[16px] leading-[20px] tracking-[-0.5px] cursor-pointer">
-                  Войти
+                  {loggedIn ? "Выйти" : "Войти"}
                 </span>
               }
               icon={
@@ -66,60 +70,31 @@ export const Header = () => {
         </div>
       </div>
 
-      <Modal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)}>
-        <LoginForm
-          onRegisterClick={() => {
-            setIsLoginOpen(false);
-            setIsRegisterOpen(true);
-          }}
-        />
-      </Modal>
+      <LoginFormModal />
+      <RegisterFormModal />
 
-      <Modal isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)}>
-        <RegisterForm
-          onLoginClick={() => {
-            setIsRegisterOpen(false);
-            setIsLoginOpen(true);
-          }}
-          onSuccessRegister={() => {
-            setIsRegisterOpen(false);
-            setIsSuccessOpen(true);
-          }}
-        />
-      </Modal>
-
-      <Modal isOpen={isSuccessOpen} onClose={() => setIsSuccessOpen(false)}>
-        <SuccessModal
-          onSubscribe={() => {
-            setIsSuccessOpen(false);
-            setIsThankYouOpen(true);
-          }}
-        />
-      </Modal>
-
-      <Modal isOpen={isThankYouOpen} onClose={() => setIsThankYouOpen(false)}>
-        <ThankYouModal onClose={() => setIsThankYouOpen(false)} />
-      </Modal>
-      {shouldShowJobsPromoButton && (
-        <div
-          className={`
-      md:absolute md:bottom-0 md:left-full md:ml-[10px] md:w-auto
-      fixed right-10 bottom-4 w-[calc(100vw-32px)] max-w-[345px] z-50
-      md:max-w-none flex justify-end md:block
-    `}
-        >
-          <Link
-            href="https://jobs.yourcodereview.com/ai/"
-          >
-            <GradientButton
-              className="h-[54px] md:h-[56px] rounded-[18px] px-5 flex items-center font-medium text-[18px] leading-[22px] md:w-auto w-full"
-              size="large"
-            >
-              Автоотклики
-            </GradientButton>
-          </Link>
-        </div>
-      )}
+      {shouldShowJobsPromoButton && <HeaderFloatButton />}
     </header>
+  );
+};
+
+const HeaderFloatButton = () => {
+  return (
+    <div
+      className={`
+md:absolute md:bottom-0 md:left-full md:ml-[10px] md:w-auto
+fixed right-10 bottom-4 w-[calc(100vw-32px)] max-w-[345px] z-50
+md:max-w-none flex justify-end md:block
+`}
+    >
+      <Link href="https://jobs.yourcodereview.com/ai/">
+        <GradientButton
+          className="h-[54px] md:h-[56px] rounded-[18px] px-5 flex items-center font-medium text-[18px] leading-[22px] md:w-auto w-full"
+          size="large"
+        >
+          Автоотклики
+        </GradientButton>
+      </Link>
+    </div>
   );
 };

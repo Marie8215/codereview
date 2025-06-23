@@ -110,8 +110,6 @@ export interface StackOption {
   filterId: string;
 }
 
-// Параметры для фильтрации вакансий по стеку сейчас с сервера не получить и поэтому они хранятся здесь.
-// В будущем можно будет сделать запрос на сервер. Параметры регистрозависимы
 export const stackOptions: StackOption[] = [
   {
     title: "Python",

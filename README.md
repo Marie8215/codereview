@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CodeReview Мария Пермякова
 
-## Getting Started
+**CodeReview** — конкурсный проект для поиска IT-стажировок и вакансий, а также подготовки к техническим интервью.
 
-First, run the development server:
+## SEO — ключевая особенность JunoJobs
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Одна из самых сильных сторон проекта — продвинутая SEO-оптимизация.  
+Каждая страница вакансий и тренажёра формируется с уникальными мета-тегами и ЧПУ-адресами, в которых отражается выбранный стек технологий (например, `/java/jobs`, `/python/interviews`).  
+Это позволяет:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Выводить в поисковой строке и сниппетах сразу нужный стек**
+  - Пользователь и поисковик видят, что страница релевантна запросу (например, "Java стажировка").
+  - Благодаря релевантным заголовкам и адресам увеличивается CTR из поисковых систем.
+  - Каждая комбинация стека и фильтров становится отдельной SEO-страницей, что ускоряет индексацию новых направлений.
+  - Человек сразу видит, что попал на страницу по своему направлению, что повышает доверие пользователей.
+  - Такой подход позволяет JunoJobs конкурировать с крупными агрегаторами, быстро наращивать поисковый трафик и давать пользователям максимально релевантный опыт — они сразу попадают на страницу с вакансиями или вопросами именно по своему стеку.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Абсолютный pixel-perfect**
+`/screenshots`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Вёрстка реализована с максимальной точностью к макетам.
+- Все страницы и компоненты сверстаны по принципу pixel-perfect и проверены наложением макета через плагин Google PerfectPixel (см. скриншоты).
+- Это гарантирует полное соответствие дизайну и высокое
 
-## Learn More
+## Технологии
 
-To learn more about Next.js, take a look at the following resources:
+- **Next.js** (App Router, SSR/SSG)
+- **TypeScript**
+- **TailwindCSS**
+- **React**
+- **Zustand** (глобальное состояние)
+- **API-клиент** для работы с backend
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Структура проекта
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `/app` — страницы и layout приложения
+- `/components` — UI-компоненты (карточки, кнопки, формы, модалки и др.)
+- `/utils` — вспомогательные функции и утилиты
+- `/hooks` — кастомные хуки
+- `/public/images` — изображения и иконки
+- `/styles` — глобальные стили и настройки Tailwind

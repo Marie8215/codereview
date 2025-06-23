@@ -1,11 +1,9 @@
 import { Metadata } from "next";
 import { JobCards } from "./JobCards";
-import { stackOptions, stackOptionsMap } from "@/app/data/static-content";
+import { stackOptionsMap } from "@/app/data/static-content";
 import ButtonLikeWrapper from "@/components/ButtonLikeWrapper/ButtonLikeWrapper";
 import { notFound } from "next/navigation";
 import { JobsFilter } from "./JobsFilter";
-import { PaginatedResponse } from "@/api/models/pagination";
-import { Vacancy } from "@/api/models/vacancy";
 import { apiClient } from "@/api/ApiClient";
 import { ApiResponse } from "@/api/models/base";
 import { DefaultPageBackground } from "@/components/Background/MainPageBackground";
@@ -22,23 +20,7 @@ interface JobsPageFilter {
   internship?: string;
   city?: string;
   sources?: string;
-}
-
-async function getJobs(
-  stack: string,
-  filter?: JobsPageFilter
-): Promise<PaginatedResponse<Vacancy>> {
-  const stackOption = stackOptionsMap.get(stack);
-
-  const response = await apiClient.vacancies.get({
-    speciality: stackOption?.filterId,
-    remote: filter?.remote ? filter?.remote === "true" : undefined,
-    internship: filter?.internship ? filter.internship === "true" : undefined,
-    location: filter?.city,
-    source: filter?.sources,
-  });
-
-  return response.response!;
+  page?: string;
 }
 
 async function getSources(): Promise<ApiResponse<string[]>> {
@@ -77,30 +59,28 @@ export default async function JobsPage({
   searchParams,
 }: JobsPageProps) {
   const { stack } = await params;
-  const { remote, internship, city, sources } = await searchParams;
+  const { remote, internship, city, sources, page } = await searchParams;
 
-  const currentStack = stackOptions.find((option) => option.linkId === stack);
+  const currentStack = stackOptionsMap.get(stack);
 
   if (!currentStack) {
     notFound();
   }
 
-  const jobsResponse = await getJobs(stack, {
-    remote,
-    internship,
-    city,
-    sources,
+  const pageSize = 7;
+
+  const apiResponse = await apiClient.vacancies.get({
+    speciality: currentStack?.filterId,
+    remote: remote ? remote === "true" : undefined,
+    internship: internship ? internship === "true" : undefined,
+    location: city,
+    source: sources,
+    limit: pageSize,
+    skip: page ? (Number(page) - 1) * pageSize : undefined,
   });
-  const jobs = jobsResponse.items.map((job) => ({
-    id: job.id.toString(),
-    title: job.title,
-    remote: job.remote,
-    internship: job.internship,
-    salary: job.salary,
-    companyName: job.company_name,
-    location: job.location,
-    datePosted: job.date_publication,
-  }));
+
+  // todo показать ошибку, если есть
+  const data = apiResponse.response;
 
   const sourcesResponse = await getSources();
   const sourcesOptions = sourcesResponse.response || [];
@@ -121,7 +101,11 @@ export default async function JobsPage({
           hh.ru, Habr Career, LinkedIn, Telegram-каналы и многие другие
         </p>
         <JobsFilter sources={sourcesOptions} locations={locations} />
-        <JobCards data={jobs} baseUrl={`${stack}/jobs`} />
+        <JobCards
+          data={data}
+          currentPage={Number(page) || 1}
+          baseUrl={`${stack}/jobs`}
+        />
         <div className="flex sm:justify-center flex-wrap font-medium text-[14px] gap-2 leading-[18px] tracking-[-0.5px] text-neutral-800 mb-[20px]">
           <ButtonLikeWrapper size="small">
             стажировка без опыта

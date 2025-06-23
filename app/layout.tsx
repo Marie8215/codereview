@@ -16,7 +16,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ru" className={`${wixMadeforText.className} ${wixMadeforDisplay.className}`}>
+    <html
+      lang="ru"
+      className={`${wixMadeforText.className} ${wixMadeforDisplay.className}`}
+    >
       <body className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-grow main-content">{children}</main>

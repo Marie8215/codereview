@@ -80,7 +80,6 @@ export const RenderedArticle = ({ content, promo }: RenderedArticleProps) => {
         (n) => (n as Element)?.name === "code"
       ) as Element | undefined;
 
-      console.log("NODENODENODE", code);
 
       const languageClass = code?.attribs?.class || "";
       const language =

@@ -3,7 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { StackOption, stackOptions } from "@/app/data/static-content";
-import { useStore } from "@/store/onClient/store";
+import { userClientStore } from "@/store/onClient/store";
 
 export const useStackRoute = (): [
   StackOption,
@@ -12,8 +12,8 @@ export const useStackRoute = (): [
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const selectedStack = useStore((state) => state.selectedStack);
-  const setSelectedStack = useStore((state) => state.setSelectedStack);
+  const selectedStack = userClientStore((state) => state.selectedStack);
+  const setSelectedStack = userClientStore((state) => state.setSelectedStack);
 
   const updateStack = (stack: StackOption) => {
     setSelectedStack(stack);
@@ -23,7 +23,6 @@ export const useStackRoute = (): [
     if (pathSegments[0] === stack.linkId) {
       return;
     }
-    console.log(pathSegments, stack.linkId, "различаются");
 
     const newPath = `/${stack.linkId}/${pathSegments.slice(1).join("/")}${
       currentParams ? `?${currentParams}` : ""

@@ -53,7 +53,6 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
               internship={vacancy?.internship}
               salary={vacancy?.salary}
             />
-            {/* Правый сайдбар */}
             <div className="w-full md:w-[300px]">
               <VacancyCard />
             </div>
@@ -73,7 +72,6 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
           </div>
         </div>
       </div>
-      {/* ...блок с тегами... */}
     </>
   );
 }

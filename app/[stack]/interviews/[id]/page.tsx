@@ -13,20 +13,17 @@ export default async function QuestionPage({ params }: QuetionPageProps) {
 
   const apiResponse = await apiClient.questions.getById(questionId);
   const question = apiResponse.response;
-  console.log(question);
 
   return (
     <>
       <DefaultPageBackground />
       <div className="w-full flex justify-center mt-[60px] md:mt-[100px] px-[15px]">
         <div className="w-full max-w-[1020px] flex flex-col md:flex-row md:gap-[60px]">
-          {/* Левая часть */}
           <Question
             stack={question?.stack}
-            title=""
-            content={question?.question}
+            title={question?.question || ""}
+            content={question?.answer || question?.question}
           />
-          {/* Правая часть */}
           <div className="w-full md:w-[300px] flex flex-col-reverse md:flex-col gap-0 mt-[40px] md:mt-0">
             <CardPromo />
             <CardNextQuestion />

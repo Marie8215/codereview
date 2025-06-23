@@ -19,17 +19,13 @@ export const Question = ({
   return (
     <div className="w-full md:w-[660px]">
       <div className="font-medium text-[16px] leading-[20px] tracking-[-0.5px] text-[#636469] mb-[10px]">
-        {/* Avito.tech&nbsp;&bull;&nbsp;27.01.2025&nbsp;&bull;&nbsp;Java */}
         {(company || content || stack) &&
           `${company || "Встречается на собеседованиях"}  •  ${datePublished || "сегодня"}  •  ${stack || ""}`}
       </div>
       <h1 className="font-bold text-[22px] leading-[26px] tracking-[-1px] text-[#232325] mb-[20px]">
-        {/* Как работает сборщик мусора в JVM? */}
         {title || `Вопрос по стэку ${stack}`}
       </h1>
       <div className="text-[16px] leading-[22px] text-[#232325] mb-[30px]">
-        {/* Расскажите, какие алгоритмы используются, как происходит сборка мусора,
-        какие есть типы сборщиков и как они влияют на производительность. */}
         <RenderedArticle
           content={content}
           promo={
@@ -40,7 +36,6 @@ export const Question = ({
           }
         />
       </div>
-      {/* Promo карточка после основного контента */}
     </div>
   );
 };

@@ -3,13 +3,13 @@ import GradientButton from "@/components/GradientButton/GradientButton";
 import Toggle from "@/components/Toggle/Toggle";
 import { wixMadeforText } from "@/app/fonts";
 import { DropdownList } from "@/components/Dropdown/DropdownList";
-import { JobsFilterState, useStore } from "@/store/onClient/store";
+import { JobsFilterState, userClientStore } from "@/store/onClient/store";
 import { stackOptions } from "@/app/data/static-content";
-import { useStackRoute } from "@/hooks/UseStackRoute";
 import { useSyncQueryParams } from "@/hooks/useSyncQueryParams";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 import Link from "next/link";
+import { useStackRoute } from "../../../hooks/useStackRoute";
 
 interface JobsFilterProps {
   sources: string[];
@@ -18,12 +18,9 @@ interface JobsFilterProps {
 
 export const JobsFilter = ({ sources, locations }: JobsFilterProps) => {
   const searchParams = useSearchParams();
-
-  const filters = useStore((state) => state.jobsFilter);
-  const setFilters = useStore((state) => state.setJobsFilter);
-
+  const filters = userClientStore((state) => state.jobsFilter);
+  const setFilters = userClientStore((state) => state.setJobsFilter);
   const isMounted = useRef(false);
-
   const [selectedStack, setSelectedStack] = useStackRoute();
   useSyncQueryParams(filters);
 
@@ -98,8 +95,8 @@ export const JobsFilter = ({ sources, locations }: JobsFilterProps) => {
         multiselect={true}
         items={sources.map((source) => ({
           title: source,
-          count: 0, // Placeholder for count, can be updated later
-          id: source.toLowerCase().replace(/\s+/g, "-"), // Generate a unique ID
+          count: 0, 
+          id: source.toLowerCase().replace(/\s+/g, "-"), 
           data: source,
         }))}
         activeIds={filters.sources}
@@ -117,8 +114,8 @@ export const JobsFilter = ({ sources, locations }: JobsFilterProps) => {
         multiselect={true}
         items={locations.map((location) => ({
           title: location,
-          count: 0, // Placeholder for count, can be updated later
-          id: location.toLowerCase().replace(/\s+/g, "-"), // Generate a unique ID
+          count: 0, 
+          id: location.toLowerCase().replace(/\s+/g, "-"),
           data: location,
         }))}
         activeIds={filters.city}

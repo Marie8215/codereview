@@ -3,6 +3,7 @@
 import { wixMadeforDisplay } from "@/app/fonts";
 import React, { useEffect, useRef } from "react";
 import GradientButton from "../GradientButton/GradientButton";
+import { userClientStore } from "@/store/onClient/store";
 
 interface GradientOverlayProps {
   children: React.ReactNode;
@@ -22,6 +23,8 @@ const GradientOverlay: React.FC<GradientOverlayProps> = ({
   const overlayStaticHeight = 320;
   const overlayCalculatedHeight = overlayStaticHeight - cardHeight - 8;
 
+  const setIsRegisterOpen = userClientStore((state) => state.setRegisterModalOpen);
+
   useEffect(() => {
     function updateHeight() {
       if (childrenRef.current && wrapperRef.current) {
@@ -34,10 +37,8 @@ const GradientOverlay: React.FC<GradientOverlayProps> = ({
 
     updateHeight();
 
-    // Listen for window resize
     window.addEventListener("resize", updateHeight);
 
-    // Listen for children size changes
     const resizeObserver = new ResizeObserver(updateHeight);
     if (childrenRef.current) {
       resizeObserver.observe(childrenRef.current);
@@ -72,7 +73,7 @@ const GradientOverlay: React.FC<GradientOverlayProps> = ({
           зарегистрироваться.
         </div>
         <div className="flex justify-center">
-          <GradientButton>Зарегистрироваться</GradientButton>
+          <GradientButton onClick={() => setIsRegisterOpen(true)}>Зарегистрироваться</GradientButton>
         </div>
       </div>
     </div>

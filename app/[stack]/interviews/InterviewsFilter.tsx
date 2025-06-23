@@ -4,10 +4,10 @@ import { wixMadeforText } from "@/app/fonts";
 import { useSearchParams } from "next/navigation";
 import { DropdownList } from "@/components/Dropdown/DropdownList";
 import { stackOptions } from "@/app/data/static-content";
-import { InterviewsFilterState, useStore } from "@/store/onClient/store";
+import { InterviewsFilterState, userClientStore } from "@/store/onClient/store";
 import { useEffect } from "react";
-import { useStackRoute } from "@/hooks/UseStackRoute";
 import { useSyncQueryParams } from "@/hooks/useSyncQueryParams";
+import { useStackRoute } from "@/hooks/useStackRoute";
 
 interface InterviewsFilterProps {
   gradeOptions?: string[];
@@ -20,8 +20,8 @@ export const InterviewsFilter = ({
 }: InterviewsFilterProps) => {
   const searchParams = useSearchParams();
 
-  const filters = useStore((state) => state.interviewsFilter);
-  const setFilters = useStore((state) => state.setIterviewsFilter);
+  const filters = userClientStore((state) => state.interviewsFilter);
+  const setFilters = userClientStore((state) => state.setIterviewsFilter);
 
   const [selectedStack, setSelectedStack] = useStackRoute();
   useSyncQueryParams(filters);

@@ -1,61 +1,73 @@
 "use client";
 import { PaginatedResponse } from "@/api/models/pagination";
 import { Question } from "@/api/models/questions";
-import GradientOverlay from "@/components/GradientOverlay/GradientOverlay";
 import { QuestionCard } from "@/components/QuestionCard/QuestionCard";
 import { SophyPromoCardLong } from "@/components/SophyPromoCardLong/SophyPromoCardLong";
+import { WithPaginationContent } from "@/components/WithPaginationContent/WithPaginationContent";
+import { useLocalStorageTokenListner } from "@/hooks/useLocalStorageTokenListner";
 import Link from "next/link";
-import { useWindowWidth } from "../jobs/JobCards";
 import { useRef } from "react";
 
 export interface QuestionCardProps {
-  questions: PaginatedResponse<Question>;
+  data: PaginatedResponse<Question> | undefined;
+  currentPage: number;
 }
 
-export const QuestionsCards = ({ questions }: QuestionCardProps) => {
-  const screenWidth = useWindowWidth();
+export const QuestionsCards = ({ data, currentPage }: QuestionCardProps) => {
   const cardsRef = useRef(null);
+  useLocalStorageTokenListner();
+
+  const questions = data?.items ?? [];
+
+  const cardsGrid = (
+    <div ref={cardsRef} className="flex flex-col gap-[10px] md:mb-[20px]">
+      {questions.slice(0, Math.ceil(questions.length / 2)).map((question) => (
+        <Link
+          href={`interviews/${question.id}`}
+          className="contents"
+          key={question.id}
+        >
+          <QuestionCard
+            key={question.id}
+            title={question.question}
+            stack={question.stack}
+            frequency={question.freq}
+          />
+        </Link>
+      ))}
+      <SophyPromoCardLong />
+      {questions.slice(Math.ceil(questions.length / 2)).map((question) => (
+        <Link
+          href={`interviews/${question.id}`}
+          className="contents"
+          key={question.id}
+        >
+          <QuestionCard
+            title={question.question}
+            stack={question.stack}
+            frequency={question.freq}
+          />
+        </Link>
+      ))}
+    </div>
+  );
+
+  if (!questions.length){
+    return <p className="text-center mb-20 mt-10">по такому фильтру нет данных</p>;
+  }
+
+  const lastPageNumber = questions ? Math.ceil(data!.total / data!.limit) : 0;
+
+
 
   return (
-    <GradientOverlay
-      cardHeight={screenWidth > 768 ? 76 : 113}
-      childrenRef={cardsRef}
-      className="mb-[56px]"
-    >
-      <div ref={cardsRef} className="flex flex-col gap-[10px] md:mb-[20px]">
-        {questions.items
-          .slice(0, Math.ceil(questions.items.length / 2))
-          .map((question) => (
-            <Link
-              href={`interviews/${question.id}`}
-              className="contents"
-              key={question.id}
-            >
-              <QuestionCard
-                key={question.id}
-                title={question.question}
-                stack={question.stack}
-                frequency={question.freq}
-              />
-            </Link>
-          ))}
-        <SophyPromoCardLong />
-        {questions.items
-          .slice(Math.ceil(questions.items.length / 2))
-          .map((question) => (
-            <Link
-              href={`interviews/${question.id}`}
-              className="contents"
-              key={question.id}
-            >
-              <QuestionCard
-                title={question.question}
-                stack={question.stack}
-                frequency={question.freq}
-              />
-            </Link>
-          ))}
-      </div>
-    </GradientOverlay>
+    <WithPaginationContent
+      cardsGrid={cardsGrid}
+      lastPageNumber={lastPageNumber}
+      currentPage={currentPage}
+      refForOverlay={cardsRef}
+      cardHeight={76}
+      cardHeightDesktop={73}
+    ></WithPaginationContent>
   );
 };

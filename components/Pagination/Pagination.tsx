@@ -1,7 +1,7 @@
 "use client";
 
-import { wixMadeforText } from '@/app/fonts';
-import React, { useState, useEffect } from 'react';
+import { wixMadeforText } from "@/app/fonts";
+import React, { useState, useEffect } from "react";
 
 interface PaginationProps {
   lastPage: number;
@@ -10,11 +10,48 @@ interface PaginationProps {
   className?: string;
 }
 
+interface PaginationButtonProps {
+  page: number;
+  isActive: boolean;
+  onClick: (page: number) => void;
+}
+
+const PaginationButton: React.FC<PaginationButtonProps> = ({
+  page,
+  isActive,
+  onClick,
+}) => {
+  return (
+    <button
+      onClick={() => onClick(page)}
+      className={`
+        w-[40px]
+        h-[40px]
+        rounded-[10px]
+        transition-colors
+        text-[18px]
+        leading-[22px]
+        tracking-[-0.5px]
+        font-medium
+        cursor-pointer
+        ${wixMadeforText.className}
+        ${
+          isActive
+            ? "bg-gradient-to-tr from-[rgba(244,184,184,0.4)] via-[rgba(234,214,181,0.4)] via-[rgba(227,234,179,0.4)] to-[rgba(197,241,208,0.4)] text-neutral-800"
+            : "text-neutral-800 hover:bg-neutral-100"
+        }
+      `}
+    >
+      {page}
+    </button>
+  );
+};
+
 const Pagination: React.FC<PaginationProps> = ({
   lastPage,
   currentPage: externalPage = 1,
   onPageChange,
-  className = ''
+  className = "",
 }) => {
   const [activePage, setActivePage] = useState(externalPage);
 
@@ -35,27 +72,12 @@ const Pagination: React.FC<PaginationProps> = ({
 
     for (let i = 1; i <= Math.min(visiblePages, lastPage); i++) {
       items.push(
-        <button
+        <PaginationButton
           key={i}
-          onClick={() => handlePageClick(i)}
-          className={`
-            w-[40px] 
-            h-[40px] 
-            rounded-[10px]
-            transition-colors
-            text-[18px]
-            leading-[22px]
-            tracking-[-0.5px]
-            font-medium
-            ${wixMadeforText.className}
-            ${activePage === i 
-              ? 'bg-gradient-to-tr from-[rgba(244,184,184,0.4)] via-[rgba(234,214,181,0.4)] via-[rgba(227,234,179,0.4)] to-[rgba(197,241,208,0.4)] text-neutral-800' 
-              : 'text-neutral-800 hover:bg-neutral-100'
-            }
-          `}
-        >
-          {i}
-        </button>
+          page={i}
+          isActive={activePage === i}
+          onClick={handlePageClick}
+        />
       );
     }
 
@@ -81,23 +103,14 @@ const Pagination: React.FC<PaginationProps> = ({
           ...
         </div>
       );
+
       items.push(
-        <button
+        <PaginationButton
           key={lastPage}
-          onClick={() => handlePageClick(lastPage)}
-          className={`
-            w-[40px] 
-            h-[40px] 
-            rounded-[10px]
-            transition-colors
-            ${activePage === lastPage 
-              ? 'bg-gradient-to-tr from-[rgba(244,184,184,0.4)] via-[rgba(234,214,181,0.4)] via-[rgba(227,234,179,0.4)] to-[rgba(197,241,208,0.4)] text-neutral-800' 
-              : 'text-neutral-800 hover:bg-neutral-100'
-            }
-          `}
-        >
-          {lastPage}
-        </button>
+          page={lastPage}
+          isActive={activePage === lastPage}
+          onClick={handlePageClick}
+        />
       );
     }
 
@@ -105,7 +118,9 @@ const Pagination: React.FC<PaginationProps> = ({
   };
 
   return (
-    <div className={`w-[298px] flex items-center gap-[3px] ${className}`}>
+    <div
+      className={`w-[298px] flex items-center justify-center gap-[3px] ${className}`}
+    >
       {renderPageNumbers()}
     </div>
   );

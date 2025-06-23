@@ -15,15 +15,12 @@ export const NavigationMenu = () => {
   const getLink = (baseLink: string | undefined) => {
     if (!baseLink) return "#";
 
-    // Get the first segment of the path (stack name or empty for home page)
     const pathSegments = pathname.split("/").filter(Boolean);
     const currentStack = pathSegments[0] || stackOptions[0].linkId;
 
-    // Always return path with current/default stack and new baseLink
     return `/${currentStack}/${baseLink}`;
   };
 
-  // Разбиваем массив на строки по колонкам — чтобы получить порядок поколоночного заполнения
   const reorderedLinks = [];
 
   for (let row = 0; row < rowsCount; row++) {

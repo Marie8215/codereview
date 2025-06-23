@@ -1,5 +1,4 @@
 import React from 'react';
-import './Divider.css';
 
 interface DividerProps {
   text?: string;

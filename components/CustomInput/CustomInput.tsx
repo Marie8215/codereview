@@ -11,7 +11,7 @@ interface CustomInputProps {
   isPassword?: boolean;
   showPassword?: boolean;
   onTogglePassword?: () => void;
-  error?: string; // для других ошибок, если нужно
+  error?: string; 
 }
 
 export const CustomInput: React.FC<CustomInputProps> = ({
@@ -38,7 +38,6 @@ export const CustomInput: React.FC<CustomInputProps> = ({
     }
   }, [type, value]);
 
-  // Показываем ошибку: если это email — только свою, иначе — проп error
   const errorToShow = type === "email" ? emailError : error;
 
   return (
