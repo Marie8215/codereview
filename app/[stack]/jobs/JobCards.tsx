@@ -77,8 +77,8 @@ export const JobCards = ({ data, baseUrl, currentPage }: JobCardsProps) => {
       lastPageNumber={lastPageNumber}
       currentPage={currentPage}
       refForOverlay={refForOverlay}
-      cardHeight={204}
-      cardHeightDesktop={240}
+      cardHeight={240}
+      cardHeightDesktop={204}
     />
   );
 };
