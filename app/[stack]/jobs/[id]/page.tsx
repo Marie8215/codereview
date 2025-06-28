@@ -4,6 +4,7 @@ import ButtonLikeWrapper from "../../../../components/ButtonLikeWrapper/ButtonLi
 import { apiClient } from "@/api/ApiClient";
 import { Vacancy } from "./Vacancy";
 import { DefaultPageBackground } from "@/components/Background/MainPageBackground";
+import { vacancyTagsDictionary } from "@/data/vacancyTagsDictionary";
 
 interface VacancyPageProps {
   params: Promise<{ id: string }>;
@@ -35,9 +36,16 @@ export async function generateMetadata({
 
 export default async function VacancyPage({ params }: VacancyPageProps) {
   const { id: vacancyId } = await params;
-
   const apiResponse = await apiClient.vacancies.getById(vacancyId);
   const vacancy = apiResponse.response;
+
+  // Получаем stack из URL (например, /java/jobs/123)
+  let stackKey: keyof typeof vacancyTagsDictionary = "java";
+  if (params && "stack" in params) {
+    stackKey = (params as any).stack?.toLowerCase().replace(/-/g, "") as keyof typeof vacancyTagsDictionary;
+  }
+
+  const tags = vacancyTagsDictionary[stackKey] || [];
 
   return (
     <>
@@ -58,17 +66,11 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
             </div>
           </div>
           <div className="flex justify-start flex-wrap font-medium text-[14px] gap-2 leading-[18px] tracking-[-0.5px] text-neutral-800 mb-[20px]">
-            <ButtonLikeWrapper size="small">вакансии джуниор</ButtonLikeWrapper>
-            <ButtonLikeWrapper size="small">
-              как откликнуться на вакансию
-            </ButtonLikeWrapper>
-            <ButtonLikeWrapper size="small">
-              примеры вакансий junior
-            </ButtonLikeWrapper>
-            <ButtonLikeWrapper size="small">вакансии по Java</ButtonLikeWrapper>
-            <ButtonLikeWrapper size="small">
-              стажировки по Java
-            </ButtonLikeWrapper>
+            {tags.map((tag, idx) => (
+              <ButtonLikeWrapper size="small" key={idx}>
+                {tag.label}
+              </ButtonLikeWrapper>
+            ))}
           </div>
         </div>
       </div>

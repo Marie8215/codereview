@@ -23,7 +23,7 @@ const  ButtonLikeWrapper: React.FC<ButtonLikeWrapperProps> = ({
       className={`
         ${sizeStyles[size]}
         bg-neutral-100
-        cursor-pointer
+        cursor-default
         ${className}
       `}
     >

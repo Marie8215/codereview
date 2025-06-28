@@ -7,6 +7,7 @@ import { JobsFilter } from "./JobsFilter";
 import { apiClient } from "@/api/ApiClient";
 import { ApiResponse } from "@/api/models/base";
 import { DefaultPageBackground } from "@/components/Background/MainPageBackground";
+import { tagsDictionary } from "@/data/tagsDictionary";
 
 interface JobsPageProps {
   params: Promise<{
@@ -88,6 +89,10 @@ export default async function JobsPage({
   const locationsResponse = await getLocations();
   const locations = locationsResponse.response || [];
 
+  // определяем ключ стека
+  const stackKey = stack.toLowerCase() as keyof typeof tagsDictionary;
+  const tags = tagsDictionary[stackKey] || [];
+
   return (
     <>
       <DefaultPageBackground />
@@ -107,26 +112,16 @@ export default async function JobsPage({
           baseUrl={`${stack}/jobs`}
         />
         <div className="flex sm:justify-center flex-wrap font-medium text-[14px] gap-2 leading-[18px] tracking-[-0.5px] text-neutral-800 mb-[20px]">
-          <ButtonLikeWrapper size="small">
-            стажировка без опыта
-          </ButtonLikeWrapper>
-          <ButtonLikeWrapper size="small">вакансии джуниор</ButtonLikeWrapper>
-          <ButtonLikeWrapper size="small">
-            как откликнуться на вакансию
-          </ButtonLikeWrapper>
-          <ButtonLikeWrapper size="small">
-            примеры вакансий junior
-          </ButtonLikeWrapper>
-          <ButtonLikeWrapper size="small">стажировки по Java</ButtonLikeWrapper>
-          <ButtonLikeWrapper size="small">
-            Junior Java Developer
-          </ButtonLikeWrapper>
-          <ButtonLikeWrapper size="small">
-            Вакансии Java без опыта
-          </ButtonLikeWrapper>
-          <ButtonLikeWrapper size="small">
-            Java Spring Boot вакансии
-          </ButtonLikeWrapper>
+          {tags
+            .filter(
+              (tag) =>
+                !tag.stacks || tag.stacks.includes(stackKey)
+            )
+            .map((tag, idx) => (
+              <ButtonLikeWrapper size="small" key={idx}>
+                {tag.label}
+              </ButtonLikeWrapper>
+            ))}
         </div>
       </div>
     </>
