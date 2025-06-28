@@ -10,6 +10,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { useStackRouteFrom } from "../../../hooks/useStackFromRoute";
+import { useSyncStoreFilter } from "@/hooks/useSyncStoreFilter";
 
 interface JobsFilterProps {
   sources: string[];
@@ -17,12 +18,13 @@ interface JobsFilterProps {
 }
 
 export const JobsFilter = ({ sources, locations }: JobsFilterProps) => {
-  const searchParams = useSearchParams();
   const filters = userClientStore((state) => state.jobsFilter);
   const setFilters = userClientStore((state) => state.setJobsFilter);
-  const isMounted = useRef(false);
+
   const [selectedStack, setSelectedStack] = useStackRouteFrom();
+
   useSyncQueryParams(filters);
+  useSyncStoreFilter(filters, setFilters);
 
   const updateFilters = (
     key: keyof JobsFilterState,
@@ -33,26 +35,6 @@ export const JobsFilter = ({ sources, locations }: JobsFilterProps) => {
       [key]: value,
     });
   };
-
-  useEffect(() => {
-    if (isMounted.current) {
-      return;
-    }
-
-    isMounted.current = false;
-
-    const sources = searchParams.get("sources")?.split("&") || [];
-    const city = searchParams.get("city")?.split("&") || [];
-    const remote = searchParams.get("remote") === "true";
-    const internship = searchParams.get("internship") === "true";
-
-    setFilters({
-      sources,
-      city,
-      remote,
-      internship,
-    });
-  }, [searchParams, setFilters]);
 
   return (
     <div
@@ -95,8 +77,8 @@ export const JobsFilter = ({ sources, locations }: JobsFilterProps) => {
         multiselect={true}
         items={sources.map((source) => ({
           title: source,
-          count: 0, 
-          id: source.toLowerCase().replace(/\s+/g, "-"), 
+          count: 0,
+          id: source.toLowerCase().replace(/\s+/g, "-"),
           data: source,
         }))}
         activeIds={filters.sources}
@@ -114,7 +96,7 @@ export const JobsFilter = ({ sources, locations }: JobsFilterProps) => {
         multiselect={true}
         items={locations.map((location) => ({
           title: location,
-          count: 0, 
+          count: 0,
           id: location.toLowerCase().replace(/\s+/g, "-"),
           data: location,
         }))}

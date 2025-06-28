@@ -1,13 +1,12 @@
 "use client";
 
 import { wixMadeforText } from "@/app/fonts";
-import { useSearchParams } from "next/navigation";
 import { DropdownList } from "@/components/Dropdown/DropdownList";
 import { stackOptions } from "@/app/data/static-content";
 import { InterviewsFilterState, userClientStore } from "@/store/onClient/store";
-import { useEffect } from "react";
 import { useSyncQueryParams } from "@/hooks/useSyncQueryParams";
 import { useStackRouteFrom } from "@/hooks/useStackFromRoute";
+import { useSyncStoreFilter } from "@/hooks/useSyncStoreFilter";
 
 interface InterviewsFilterProps {
   gradeOptions?: string[];
@@ -18,13 +17,13 @@ export const InterviewsFilter = ({
   gradeOptions,
   subStackOptions,
 }: InterviewsFilterProps) => {
-  const searchParams = useSearchParams();
-
   const filters = userClientStore((state) => state.interviewsFilter);
   const setFilters = userClientStore((state) => state.setIterviewsFilter);
 
   const [selectedStack, setSelectedStack] = useStackRouteFrom();
+
   useSyncQueryParams(filters);
+  useSyncStoreFilter(filters, setFilters);
 
   const updateFilters = (
     key: keyof InterviewsFilterState,
@@ -35,16 +34,6 @@ export const InterviewsFilter = ({
       [key]: value,
     });
   };
-
-  useEffect(() => {
-    const grade = searchParams.get("grade")?.split("&") || [];
-    const subStack = searchParams.get("subStack")?.split("&") || [];
-
-    setFilters({
-      grade,
-      subStack,
-    });
-  }, [searchParams, setFilters]);
 
   return (
     <div

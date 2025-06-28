@@ -33,6 +33,10 @@ export interface InterviewsFilterState {
   [key: string]: string | boolean | string[];
 }
 
+export interface FilterState {
+  [key: string]: string | boolean | number | string[];
+}
+
 export interface JobsFilterState {
   sources: string[];
   city: string[];

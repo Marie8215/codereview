@@ -1,6 +1,6 @@
 "use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export const useSyncQueryParams = <
   T extends Record<string, string | boolean | string[]>
@@ -10,16 +10,22 @@ export const useSyncQueryParams = <
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const isMounted = useRef(false);
 
   useEffect(() => {
+    if (!isMounted.current) {
+      isMounted.current = true;
+      return;
+    }
+    
     const params = new URLSearchParams(searchParams.toString());
-
+    
     Object.entries(filters).forEach(([key, value]) => {
       if (value === null || value === undefined) {
         params.delete(key);
         return;
       }
-
+      
       if (Array.isArray(value)) {
         if (value.length > 0) {
           params.set(key, value.join("&"));
@@ -38,17 +44,18 @@ export const useSyncQueryParams = <
         params.delete(key);
       }
     });
-
+    
     const newUrl = `${pathname}${
       params.toString() ? `?${params.toString()}` : ""
     }`;
-
+    
     const currentUrl = `${pathname}${
       searchParams.toString() ? `?${searchParams.toString()}` : ""
     }`;
 
     if (newUrl !== currentUrl) {
       router.push(newUrl);
+      console.log("from store to url", isMounted);
     }
   }, [filters, pathname, router, searchParams]);
 
