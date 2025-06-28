@@ -5,6 +5,7 @@ import { stackOptionsMap } from "@/app/data/static-content";
 import { notFound } from "next/navigation";
 import { DefaultPageBackground } from "@/components/Background/MainPageBackground";
 import { QuestionsCards } from "./QuestionsCards";
+import { interviewTagsDictionary } from "@/data/interviewTagsDictionary";
 
 interface InterviewPageProps {
   params: Promise<{
@@ -43,6 +44,9 @@ export default async function InterviewsPage(props: InterviewPageProps) {
   const gradesResponse = await apiClient.questions.getGrades();
   const grades = gradesResponse.response;
 
+  const stackKey = stack.toLowerCase().replace(/-/g, "") as keyof typeof interviewTagsDictionary;
+  const tags = interviewTagsDictionary[stackKey] || [];
+
   return (
     <>
       <DefaultPageBackground />
@@ -62,26 +66,11 @@ export default async function InterviewsPage(props: InterviewPageProps) {
         <QuestionsCards data={questions} currentPage={Number(page) || 1} />
 
         <div className="flex md:justify-center justify-start flex-wrap font-medium text-[14px] gap-2 leading-[18px] tracking-[-0.5px] text-neutral-800 mb-[20px]">
-          <ButtonLikeWrapper size="small">
-            стажировка без опыта
-          </ButtonLikeWrapper>
-          <ButtonLikeWrapper size="small">вакансии джуниор</ButtonLikeWrapper>
-          <ButtonLikeWrapper size="small">
-            как откликнуться на вакансию
-          </ButtonLikeWrapper>
-          <ButtonLikeWrapper size="small">
-            примеры вакансий junior
-          </ButtonLikeWrapper>
-          <ButtonLikeWrapper size="small">стажировки по Java</ButtonLikeWrapper>
-          <ButtonLikeWrapper size="small">
-            Junior Java Developer
-          </ButtonLikeWrapper>
-          <ButtonLikeWrapper size="small">
-            Вакансии Java без опыта
-          </ButtonLikeWrapper>
-          <ButtonLikeWrapper size="small">
-            Java Spring Boot вакансии
-          </ButtonLikeWrapper>
+          {tags.map((tag, idx) => (
+            <ButtonLikeWrapper size="small" key={idx}>
+              {tag.label}
+            </ButtonLikeWrapper>
+          ))}
         </div>
       </div>
     </>
