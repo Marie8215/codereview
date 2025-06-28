@@ -47,6 +47,10 @@ class ApiClient {
       console.info(`Fetching: ${this.baseUrl}${endpoint}`, options);
 
       const response = await fetch(`${this.baseUrl}${endpoint}`, {
+        cache: "force-cache",
+        next: {
+          revalidate: 60, // 1 minute
+        },
         ...options,
         headers: {
           ...this.getHeaders(),
@@ -300,11 +304,11 @@ class ApiClient {
   private createAuthEndpoint(): AuthEndpoint {
     return {
       login: async (data: LoginData) => {
-
+        // todo здесь выполнять запрос без кэша!
         const tokenData: TokenResponse = {
           access_token: "faketoken_ " + data.username,
           token_type: "Bearer",
-        }
+        };
 
         // Сохраняем токен
         this.accessToken = tokenData.access_token;
