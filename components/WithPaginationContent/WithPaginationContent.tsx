@@ -12,6 +12,7 @@ interface WithPaginationContentProps {
   refForOverlay: React.RefObject<HTMLDivElement | null>;
   cardHeightDesktop: number;
   cardHeight: number;
+  overlayType?: "jobs" | "questions"; // новый проп
 }
 
 export const WithPaginationContent = ({
@@ -20,7 +21,8 @@ export const WithPaginationContent = ({
   currentPage,
   refForOverlay,
   cardHeightDesktop,
-  cardHeight
+  cardHeight,
+  overlayType = "jobs", // по умолчанию
 }: WithPaginationContentProps) => {
   const loggedIn = userClientStore((state) => state.loggedIn);
   const setPage = useSyncPage();
@@ -49,6 +51,7 @@ export const WithPaginationContent = ({
           cardHeight={screenWidth > 768 ? cardHeightDesktop : cardHeight}
           childrenRef={refForOverlay}
           className="mb-[56px]"
+          overlayType={overlayType} // прокидываем сюда
         >
           {jobCardsGrid}
         </GradientOverlay>

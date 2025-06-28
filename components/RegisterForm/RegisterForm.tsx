@@ -105,7 +105,7 @@ export const RegisterFormModalContent: React.FC<RegisterFormProps> = ({
     <div
       className="
         w-full bg-white rounded-[24px] flex flex-col
-        md:w-[800px] md:h-[682px] md:rounded-[24px] md:flex-row
+        md:w-[800px]  md:rounded-[24px] md:flex-row
         overflow-y-auto max-h-[calc(100dvh-40px)] md:overflow-hidden md:max-h-none
         my-[20px] md:my-0
       "
@@ -113,7 +113,7 @@ export const RegisterFormModalContent: React.FC<RegisterFormProps> = ({
       <div
         className="
         flex flex-col items-center justify-center pt-[24px] pb-[16px]
-        md:pt-[30px] md:pb-0 md:w-[380px] md:h-full md:bg-[#F5F5F5] md:box-border
+        md:pt-[30px] md:pb-0 md:w-[380px] md:bg-[#F5F5F5] md:box-border
       "
       >
         <div
@@ -151,9 +151,9 @@ export const RegisterFormModalContent: React.FC<RegisterFormProps> = ({
           <SocialButton icon="/images/telegram-color-ico.svg" alt="Telegram">
             Войти через Telegram
           </SocialButton>
-          <SocialButton icon="/images/hh-color-ico.svg" alt="HH.ru">
+          {/* <SocialButton icon="/images/hh-color-ico.svg" alt="HH.ru">
             Войти через HH.ru
-          </SocialButton>
+          </SocialButton> */}
         </div>
 
         <Divider text="или" className="mb-[15px]" />

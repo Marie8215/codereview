@@ -10,6 +10,7 @@ interface GradientOverlayProps {
   childrenRef: React.RefObject<HTMLDivElement> | React.RefObject<null>;
   cardHeight: number;
   className?: string;
+  overlayType?: "jobs" | "questions"; // новый проп
 }
 
 const GradientOverlay: React.FC<GradientOverlayProps> = ({
@@ -17,13 +18,14 @@ const GradientOverlay: React.FC<GradientOverlayProps> = ({
   childrenRef,
   cardHeight,
   className,
+  overlayType = "jobs", // по умолчанию
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const overlayStaticHeight = 320;
   const overlayCalculatedHeight = overlayStaticHeight - cardHeight - 8;
 
-  const setIsRegisterOpen = userClientStore((state) => state.setRegisterModalOpen);
+  const setIsLoginOpen = userClientStore((state) => state.setLoginModalOpen);
 
   useEffect(() => {
     function updateHeight() {
@@ -50,6 +52,21 @@ const GradientOverlay: React.FC<GradientOverlayProps> = ({
     };
   }, [childrenRef, cardHeight, overlayCalculatedHeight]);
 
+  let title = (
+    <>
+      Получите доступ <br className="md:hidden" />к 1200 вакансиям и стажировкам
+    </>
+  );
+  if (overlayType === "questions") {
+    title = (
+      <>
+        Получите доступ{" "}
+        <br className="md:hidden" />
+        более чем к 1000 вопросов для подготовки к собеседованию
+      </>
+    );
+  }
+
   return (
     <div ref={wrapperRef} className={`relative ${className}`}>
       {children}
@@ -63,8 +80,7 @@ const GradientOverlay: React.FC<GradientOverlayProps> = ({
         <div
           className={`font-bold md:text-[22px] text-[20px] md:leading-[26px] leading-[24px] tracking-[-0.5px] sm:text-center text-left mt-[129px] mb-2.5`}
         >
-          Получите доступ <br className="md:hidden" />к 1200 вакансиям и
-          стажировкам
+          {title}
         </div>
         <div className="font-medium md:text-[18px] text-[14px] md:leading-[22px] leading-[18px] tracking-[-0.5px] sm:text-center text-left md:w-[626px] mx-auto text-neutral-500 mb-[25px]">
           Сервис можно использовать бесплатно, <br className="md:hidden" /> без
@@ -73,7 +89,7 @@ const GradientOverlay: React.FC<GradientOverlayProps> = ({
           зарегистрироваться.
         </div>
         <div className="flex justify-center">
-          <GradientButton onClick={() => setIsRegisterOpen(true)}>Зарегистрироваться</GradientButton>
+          <GradientButton onClick={() => setIsLoginOpen(true)}>Войти</GradientButton>
         </div>
       </div>
     </div>

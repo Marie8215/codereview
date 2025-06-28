@@ -52,13 +52,11 @@ export const QuestionsCards = ({ data, currentPage }: QuestionCardProps) => {
     </div>
   );
 
-  if (!questions.length){
+  if (!questions.length) {
     return <p className="text-center mb-20 mt-10">по такому фильтру нет данных</p>;
   }
 
   const lastPageNumber = questions ? Math.ceil(data!.total / data!.limit) : 0;
-
-
 
   return (
     <WithPaginationContent
@@ -68,6 +66,7 @@ export const QuestionsCards = ({ data, currentPage }: QuestionCardProps) => {
       refForOverlay={cardsRef}
       cardHeight={76}
       cardHeightDesktop={73}
-    ></WithPaginationContent>
+      overlayType="questions" // явно указываем
+    />
   );
 };

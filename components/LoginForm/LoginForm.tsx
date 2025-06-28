@@ -52,9 +52,9 @@ const LoginForm = () => {
       <SocialButton icon="/images/telegram-color-ico.svg" alt="Telegram">
         Войти через Telegram
       </SocialButton>
-      <SocialButton icon="/images/hh-color-ico.svg" alt="HH.ru">
+      {/* <SocialButton icon="/images/hh-color-ico.svg" alt="HH.ru">
         Войти через HH.ru
-      </SocialButton>
+      </SocialButton> */}
     </div>
   );
 
@@ -121,7 +121,7 @@ const LeftModalSide = () => {
     <div
       className="
     flex flex-col items-center justify-center pt-[24px] pb-[16px]
-    md:pt-[30px] md:pb-0 md:w-[380px] md:h-full md:bg-[#F5F5F5] md:box-border"
+    md:pt-[30px] md:pb-0 md:w-[380px] md:bg-[#F5F5F5] md:box-border"
     >
       <div
         className="
@@ -150,7 +150,7 @@ const LoginFormModalContent: React.FC = () => {
     <div
       className={`${wixMadeforText.className}
       w-full bg-white rounded-[24px] flex flex-col overflow-hidden
-      lg:w-[800px] md:h-[522px] md:rounded-[24px] md:flex-row
+      lg:w-[800px] md:rounded-[24px] md:flex-row
     `}
     >
       <LeftModalSide />
