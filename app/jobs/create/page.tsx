@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { CustomInput } from "../../../components/CustomInput/CustomInput";
 import GradientButton from "../../../components/GradientButton/GradientButton";
 import Image from "next/image";
@@ -15,12 +15,42 @@ export default function PostVacancy() {
   const [email, setEmail] = useState("");
   const [isInternship, setIsInternship] = useState(false);
   const [isRemote, setIsRemote] = useState(false);
+  const [error, setError] = useState("");
+  const [logo, setLogo] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (
+      !title.trim() ||
+      !desc.trim() ||
+      !salary.trim() ||
+      !city.trim() ||
+      !company.trim() ||
+      !telegram.trim() ||
+      !email.trim()
+    ) {
+      setError("Все поля должны быть заполнены");
+      return;
+    }
+    setError("");
+    // ...отправка данных...
+  }
+
+  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setLogo(e.target.files[0]);
+    }
+  };
 
   return (
     <>
       <DefaultPageBackground />
       <div className="w-full flex justify-center mt-[60px] md:mt-[65px] px-[15px] md:px-0">
-        <form className="w-full max-w-full md:max-w-[560px] flex flex-col items-stretch">
+        <form
+          className="w-full max-w-full md:max-w-[560px] flex flex-col items-stretch"
+          onSubmit={handleSubmit}
+        >
           <h1 className="font-bold text-[26px] leading-[30px] tracking-[-0.5px] text-black text-left mb-[25px]">
             Разместить вакансию
           </h1>
@@ -106,18 +136,27 @@ export default function PostVacancy() {
               <input
                 type="file"
                 className="hidden"
+                ref={fileInputRef}
+                accept="image/*"
+                onChange={handleLogoChange}
               />
-              <span>
-                <Image
-                  src="/images/upload-logo.svg"
-                  alt="Загрузить логотип"
-                  width={52}
-                  height={52}
-                  className="object-contain"
-                />
-              </span>
+              <Image
+                src="/images/upload-logo.svg"
+                alt="Загрузить логотип"
+                width={52}
+                height={52}
+                className="object-contain"
+              />
             </label>
           </div>
+          {logo && (
+            <div
+              className="text-xs mb-2 ml-auto"
+              style={{ color: "#C217FEE5" }}
+            >
+              Логотип выбран: {logo.name}
+            </div>
+          )}
 
           <div className="flex flex-col md:flex-row gap-[20px] mb-[30px]">
             <div className="w-full md:w-[280px]">
@@ -139,6 +178,12 @@ export default function PostVacancy() {
               />
             </div>
           </div>
+
+          {error && (
+            <div className="text-red-500 font-medium mb-2 mt-[-2px] text-center px-0">
+              {error}
+            </div>
+          )}
 
           <GradientButton
             variant="light"
