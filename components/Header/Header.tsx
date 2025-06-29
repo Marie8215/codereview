@@ -90,7 +90,7 @@ export const Header = () => {
       )}
 
       {/* Основной header */}
-      <header className="rounded-[18px] md:py-[17px] md:px-5 py-[13px] px-5 gap-5 bg-neutral-10 shadow-header backdrop-blur-[8px] flex items-center">
+      <header className="rounded-[18px] md:py-[17px] md:px-5 py-[13px] px-5 gap-5 bg-neutral-10 shadow-header backdrop-blur-[8px] flex items-center relative z-20">
         <Link href={logoLink} className="contents">
           <Logo monochrome={!isHomePage} />
         </Link>
