@@ -4,6 +4,7 @@ import { CustomInput } from "../../../components/CustomInput/CustomInput";
 import GradientButton from "../../../components/GradientButton/GradientButton";
 import Image from "next/image";
 import { DefaultPageBackground } from "@/components/Background/MainPageBackground";
+import { apiClient } from "../../../api/ApiClient";
 
 export default function PostVacancy() {
   const [title, setTitle] = useState("");
@@ -16,10 +17,26 @@ export default function PostVacancy() {
   const [isInternship, setIsInternship] = useState(false);
   const [isRemote, setIsRemote] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
   const [logo, setLogo] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // обработчик выбора файла
+  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setLogo(e.target.files[0]);
+    }
+  };
+
+  const fileToBase64 = (file: File): Promise<string> =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (
       !title.trim() ||
@@ -34,12 +51,34 @@ export default function PostVacancy() {
       return;
     }
     setError("");
-    // ...отправка данных...
-  }
 
-  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setLogo(e.target.files[0]);
+    let imageBase64: string | null = null;
+    if (logo) {
+      imageBase64 = await fileToBase64(logo);
+    }
+
+    const vacancyData = {
+      active: true,
+      external_id: null,
+      company_name: company,
+      title,
+      salary,
+      location: city,
+      speciality: "",
+      internship: isInternship,
+      remote: isRemote,
+      url: "",
+      description: desc,
+      source: "",
+      image: imageBase64,
+    };
+
+    const response = await apiClient.vacancies.create(vacancyData);
+
+    if (response.isSuccess) {
+      setSuccess(true);
+    } else {
+      setError(response.error?.message || "Ошибка при отправке вакансии");
     }
   };
 
@@ -180,8 +219,16 @@ export default function PostVacancy() {
           </div>
 
           {error && (
-            <div className="text-red-500 font-medium mb-2 mt-[-2px] text-center px-0">
+            <div className="text-red-600 font-medium mb-2 mt-[-8px] text-center px-0">
               {error}
+            </div>
+          )}
+          {success && (
+            <div
+              className="font-medium mb-2 mt-[-8px] text-center px-0"
+              style={{ color: "#78cd0a" }}
+            >
+              Вакансия успешно отправлена!
             </div>
           )}
 
