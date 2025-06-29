@@ -113,10 +113,7 @@ export default async function JobsPage({
         />
         <div className="flex sm:justify-center flex-wrap font-medium text-[14px] gap-2 leading-[18px] tracking-[-0.5px] text-neutral-800 mb-[20px]">
           {tags
-            .filter(
-              (tag) =>
-                !tag.stacks || tag.stacks.includes(stackKey)
-            )
+            .filter((tag) => !tag.stacks || tag.stacks.includes(stackKey))
             .map((tag, idx) => (
               <ButtonLikeWrapper size="small" key={idx}>
                 {tag.label}

@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { VacancyCard } from "../../../../components/VacancyCard/VacancyCard";
+import { VacancySideBlock } from "../../../../components/VacancySideBlock/VacancySideBlock";
 import ButtonLikeWrapper from "../../../../components/ButtonLikeWrapper/ButtonLikeWrapper";
 import { apiClient } from "@/api/ApiClient";
 import { Vacancy } from "./Vacancy";
@@ -42,7 +42,9 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
   // Получаем stack из URL (например, /java/jobs/123)
   let stackKey: keyof typeof vacancyTagsDictionary = "java";
   if (params && "stack" in params) {
-    stackKey = (params as any).stack?.toLowerCase().replace(/-/g, "") as keyof typeof vacancyTagsDictionary;
+    stackKey = (params as any).stack
+      ?.toLowerCase()
+      .replace(/-/g, "") as keyof typeof vacancyTagsDictionary;
   }
 
   const tags = vacancyTagsDictionary[stackKey] || [];
@@ -62,7 +64,12 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
               salary={vacancy?.salary}
             />
             <div className="w-full md:w-[300px]">
-              <VacancyCard />
+              <VacancySideBlock
+                location={vacancy?.location}
+                companyName={vacancy?.company_name}
+                sourceLink={vacancy?.url}
+                imageSrc={vacancy?.image || undefined}
+              />
             </div>
           </div>
           <div className="flex justify-start flex-wrap font-medium text-[14px] gap-2 leading-[18px] tracking-[-0.5px] text-neutral-800 mb-[20px]">
