@@ -25,7 +25,7 @@ export const Footer = () => {
             </span>
           </div>
         }
-        speed={70}
+        speed={100}
       />
 
       <div

@@ -40,7 +40,6 @@
   }
 }
 
-/* Опционально: приостанавливаем анимацию при наведении */
 .marquee-container:hover .marquee-track {
-  animation-play-state: paused;
+  cursor: default;
 }
