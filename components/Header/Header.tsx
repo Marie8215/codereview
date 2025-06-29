@@ -8,8 +8,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { RegisterFormModal } from "../RegisterForm/RegisterForm";
 import { stackOptionsMap } from "@/app/data/static-content";
-import GradientButton from "../GradientButton/GradientButton";
 import { userClientStore } from "@/store/onClient/store";
+import HeaderFloatButton from "./HeaderFloatButton";
 
 export const Header = () => {
   const loggedIn = userClientStore((state) => state.loggedIn);
@@ -28,7 +28,9 @@ export const Header = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const shouldShowJobsPromoButton = pathname.includes("jobs");
+  const showJobsButton = pathname.includes("jobs");
+  const showInterviewsButton = pathname.includes("interviews");
+
   const isHomePage = pathname.split("/").filter(Boolean).length < 2;
   const currentStack = stackOptionsMap.get(pathname.split("/")[1])?.linkId;
   const logoLink = currentStack ? `/${currentStack}` : "/";
@@ -38,8 +40,23 @@ export const Header = () => {
 
   const isDesktop = typeof window !== "undefined" ? window.innerWidth >= 768 : true;
 
-  const handleBackClick = () => {
-    router.back();
+  const host = typeof window !== "undefined" ? window.location.host : "";
+  const referrer = typeof document !== "undefined" ? document.referrer : "";
+
+  const handleBack = () => {
+    if (referrer && referrer.includes(host)) {
+      router.back();
+    } else {
+      // fallback: режем id
+      const parts = pathname.split("/").filter(Boolean);
+      if (parts.length > 1 && /^\d+$/.test(parts[parts.length - 1])) {
+        parts.pop();
+        const basePath = "/" + parts.join("/");
+        router.push(basePath);
+      } else {
+        router.push("/");
+      }
+    }
   };
 
   return (
@@ -59,7 +76,7 @@ export const Header = () => {
             z-10
             cursor-pointer
           "
-          onClick={handleBackClick}
+          onClick={handleBack}
         >
           <Image
             src="/images/backspace-arrow.svg"
@@ -110,28 +127,16 @@ export const Header = () => {
       <LoginFormModal />
       <RegisterFormModal />
 
-      {shouldShowJobsPromoButton && <HeaderFloatButton />}
-    </div>
-  );
-};
-
-const HeaderFloatButton = () => {
-  return (
-    <div
-      className={`
-md:absolute md:bottom-0 md:left-full md:ml-[10px] md:w-auto
-fixed right-10 bottom-4 w-[calc(100vw-32px)] max-w-[345px] z-50
-md:max-w-none flex justify-end md:block
-`}
-    >
-      <Link href="https://jobs.yourcodereview.com/ai/">
-        <GradientButton
-          className="h-[54px] md:h-[56px] rounded-[18px] px-5 flex items-center font-medium text-[18px] leading-[22px] md:w-auto w-full"
-          size="large"
-        >
+      {showJobsButton && (
+        <HeaderFloatButton href="https://jobs.yourcodereview.com/ai/">
           Автоотклики
-        </GradientButton>
-      </Link>
+        </HeaderFloatButton>
+      )}
+      {showInterviewsButton && (
+        <HeaderFloatButton href="https://interview.yourcodereview.com/testing">
+          <span className="whitespace-nowrap">Тренажер заданий</span>
+        </HeaderFloatButton>
+      )}
     </div>
   );
 };
