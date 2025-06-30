@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+html, body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smooth: never;
+  -webkit-tap-highlight-color: transparent;
+}
+
 @theme {
   --color-neutral-10: #ffffff;
   --color-neutral-100: #f6f6f6;

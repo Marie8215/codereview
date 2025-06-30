@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import Image from "next/image";
 import { wixMadeforDisplay, wixMadeforText } from "../../app/fonts";
 import {
@@ -15,7 +16,9 @@ export const Footer = () => {
       <Marquee
         text={
           <div className="flex items-center gap-2">
-            Этим сайтом пользуется больше 30.000 человек каждый месяц
+            <Link href="#">
+              Этим сайтом пользуется больше 30.000 человек каждый месяц
+            </Link>
             <span className="contents">
               <BlackDuckIcon />
             </span>
@@ -59,50 +62,81 @@ export const Footer = () => {
             <div className="w-full xl:w-[634px] order-2 xl:order-1 flex flex-col md:flex-row md:justify-between md:items-center items-start">
               <div className="md:flex mb-[30px] md:mb-0 gap-[50px]">
                 <div className="text-[#F6F6F6] md:h-[158px] h-[156px] md:text-[18px] text-[16px] md:leading-[22px] leading-[18px] font-normal tracking-[-0.5px] flex flex-col flex-wrap space-y-4 gap-y-[12px] md:gap-x-[50px] gap-x-[23px]">
-                  <span className="sm:w-[228px] w-[170px] mb-0">
+                  <Link
+                    href="https://yourcodereview.com/#testirovanie"
+                    className="sm:w-[228px] w-[170px] mb-0"
+                  >
                     Программа <br className="sm:hidden" />и тестирование
-                  </span>
-                  <span className="sm:w-[228px] w-[170px] mb-0">Тарифы</span>
-                  <span className="sm:w-[228px] w-[170px] mb-0">Команда</span>
-                  <span className="sm:w-[228px] w-[170px] mb-0">О нас</span>
-                  <span className="sm:w-[228px] w-[170px] mb-0">Блог</span>
-                  <span className="sm:w-[228px] w-[170px] mb-0">Вакансии</span>
-                  <span className="sm:w-[228px] w-[170px] mb-0">Запись</span>
-                  <span className="sm:w-[228px] w-[170px] mb-0">Отзывы</span>
-                  <span>Вопросы и ответы</span>
+                  </Link>
+                  <Link href="https://yourcodereview.com/#tarifs" className="sm:w-[228px] w-[170px] mb-0">
+                    Тарифы
+                  </Link>
+                  <Link href="https://yourcodereview.com/#team" className="sm:w-[228px] w-[170px] mb-0">
+                    Команда
+                  </Link>
+                  <Link href="#" className="sm:w-[228px] w-[170px] mb-0">
+                    О нас
+                  </Link>
+                  <Link href="https://blog.yourcodereview.com" className="sm:w-[228px] w-[170px] mb-0">
+                    Блог
+                  </Link>
+                  <Link href="#" className="sm:w-[228px] w-[170px] mb-0">
+                    Вакансии
+                  </Link>
+                  <Link href="https://yourcodereview.com/#offer" className="sm:w-[228px] w-[170px] mb-0">
+                    Запись
+                  </Link>
+                  <Link href="https://yourcodereview.com/#feedback" className="sm:w-[228px] w-[170px] mb-0">
+                    Отзывы
+                  </Link>
+                  <Link href="https://yourcodereview.com/#faq">
+                    Вопросы и ответы
+                  </Link>
                 </div>
               </div>
-              <div className="p-[15px] md:gap-[50px] gap-[30px] bg-[#232325] xl:w-[156px] md:w-[200px] md:h-[152px] h-[114px] w-full rounded-[8px] flex flex-col xl:-translate-x-[3px] sm:-translate-y-[3px]">
+              <Link
+                href="https://mrqz.me/6400c6ab9c4e9c004d2fecfa"
+                className="p-[15px] md:gap-[50px] gap-[30px] bg-[#232325] xl:w-[156px] md:w-[200px] md:h-[152px] h-[114px] w-full rounded-[8px] flex flex-col xl:-translate-x-[3px] sm:-translate-y-[3px]"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <p className="text-[#F6F6F6] text-[16px] leading-[18px] font-medium tracking-[-0.5px] text-center md:text-left md:w-full">
-                  <span>
-                    На какую зарплату <br className="md:hidden" /> я могу
-                    претендовать?
-                  </span>
+                  На какую зарплату <br className="md:hidden" /> я могу претендовать?
                 </p>
                 <p className="text-[#86888E] text-[16px] leading-[18px] font-medium tracking-[-0.5px] text-center md:text-left">
                   Пройти тест
                 </p>
-              </div>
+              </Link>
             </div>
           </div>
 
           <div className="w-full h-[178px] md:h-[105px] xl:w-[1180px] mx-auto relative">
             <div className="flex md:flex-row flex-col justify-between md:mb-[19px] mb-[16px] gap-y-[12px]">
               <div className="flex gap-[10px] md:justify-start md:order-2 justify-center ">
-                <a href="#" className="w-[30px] h-[30px]">
+                <Link
+                  href="https://t.me/YourCodeReview"
+                  className="w-[30px] h-[30px]"
+                >
                   <TelegramIcon />
-                </a>
-                <a href="#" className="w-[30px] h-[30px]">
+                </Link>
+                <Link
+                  href="https://www.youtube.com/channel/UC6wNgLxcNW72CRow-Hyu0LA"
+                  className="w-[30px] h-[30px]"
+                >
                   <YouTubeIcon />
-                </a>
-                <a href="#" className="w-[30px] h-[30px]">
+                </Link>
+                <Link href="https://www.linkedin.com/uas/login?session_redirect=%2Fcompany%2F80207713" className="w-[30px] h-[30px]">
                   <LinkedInIcon />
-                </a>
+                </Link>
               </div>
               <div className="md:w-[351px] h-[22px] md:order-1 flex items-center gap-[10px] md:justify-between px-4 md:px-0 justify-center text-[#F6F6F6] md:text-[18px] text-[14px] md:leading-[22px] leading-[16px] font-normal tracking-[-0.5px]">
-                <a href="#">Политика конфиденциальности</a>
+                <Link href="https://yourcodereview.com/policy">
+                  Политика конфиденциальности
+                </Link>
                 <div className="w-[5px] h-[5px] rounded-full bg-[#86888E]"></div>
-                <a href="#">Оферта</a>
+                <Link href="#">
+                  Оферта
+                </Link>
               </div>
             </div>
             <div className="h-[1px] bg-[#414246] mb-[15px]"></div>
@@ -116,15 +150,17 @@ export const Footer = () => {
                   height={22}
                 />
                 <p className="text-[#F0F1F1] text-[16px] leading-[20px] font-normal tracking-[-0.5px]">
-                  junior for juniors
+                  <Link href="#">
+                    junior for juniors
+                  </Link>
                 </p>
               </div>
               <div className="text-[#86888E] md:order-1">
                 <p className="text-[16px] leading-[20px] font-normal tracking-[-0.5px] text-center md:text-left">
-                  <span>
+                  <Link href="#">
                     ИП Примак Максим Андреевич
                     <br /> ИНН 772142877813 ОГРН 322774600410191
-                  </span>
+                  </Link>
                 </p>
               </div>
             </div>
