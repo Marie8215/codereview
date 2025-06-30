@@ -1,11 +1,11 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { StackOption, stackOptions } from "@/app/data/static-content";
 import { userClientStore } from "@/store/onClient/store";
 
-export const useStackRouteFrom = (): [
+export const useSyncStackFromRoute = (): [
   StackOption,
   (stack: StackOption) => void
 ] => {
@@ -14,6 +14,7 @@ export const useStackRouteFrom = (): [
   const searchParams = useSearchParams();
   const selectedStack = userClientStore((state) => state.selectedStack);
   const setSelectedStack = userClientStore((state) => state.setSelectedStack);
+  const hasInitialized = useRef(false);
 
   const updateStack = (stack: StackOption) => {
     setSelectedStack(stack);
@@ -27,17 +28,23 @@ export const useStackRouteFrom = (): [
     const newPath = `/${stack.linkId}/${pathSegments.slice(1).join("/")}${
       currentParams ? `?${currentParams}` : ""
     }`;
-    router.push(newPath);
+
+    router.push(newPath, { scroll: false });
   };
 
   useEffect(() => {
+    if (hasInitialized.current) return;
+
     const stackFromUrl = pathname.split("/")[1];
     const stackOption = stackOptions.find(
       (option) => option.linkId === stackFromUrl
     );
+
     if (stackOption) {
       setSelectedStack(stackOption);
     }
+
+    hasInitialized.current = true;
   }, [pathname, setSelectedStack]);
 
   return [selectedStack, updateStack];

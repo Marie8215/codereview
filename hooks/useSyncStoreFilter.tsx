@@ -1,6 +1,6 @@
 import { FilterState } from "@/store/onClient/store";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useRef, useMemo } from "react";
+import { useEffect, useRef } from "react";
 
 export function useSyncStoreFilter<T extends FilterState>(
   prevFilters: T,
@@ -36,7 +36,6 @@ export function useSyncStoreFilter<T extends FilterState>(
     if (changed) {
       filtersRef.current = parsed;
       setFilter(parsed);
-      console.log("from url to store", isMounted);
     }
-  }, [searchParams, prevFilters]);
+  }, [searchParams, prevFilters, setFilter]);
 }

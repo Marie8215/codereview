@@ -6,10 +6,8 @@ import { DropdownList } from "@/components/Dropdown/DropdownList";
 import { JobsFilterState, userClientStore } from "@/store/onClient/store";
 import { stackOptions } from "@/app/data/static-content";
 import { useSyncQueryParams } from "@/hooks/useSyncQueryParams";
-import { useSearchParams } from "next/navigation";
-import { useEffect, useRef } from "react";
 import Link from "next/link";
-import { useStackRouteFrom } from "../../../hooks/useStackFromRoute";
+import { useSyncStackFromRoute } from "../../../hooks/useStackFromRoute";
 import { useSyncStoreFilter } from "@/hooks/useSyncStoreFilter";
 
 interface JobsFilterProps {
@@ -21,7 +19,7 @@ export const JobsFilter = ({ sources, locations }: JobsFilterProps) => {
   const filters = userClientStore((state) => state.jobsFilter);
   const setFilters = userClientStore((state) => state.setJobsFilter);
 
-  const [selectedStack, setSelectedStack] = useStackRouteFrom();
+  const [selectedStack, setSelectedStack] = useSyncStackFromRoute();
 
   useSyncQueryParams(filters);
   useSyncStoreFilter(filters, setFilters);
@@ -78,7 +76,7 @@ export const JobsFilter = ({ sources, locations }: JobsFilterProps) => {
         items={sources.map((source) => ({
           title: source,
           count: 0,
-          id: source.toLowerCase().replace(/\s+/g, "-"),
+          id: source,
           data: source,
         }))}
         activeIds={filters.sources}
@@ -97,7 +95,7 @@ export const JobsFilter = ({ sources, locations }: JobsFilterProps) => {
         items={locations.map((location) => ({
           title: location,
           count: 0,
-          id: location.toLowerCase().replace(/\s+/g, "-"),
+          id: location,
           data: location,
         }))}
         activeIds={filters.city}

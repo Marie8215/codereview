@@ -55,7 +55,6 @@ export const useSyncQueryParams = <
 
     if (newUrl !== currentUrl) {
       router.push(newUrl);
-      console.log("from store to url", isMounted);
     }
   }, [filters, pathname, router, searchParams]);
 

@@ -1,4 +1,5 @@
 import { StackOption, stackOptions } from "@/app/data/static-content";
+import { LinkedMap } from "@/common/LinkedMap";
 import { create } from "zustand";
 
 export interface User {
@@ -7,6 +8,12 @@ export interface User {
   username?: string;
   isActive?: boolean;
   isSuperuser?: boolean;
+}
+
+export interface VacancyLinkData {
+  id: number,
+  title: string,
+  companyName: string,
 }
 
 export interface StoreState {
@@ -18,6 +25,7 @@ export interface StoreState {
   isLoginModalOpen: boolean;
   user: User | null;
   loggedIn: boolean; // todo заменить на данные о текущем пользователе
+  jobsList: LinkedMap<number, VacancyLinkData> | null,
   setUser: (user: User) => void;
   setLoggedIn: (loggedId?: boolean) => void; // todo заменить на данные о текущем пользователе
   setRegisterModalOpen: (open: boolean) => void;
@@ -25,24 +33,23 @@ export interface StoreState {
   setSelectedStack: (stack: StackOption) => void;
   setIterviewsFilter: (stack: InterviewsFilterState) => void;
   setJobsFilter: (stack: JobsFilterState) => void;
+  setJobsList: (list: LinkedMap<number, VacancyLinkData>) => void;
 }
 
-export interface InterviewsFilterState {
+export interface InterviewsFilterState extends FilterState {
   grade: string[];
   subStack: string[];
-  [key: string]: string | boolean | string[];
 }
 
 export interface FilterState {
   [key: string]: string | boolean | number | string[];
 }
 
-export interface JobsFilterState {
+export interface JobsFilterState extends FilterState {
   sources: string[];
   city: string[];
   remote: boolean;
   internship: boolean;
-  [key: string]: string | boolean | string[];
 }
 
 export const userClientStore = create<StoreState>((set) => ({
@@ -57,6 +64,7 @@ export const userClientStore = create<StoreState>((set) => ({
   isLoginModalOpen: false,
   loggedIn: false,
   user: null,
+  jobsList: null,
   setUser: (user) => set({ user: user }),
   setLoggedIn: (loggedIn = true) => set({ loggedIn: loggedIn }),
   setRegisterModalOpen: (open) => set({ isRegisterModalOpen: open }),
@@ -64,4 +72,5 @@ export const userClientStore = create<StoreState>((set) => ({
   setJobsFilter: (filter) => set({ jobsFilter: filter }),
   setSelectedStack: (stack) => set({ selectedStack: stack }),
   setIterviewsFilter: (filter) => set({ interviewsFilter: filter }),
+  setJobsList: (list) => set({jobsList: list})
 }));

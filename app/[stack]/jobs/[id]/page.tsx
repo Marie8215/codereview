@@ -69,6 +69,7 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
                 companyName={vacancy?.company_name}
                 sourceLink={vacancy?.url}
                 imageSrc={vacancy?.image || undefined}
+                id={vacancy?.id}
               />
             </div>
           </div>

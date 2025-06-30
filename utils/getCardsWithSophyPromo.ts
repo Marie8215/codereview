@@ -2,7 +2,7 @@ import { JobCardDataItem } from "@/components/Card/Card";
 
 export function getCardsWithSophyPromo(data: JobCardDataItem[], isDesktop: boolean) {
   const cards = [...data];
-  let result: (JobCardDataItem | "sophy")[] = [];
+  let result: (JobCardDataItem | "sophy")[] = [...cards];
 
   if (isDesktop) {
     if (cards.length < 3) {

@@ -2,12 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { wixMadeforDisplay, wixMadeforText } from "../../app/fonts";
 import { ImageWithFallback } from "../ImageWithFallback/ImageWithFallback";
+import { SimilarVacancies } from "./SimilarVacancies";
 
 interface VacancySideBlockProps {
   companyName?: string;
   location?: string;
   sourceLink?: string;
   imageSrc?: string;
+  id?: number;
 }
 
 export const VacancySideBlock = ({
@@ -15,6 +17,7 @@ export const VacancySideBlock = ({
   location,
   sourceLink,
   imageSrc,
+  id
 }: VacancySideBlockProps) => {
   return (
     <>
@@ -25,7 +28,7 @@ export const VacancySideBlock = ({
         imageSrc={imageSrc}
       />
       <SophyPromo />
-      <SimilarVacancies />
+      <SimilarVacancies currentVacancyId={id} />
     </>
   );
 };
@@ -46,18 +49,11 @@ const ReplyOptions = ({
   return (
     <div className="bg-[#F6F6F6] rounded-[8px] p-[20px] mb-[10px]">
       <div className="flex mb-[15px]">
-        {/* <Image
-          src={imageSrc || "/"}
-          alt="Company"
-          width={50}
-          height={50}
-          className="rounded-[8px]"
-        /> */}
         <ImageWithFallback
           src={imageSrc}
           width={50}
           height={50}
-          alt={companyName || ''}
+          alt={companyName || ""}
           fallbackText={companyName || ""}
         />
         <div className="ml-[15px]">
@@ -129,46 +125,5 @@ const SophyPromo = () => {
         />
       </div>
     </a>
-  );
-};
-
-const SimilarVacancies = () => {
-  return (
-    <div className="bg-[#F6F6F6] rounded-[8px] p-[23px] md:p-[20px] mb-[40px] md:mb-20">
-      <h3
-        className={`${wixMadeforDisplay.className} font-bold text-[18px] leading-[20px] tracking-[-0.5px] text-[#232325] mb-[20px]`}
-      >
-        Похожие вакансии
-      </h3>
-
-      <div className="mb-[15px]">
-        <p
-          className={`${wixMadeforDisplay.className} font-semibold text-[16px] leading-[18px] tracking-[-0.5px] text-[#232325] mb-[8px]`}
-        >
-          Начинающий тестировщик / AQA Engineer (Java)
-        </p>
-        <p
-          className={`${wixMadeforDisplay.className} font-medium text-[16px] leading-[18px] tracking-[-0.5px] text-[#86888E]`}
-        >
-          Инфомаксимум
-        </p>
-      </div>
-
-      <div className="h-[1px] bg-[#EAEAEA] mb-[15px]" />
-
-      <div>
-        <p
-          className={`${wixMadeforDisplay.className} font-semibold text-[16px] leading-[18px] tracking-[-0.5px] text-[#232325] mb-[8px]`}
-        >
-          Тестировщик Java/QA инженер по автоматизированному тестированию Java с
-          нуля (стажер)
-        </p>
-        <p
-          className={`${wixMadeforDisplay.className} font-medium text-[16px] leading-[18px] tracking-[-0.5px] text-[#86888E]`}
-        >
-          Bell Integrator
-        </p>
-      </div>
-    </div>
   );
 };
