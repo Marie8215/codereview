@@ -7,7 +7,7 @@ import { DefaultPageBackground } from "@/components/Background/MainPageBackgroun
 import { vacancyTagsDictionary } from "@/data/vacancyTagsDictionary";
 
 interface VacancyPageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string; stack: string }>;
 }
 
 export async function generateMetadata({
@@ -35,17 +35,16 @@ export async function generateMetadata({
 }
 
 export default async function VacancyPage({ params }: VacancyPageProps) {
-  const { id: vacancyId } = await params;
+  const { id: vacancyId, stack } = await params;
   const apiResponse = await apiClient.vacancies.getById(vacancyId);
   const vacancy = apiResponse.response;
 
   // Получаем stack из URL (например, /java/jobs/123)
   let stackKey: keyof typeof vacancyTagsDictionary = "java";
-  if (params && "stack" in params) {
-    stackKey = (params as any).stack
-      ?.toLowerCase()
-      .replace(/-/g, "") as keyof typeof vacancyTagsDictionary;
-  }
+
+  stackKey = stack
+    ?.toLowerCase()
+    .replace(/-/g, "") as keyof typeof vacancyTagsDictionary;
 
   const tags = vacancyTagsDictionary[stackKey] || [];
 
