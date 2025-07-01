@@ -5,6 +5,8 @@ import GradientButton from "../../../components/GradientButton/GradientButton";
 import Image from "next/image";
 import { DefaultPageBackground } from "@/components/Background/MainPageBackground";
 import { apiClient } from "../../../api/ApiClient";
+import { DropdownList } from "../../../components/Dropdown/DropdownList";
+import { stackOptions } from "../../data/static-content";
 
 export default function PostVacancy() {
   const [title, setTitle] = useState("");
@@ -20,6 +22,8 @@ export default function PostVacancy() {
   const [success, setSuccess] = useState(false);
   const [logo, setLogo] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [stack, setStack] = useState<string>(stackOptions[0].title);
+  const [url, setUrl] = useState("");
 
   // обработчик выбора файла
   const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,14 +68,16 @@ export default function PostVacancy() {
       title,
       salary,
       location: city,
-      speciality: "",
+      speciality: stack,
       internship: isInternship,
       remote: isRemote,
-      url: "",
+      url,
       description: desc,
-      source: "",
+      source: "codereview",
       image: imageBase64,
     };
+
+    console.log("imageBase64", imageBase64);
 
     const response = await apiClient.vacancies.create(vacancyData);
 
@@ -114,6 +120,31 @@ export default function PostVacancy() {
               value={desc}
               onChange={(e) => setDesc(e.target.value)}
             />
+          </div>
+
+          <div className="mb-[20px]">
+            <div className="flex flex-col md:flex-row gap-[20px] mb-[30px] items-end">
+              <DropdownList
+                relative
+                buttonLike
+                trigger={stack || "Стэк"}
+                onSelect={(item) => setStack(item.title)}
+                items={stackOptions.map((item) => ({
+                  id: item.title,
+                  title: item.title,
+                  data: item,
+                }))}
+                activeIds={[stack]}
+                multiselect={false}
+              />
+              <CustomInput
+              label="Сайт работодателя"
+              type="text"
+              placeholder="example.com"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+            />
+            </div>
           </div>
 
           <div className="mb-[20px]">

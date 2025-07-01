@@ -28,7 +28,7 @@ export const Header = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const showJobsButton = pathname.includes("jobs");
+  const showJobsButton = pathname.includes("jobs") && !pathname.includes("jobs/create");
   const showInterviewsButton = pathname.includes("interviews");
 
   const isHomePage = pathname.split("/").filter(Boolean).length < 2;

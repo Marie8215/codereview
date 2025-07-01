@@ -305,10 +305,35 @@ class ApiClient {
     return {
       login: async (data: LoginData) => {
         // todo здесь выполнять запрос без кэша!
-        const tokenData: TokenResponse = {
-          access_token: "faketoken_ " + data.username,
-          token_type: "Bearer",
-        };
+        // const tokenData: TokenResponse = {
+        //   access_token: "faketoken_ " + data.username,
+        //   token_type: "Bearer",
+        // };
+
+        const formData = new URLSearchParams();
+        formData.append("username", data.username);
+        formData.append("password", data.password);
+
+        const response = await fetch(`${this.baseUrl}/auth/token`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: formData,
+          cache: "no-cache", // Отключаем кэш для этого запроса
+        });
+
+        if (!response.ok) {
+          return {
+            isSuccess: false,
+            error: {
+              message: "Login failed",
+              code: response.status,
+            },
+          };
+        }
+
+        const tokenData: TokenResponse = await response.json();
 
         // Сохраняем токен
         this.accessToken = tokenData.access_token;
