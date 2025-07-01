@@ -55,7 +55,7 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
     <>
       <DefaultPageBackground />
       <div className="w-full">
-        <div className="w-full mx-auto max-w-[345px] md:max-w-[1020px] mt-[60px] md:mt-[100px] ">
+        <div className="w-full mx-auto max-w-[345px] lg:max-w-[1020px] md:max-w-[90%] mt-[60px] md:mt-[100px] ">
           <div className="w-full md:flex md:flex-row md:gap-[60px]">
             <Vacancy
               content={vacancy?.description}
