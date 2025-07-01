@@ -47,14 +47,14 @@ const RadioGroup = ({ items, className, size }: RadioGroupProps) => {
             ${sizeDependingStyles}
             ${wixMadeforText.className}
             ${
-              selectedStack.linkId === item.linkId
+              selectedStack?.linkId === item.linkId
                 ? "text-white"
                 : "bg-[#F6F6F6]"
             }
             transition-colors
           `}
           style={
-            selectedStack.linkId === item.linkId
+            selectedStack?.linkId === item.linkId
               ? {
                   background:
                     "linear-gradient(85.18deg, #2093FE 0.83%, rgba(194, 23, 254, 0.9) 91.48%)",

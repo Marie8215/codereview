@@ -10,7 +10,7 @@ export const NavMenuButton = () => {
     <IconWithText
       text={
         <span className="font-normal md:text-[18px] md:leading-[22px] text-[16px] leading-[20px] tracking-[-0.5px]">
-          {selectedStack.title}
+          {selectedStack?.title ?? "Специализация"}
         </span>
       }
       icon={

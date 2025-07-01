@@ -54,7 +54,7 @@ export interface JobsFilterState extends FilterState {
 
 export const userClientStore = create<StoreState>((set) => ({
   stackOptions,
-  selectedStack: stackOptions[0],
+  selectedStack: null!,
   interviewsFilter: {
     grade: [],
     subStack: [],
