@@ -58,7 +58,7 @@ export const DropdownBase = ({
       {triggerUi}
       {isOpen && (
         <div
-          className={`dropdown-content ${
+          className={`dropdown-content max-h-[400px] overflow-auto ${
             align === "center" ? "dropdown-center" : ""
           }`}
         >
