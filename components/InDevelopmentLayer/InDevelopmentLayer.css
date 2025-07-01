@@ -1,0 +1,88 @@
+.inDevelopment {
+  position: absolute;
+}
+
+.inDevelopmentTop {
+  position: absolute;
+  top: 40%;
+  left: -54%;
+  background: linear-gradient(85.18deg, #2093fe 0.83%, #c217fe 91.48%);
+  color: white;
+  transform: translate(0, 0) rotate(2deg);
+  transition: transform 0.5s;
+}
+
+.inDevelopmentBottom {
+  position: absolute;
+  bottom: 40%;
+  left: -52%;
+  color: white;
+  background-color: black;
+  transform: translate(0, 0) rotate(-1deg);
+  transition: transform 0.4s;
+}
+
+@keyframes moveTopIn {
+  0% {
+    transform: translate(0, 0) rotate(2deg);
+  }
+  80% {
+    transform: translate(-30px, 0) rotate(2deg);
+  }
+  100% {
+    transform: translate(-28px, 0) rotate(2deg);
+  }
+}
+
+@keyframes moveTopOut {
+  0% {
+    transform: translate(-28px, 0) rotate(2deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(2deg);
+  }
+}
+
+@keyframes moveBottomIn {
+  0% {
+    transform: translate(0, 0) rotate(-1deg);
+  }
+  80% {
+    transform: translate(30px, 0) rotate(-1deg);
+  }
+  100% {
+    transform: translate(28px, 0) rotate(-1deg);
+  }
+}
+
+@keyframes moveBottomOut {
+  0% {
+    transform: translate(28px, 0) rotate(-1deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(-1deg);
+  }
+}
+
+.inDevelopmentTop,
+.inDevelopmentBottom {
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+}
+
+.card-container:hover .inDevelopmentTop {
+  animation-name: moveTopIn;
+}
+
+.card-container:hover .inDevelopmentBottom {
+  animation-name: moveBottomIn;
+}
+
+.card-container:not(:hover) .inDevelopmentTop {
+  animation-name: moveTopOut;
+}
+
+.card-container:not(:hover) .inDevelopmentBottom {
+  animation-name: moveBottomOut;
+}

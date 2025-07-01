@@ -23,6 +23,7 @@ interface pageLink {
   ingoreOnMainPage?: boolean;
   gradient?: GradientType;
   baseLink?: string;
+  inDevelopment?: boolean;
 }
 
 export const pageLinks: pageLink[] = [
@@ -32,16 +33,22 @@ export const pageLinks: pageLink[] = [
       "Актуальные junior-вакансии и стажировки с hh.ru, Habr Career, LinkedIn, Telegram и других платформ",
     iconFactory: (size = 20) => <BriefcaseIcon size={size} />,
     orderOnMainPage: 0,
-    baseLink: "jobs"
+    baseLink: "jobs",
   },
   {
     title: "Тестовые задания",
-    onMainPageTitle: <span>Тестовые <br className="md:hidden"/>задания</span>,
+    onMainPageTitle: (
+      <span>
+        Тестовые <br className="md:hidden" />
+        задания
+      </span>
+    ),
     description:
       "Реальные задания с отборов на стажировки и junior-позиции — для практики и портфолио",
     iconFactory: (size = 20) => <CodeIcon size={size} />,
     orderOnMainPage: 2,
     gradient: "light",
+    inDevelopment: true,
   },
   {
     title: "IT-мероприятия",
@@ -50,6 +57,7 @@ export const pageLinks: pageLink[] = [
     iconFactory: (size = 20) => <CalendarIcon size={size} />,
     orderOnMainPage: 4,
     gradient: "dark",
+    inDevelopment: true,
   },
   {
     title: "Контакты рекрутеров",
@@ -57,7 +65,13 @@ export const pageLinks: pageLink[] = [
       "Контакты рекрутеров и сотрудников, готовых рекомендовать в свою компанию. Можно найти того, кто поможет попасть на собеседование",
     iconFactory: (size = 20) => <MessageIcon size={size} />,
     orderOnMainPage: 6,
-    onMainPageTitle: <span>Контакты <br/>рекрутеров</span>
+    onMainPageTitle: (
+      <span>
+        Контакты <br />
+        рекрутеров
+      </span>
+    ),
+    inDevelopment: true,
   },
   {
     title: "Резюме соискателей",
@@ -71,6 +85,7 @@ export const pageLinks: pageLink[] = [
       </span>
     ),
     ingoreOnMainPage: true,
+    inDevelopment: true,
   },
   {
     title: "Необходимые навыки",
@@ -78,7 +93,13 @@ export const pageLinks: pageLink[] = [
       "Популярные навыки и ключевые слова из вакансий — можно использовать для улучшения резюме",
     iconFactory: (size = 20) => <StackIcon size={size} />,
     orderOnMainPage: 1,
-    onMainPageTitle: <span>Необходимые <br/>навыки</span>
+    onMainPageTitle: (
+      <span>
+        Необходимые <br />
+        навыки
+      </span>
+    ),
+    inDevelopment: true,
   },
   {
     title: "Собеседования",
@@ -94,6 +115,7 @@ export const pageLinks: pageLink[] = [
       "Проекты для портфолио, в том числе коммерческие. Отличный способ прокачать скиллы и показать опыт",
     iconFactory: (size = 20) => <CodeAsteriskIcon size={size} />,
     orderOnMainPage: 5,
+    inDevelopment: true,
   },
   {
     title: "ИИ инструменты",
@@ -101,6 +123,7 @@ export const pageLinks: pageLink[] = [
       "Подборка AI-тулзов для автоматизации, разработки и поиска работы — c описаниями и рейтингом полезности",
     iconFactory: (size = 20) => <SparklesIcon size={size} />,
     orderOnMainPage: 7,
+    inDevelopment: true,
   },
 ];
 
@@ -114,33 +137,33 @@ export const stackOptions: StackOption[] = [
   {
     title: "Python",
     linkId: "python",
-    filterId: "Python"
+    filterId: "Python",
   },
   {
     title: "Java",
     linkId: "java",
-    filterId: "Java"
+    filterId: "Java",
   },
   {
     title: "JavaScript",
     linkId: "javascript",
-    filterId: "JS"
+    filterId: "JS",
   },
   {
     title: "Data Science",
     linkId: "data-science",
-    filterId: "ML"
+    filterId: "ML",
   },
   {
     title: "QA",
     linkId: "qa",
-    filterId: "QA"
+    filterId: "QA",
   },
   {
     title: "C#",
     linkId: "csharp",
-    filterId: "CSharp"
-  }
+    filterId: "CSharp",
+  },
 ];
 
 export const stackOptionsMap = new Map(

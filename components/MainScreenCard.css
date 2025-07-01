@@ -75,7 +75,7 @@
   transition: transform 0.3s ease-out;
 }
 
-.card-content:hover .card-icon-container {
+.card-content:hover .card-icon-container-active {
   transform: translateY(10px);
 }
 

@@ -48,6 +48,14 @@ export const BlackDuckIcon = ({ size = 18 }) => {
   return <Icon src="/images/black-duck-icon.svg" size={size} alt="Black duck icon" />;
 };
 
+export const WhiteDuckIcon = ({ size = 14 }) => {
+  return <Icon src="/images/duck-white.svg" size={size} alt="White duck icon" />;
+};
+
+export const RainbowDuckIcon = ({ size = 14 }) => {
+  return <Icon src="/images/duck-icon.svg" size={size} alt="Rainbow duck icon" />;
+};
+
 export const PhotoContIcon = () => {
   return (
     <Icon src="/images/photo-cont-icon.svg" className="w-[115px] h-[40px]" alt="Photo container icon" />

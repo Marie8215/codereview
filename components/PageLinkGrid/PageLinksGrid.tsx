@@ -24,23 +24,37 @@ export function PageLinksGrid() {
         {pageLinks
           .filter((link) => !link.ingoreOnMainPage)
           .toSorted((a, b) => a.orderOnMainPage - b.orderOnMainPage)
-          .map((link) => (
-            <Link
-              key={link.title}
-              href={getLink(link.baseLink)}
-              className="contents"
-            >
+          .map((link) => {
+            return link.inDevelopment ? (
               <MainScreenCard
                 key={link.title}
-                className="h-[150px] md:h-[280px]"
+                className="h-[150px] md:h-[280px] cursor-pointer"
                 title={link.onMainPageTitle ?? link.title}
                 icon={link.iconFactory(26)}
                 text={link.description}
                 hoverType="code"
                 gradient={link.gradient}
+                inDevelopment={link.inDevelopment}
               />
-            </Link>
-          ))}
+            ) : (
+              <Link
+                key={link.title}
+                href={getLink(link.baseLink)}
+                className="contents"
+              >
+                <MainScreenCard
+                  key={link.title}
+                  className="h-[150px] md:h-[280px]"
+                  title={link.onMainPageTitle ?? link.title}
+                  icon={link.iconFactory(26)}
+                  text={link.description}
+                  hoverType="code"
+                  gradient={link.gradient}
+                  inDevelopment={link.inDevelopment}
+                />
+              </Link>
+            );
+          })}
         <Link href={"#"} className="contents">
           <MainScreenCard
             className="col-span-full md:col-span-3 h-[121px] md:h-[157px]"
