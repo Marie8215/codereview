@@ -5,16 +5,19 @@ import { CardPromo } from "../../../../components/CardPromo/CardPromo";
 import { Question } from "./Question";
 import { DefaultPageBackground } from "@/components/Background/MainPageBackground";
 import { questionTags } from "@/data/questionTagsDictionary";
+import { stackOptionsMap } from "../../../data/static-content";
 
 interface QuetionPageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string, stack: string }>;
 }
 
 export default async function QuestionPage({ params }: QuetionPageProps) {
-  const { id: questionId } = await params;
+  const { id: questionId, stack } = await params;
 
   const apiResponse = await apiClient.questions.getById(questionId);
   const question = apiResponse.response;
+
+  const selectedStack = stackOptionsMap.get(stack);
 
   return (
     <>
@@ -28,7 +31,7 @@ export default async function QuestionPage({ params }: QuetionPageProps) {
           />
           <div className="w-full md:w-[300px] flex flex-col-reverse md:flex-col gap-0 mt-[40px] md:mt-0">
             <CardPromo />
-            <CardNextQuestion />
+            <CardNextQuestion currentQuestionId={Number(questionId)} selectedStack={selectedStack!} />
           </div>
         </div>
       </div>

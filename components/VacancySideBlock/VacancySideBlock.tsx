@@ -3,13 +3,15 @@ import Link from "next/link";
 import { wixMadeforDisplay, wixMadeforText } from "../../app/fonts";
 import { ImageWithFallback } from "../ImageWithFallback/ImageWithFallback";
 import { SimilarVacancies } from "./SimilarVacancies";
+import { StackOption } from "../../app/data/static-content";
 
 interface VacancySideBlockProps {
   companyName?: string;
   location?: string;
   sourceLink?: string;
   imageSrc?: string;
-  id?: number;
+  id: number;
+  selectedStack: StackOption
 }
 
 export const VacancySideBlock = ({
@@ -17,7 +19,8 @@ export const VacancySideBlock = ({
   location,
   sourceLink,
   imageSrc,
-  id
+  id,
+  selectedStack
 }: VacancySideBlockProps) => {
   return (
     <>
@@ -28,7 +31,7 @@ export const VacancySideBlock = ({
         imageSrc={imageSrc}
       />
       <SophyPromo />
-      <SimilarVacancies currentVacancyId={id} />
+      <SimilarVacancies currentVacancyId={id} selectedStack={selectedStack}/>
     </>
   );
 };

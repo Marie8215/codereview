@@ -5,6 +5,7 @@ import { apiClient } from "@/api/ApiClient";
 import { Vacancy } from "./Vacancy";
 import { DefaultPageBackground } from "@/components/Background/MainPageBackground";
 import { vacancyTagsDictionary } from "@/data/vacancyTagsDictionary";
+import { stackOptionsMap } from "../../../data/static-content";
 
 interface VacancyPageProps {
   params: Promise<{ id: string; stack: string }>;
@@ -48,6 +49,8 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 
   const tags = vacancyTagsDictionary[stackKey] || [];
 
+  const selectedStack = stackOptionsMap.get(stack)!;
+
   return (
     <>
       <DefaultPageBackground />
@@ -68,7 +71,8 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
                 companyName={vacancy?.company_name}
                 sourceLink={vacancy?.url}
                 imageSrc={vacancy?.image || undefined}
-                id={vacancy?.id}
+                id={Number(vacancyId)}
+                selectedStack={selectedStack}
               />
             </div>
           </div>

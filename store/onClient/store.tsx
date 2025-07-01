@@ -16,6 +16,12 @@ export interface VacancyLinkData {
   companyName: string,
 }
 
+export interface QuestionLinkData {
+  id: number;
+  title: string;
+  stack?: string;
+}
+
 export interface StoreState {
   selectedStack: StackOption;
   stackOptions: readonly StackOption[];
@@ -26,6 +32,7 @@ export interface StoreState {
   user: User | null;
   loggedIn: boolean; // todo заменить на данные о текущем пользователе
   jobsList: LinkedMap<number, VacancyLinkData> | null,
+  questionsList: LinkedMap<number, QuestionLinkData> | null;
   setUser: (user: User) => void;
   setLoggedIn: (loggedId?: boolean) => void; // todo заменить на данные о текущем пользователе
   setRegisterModalOpen: (open: boolean) => void;
@@ -34,6 +41,7 @@ export interface StoreState {
   setIterviewsFilter: (stack: InterviewsFilterState) => void;
   setJobsFilter: (stack: JobsFilterState) => void;
   setJobsList: (list: LinkedMap<number, VacancyLinkData>) => void;
+  setQuestionsList: (list: LinkedMap<number, QuestionLinkData>) => void;
 }
 
 export interface InterviewsFilterState extends FilterState {
@@ -65,6 +73,7 @@ export const userClientStore = create<StoreState>((set) => ({
   loggedIn: false,
   user: null,
   jobsList: null,
+  questionsList: null,
   setUser: (user) => set({ user: user }),
   setLoggedIn: (loggedIn = true) => set({ loggedIn: loggedIn }),
   setRegisterModalOpen: (open) => set({ isRegisterModalOpen: open }),
@@ -72,5 +81,6 @@ export const userClientStore = create<StoreState>((set) => ({
   setJobsFilter: (filter) => set({ jobsFilter: filter }),
   setSelectedStack: (stack) => set({ selectedStack: stack }),
   setIterviewsFilter: (filter) => set({ interviewsFilter: filter }),
-  setJobsList: (list) => set({jobsList: list})
+  setJobsList: (list) => set({jobsList: list}),
+  setQuestionsList: (list) => set({ questionsList: list }),
 }));

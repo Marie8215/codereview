@@ -16,9 +16,7 @@ export const Footer = () => {
       <Marquee
         text={
           <div className="flex items-center gap-2">
-            <Link href="#">
-              Этим сайтом пользуется больше 30.000 человек каждый месяц
-            </Link>
+            Этим сайтом пользуется больше 30.000 человек каждый месяц
             <span className="contents">
               <BlackDuckIcon />
             </span>
@@ -28,7 +26,7 @@ export const Footer = () => {
             </span>
           </div>
         }
-        speed={100}
+        speed={140}
       />
 
       <div
@@ -68,25 +66,40 @@ export const Footer = () => {
                   >
                     Программа <br className="sm:hidden" />и тестирование
                   </Link>
-                  <Link href="https://yourcodereview.com/#tarifs" className="sm:w-[228px] w-[170px] mb-0">
+                  <Link
+                    href="https://yourcodereview.com/#tarifs"
+                    className="sm:w-[228px] w-[170px] mb-0"
+                  >
                     Тарифы
                   </Link>
-                  <Link href="https://yourcodereview.com/#team" className="sm:w-[228px] w-[170px] mb-0">
+                  <Link
+                    href="https://yourcodereview.com/#team"
+                    className="sm:w-[228px] w-[170px] mb-0"
+                  >
                     Команда
                   </Link>
                   <Link href="#" className="sm:w-[228px] w-[170px] mb-0">
                     О нас
                   </Link>
-                  <Link href="https://blog.yourcodereview.com" className="sm:w-[228px] w-[170px] mb-0">
+                  <Link
+                    href="https://blog.yourcodereview.com"
+                    className="sm:w-[228px] w-[170px] mb-0"
+                  >
                     Блог
                   </Link>
                   <Link href="#" className="sm:w-[228px] w-[170px] mb-0">
                     Вакансии
                   </Link>
-                  <Link href="https://yourcodereview.com/#offer" className="sm:w-[228px] w-[170px] mb-0">
+                  <Link
+                    href="https://yourcodereview.com/#offer"
+                    className="sm:w-[228px] w-[170px] mb-0"
+                  >
                     Запись
                   </Link>
-                  <Link href="https://yourcodereview.com/#feedback" className="sm:w-[228px] w-[170px] mb-0">
+                  <Link
+                    href="https://yourcodereview.com/#feedback"
+                    className="sm:w-[228px] w-[170px] mb-0"
+                  >
                     Отзывы
                   </Link>
                   <Link href="https://yourcodereview.com/#faq">
@@ -101,7 +114,8 @@ export const Footer = () => {
                 rel="noopener noreferrer"
               >
                 <p className="text-[#F6F6F6] text-[16px] leading-[18px] font-medium tracking-[-0.5px] text-center md:text-left md:w-full">
-                  На какую зарплату <br className="md:hidden" /> я могу претендовать?
+                  На какую зарплату <br className="md:hidden" /> я могу
+                  претендовать?
                 </p>
                 <p className="text-[#86888E] text-[16px] leading-[18px] font-medium tracking-[-0.5px] text-center md:text-left">
                   Пройти тест
@@ -125,7 +139,10 @@ export const Footer = () => {
                 >
                   <YouTubeIcon />
                 </Link>
-                <Link href="https://www.linkedin.com/uas/login?session_redirect=%2Fcompany%2F80207713" className="w-[30px] h-[30px]">
+                <Link
+                  href="https://www.linkedin.com/uas/login?session_redirect=%2Fcompany%2F80207713"
+                  className="w-[30px] h-[30px]"
+                >
                   <LinkedInIcon />
                 </Link>
               </div>
@@ -134,9 +151,7 @@ export const Footer = () => {
                   Политика конфиденциальности
                 </Link>
                 <div className="w-[5px] h-[5px] rounded-full bg-[#86888E]"></div>
-                <Link href="#">
-                  Оферта
-                </Link>
+                <Link href="#">Оферта</Link>
               </div>
             </div>
             <div className="h-[1px] bg-[#414246] mb-[15px]"></div>
@@ -149,10 +164,8 @@ export const Footer = () => {
                   width={22}
                   height={22}
                 />
-                <p className="text-[#F0F1F1] text-[16px] leading-[20px] font-normal tracking-[-0.5px]">
-                  <Link href="#">
-                    junior for juniors
-                  </Link>
+                <p className="text-[#F0F1F1] text-[16px] leading-[20px] font-normal tracking-[-0.5px] cursor-default">
+                  junior for juniors
                 </p>
               </div>
               <div className="text-[#86888E] md:order-1">

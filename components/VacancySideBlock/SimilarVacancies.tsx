@@ -4,33 +4,29 @@ import { apiClient } from "@/api/ApiClient";
 import { wixMadeforDisplay } from "@/app/fonts";
 import { LinkedMap } from "@/common/LinkedMap";
 import { userClientStore, VacancyLinkData } from "@/store/onClient/store";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { VacancyLink } from "./VacancyLink";
+import { StackOption } from "../../app/data/static-content";
 
 interface SimilarVacanciesProps {
   currentVacancyId: number;
+  selectedStack: StackOption;
 }
 
 export const SimilarVacancies = ({
   currentVacancyId,
+  selectedStack: stack,
 }: SimilarVacanciesProps) => {
   const jobsList = userClientStore((store) => store.jobsList);
-  const stack = userClientStore((store) => store.selectedStack);
   const vacancyFilter = userClientStore((store) => store.jobsFilter);
   const setJobsList = userClientStore((store) => store.setJobsList);
 
-  const prevFilterRef = useRef<typeof vacancyFilter | null>(null);
   const vacancy = jobsList?.get(currentVacancyId);
 
   useEffect(() => {
-    const prevFilter = prevFilterRef.current;
-    const isFilterChanged =
-      JSON.stringify(prevFilter) !== JSON.stringify(vacancyFilter);
-
-    if (!vacancy || isFilterChanged) {
       apiClient.vacancies
         .get({
-          speciality: stack.filterId,
+          speciality: stack?.filterId,
           remote: vacancyFilter.remote || undefined,
           internship: vacancyFilter.internship || undefined,
           location: vacancyFilter.city[0],
@@ -51,8 +47,6 @@ export const SimilarVacancies = ({
           const linkedMap = new LinkedMap(vacancyLinks, (x) => x.id);
           setJobsList(linkedMap);
         });
-    }
-    prevFilterRef.current = vacancyFilter;
   }, [currentVacancyId, setJobsList, stack.filterId, vacancy, vacancyFilter]);
 
   const similar: VacancyLinkData[] =

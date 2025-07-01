@@ -79,7 +79,7 @@ export const JobCards = ({ data, baseUrl, currentPage }: JobCardsProps) => {
       refForOverlay={refForOverlay}
       cardHeight={240}
       cardHeightDesktop={204}
-      overlayType="jobs" // явно указываем
+      overlayType="jobs"
     />
   );
 };
