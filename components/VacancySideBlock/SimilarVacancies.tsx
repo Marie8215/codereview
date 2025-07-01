@@ -21,8 +21,6 @@ export const SimilarVacancies = ({
   const vacancyFilter = userClientStore((store) => store.jobsFilter);
   const setJobsList = userClientStore((store) => store.setJobsList);
 
-  const vacancy = jobsList?.get(currentVacancyId);
-
   useEffect(() => {
       apiClient.vacancies
         .get({
@@ -47,7 +45,7 @@ export const SimilarVacancies = ({
           const linkedMap = new LinkedMap(vacancyLinks, (x) => x.id);
           setJobsList(linkedMap);
         });
-  }, [currentVacancyId, setJobsList, stack.filterId, vacancy, vacancyFilter]);
+  }, [currentVacancyId, setJobsList, stack.filterId, vacancyFilter]);
 
   const similar: VacancyLinkData[] =
     jobsList?.getNextN(currentVacancyId, 2)?.map((x) => x.value) ?? [];
