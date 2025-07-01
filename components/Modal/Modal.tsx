@@ -28,7 +28,7 @@ export const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose }) => {
         }
       }}
     >
-      <div className="modal-content">
+      <div className="modal-content overflow-auto md:overflow-visible">
         <button className="modal-close desktop-only" onClick={onClose}>
           ×
         </button>

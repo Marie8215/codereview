@@ -105,8 +105,8 @@ export const RegisterFormModalContent: React.FC<RegisterFormProps> = ({
     <div
       className="
         w-full bg-white rounded-[24px] flex flex-col
-        md:w-[800px]  md:rounded-[24px] md:flex-row
-        overflow-y-auto max-h-[calc(100dvh-40px)] md:overflow-hidden md:max-h-none
+        lg:w-[800px] md:flex-row
+        max-h-[calc(100dvh-40px)] md:overflow-hidden md:max-h-none
         my-[20px] md:my-0
       "
     >
