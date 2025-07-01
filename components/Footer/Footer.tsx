@@ -44,7 +44,7 @@ export const Footer = () => {
               <div
                 className={`text-[#86888E] text-[20px] xl:text-[30px] leading-[20px] xl:leading-[30px] font-semibold tracking-[-1px] text-left xl:text-right w-full ${wixMadeforDisplay.className}`}
               >
-                {"<codereview />"}
+                <Link href="/">{"<codereview />"}</Link>
               </div>
 
               <div className="flex flex-col items-start xl:items-end xl:text-right">
@@ -78,18 +78,18 @@ export const Footer = () => {
                   >
                     Команда
                   </Link>
-                  <Link href="#" className="sm:w-[228px] w-[170px] mb-0">
+                  <div className="sm:w-[228px] w-[170px] mb-0 cursor-default">
                     О нас
-                  </Link>
+                  </div>
                   <Link
                     href="https://blog.yourcodereview.com"
                     className="sm:w-[228px] w-[170px] mb-0"
                   >
                     Блог
                   </Link>
-                  <Link href="#" className="sm:w-[228px] w-[170px] mb-0">
+                  <span className="sm:w-[228px] w-[170px] mb-0 cursor-default">
                     Вакансии
-                  </Link>
+                  </span>
                   <Link
                     href="https://yourcodereview.com/#offer"
                     className="sm:w-[228px] w-[170px] mb-0"
@@ -151,7 +151,7 @@ export const Footer = () => {
                   Политика конфиденциальности
                 </Link>
                 <div className="w-[5px] h-[5px] rounded-full bg-[#86888E]"></div>
-                <Link href="#">Оферта</Link>
+                <span className="cursor-default">Оферта</span>
               </div>
             </div>
             <div className="h-[1px] bg-[#414246] mb-[15px]"></div>
@@ -170,10 +170,8 @@ export const Footer = () => {
               </div>
               <div className="text-[#86888E] md:order-1">
                 <p className="text-[16px] leading-[20px] font-normal tracking-[-0.5px] text-center md:text-left">
-                  <Link href="#">
-                    ИП Примак Максим Андреевич
-                    <br /> ИНН 772142877813 ОГРН 322774600410191
-                  </Link>
+                  ИП Примак Максим Андреевич
+                  <br /> ИНН 772142877813 ОГРН 322774600410191
                 </p>
               </div>
             </div>
