@@ -67,44 +67,55 @@ const Pagination: React.FC<PaginationProps> = ({
   };
 
   const renderPageNumbers = () => {
-    const items = [];
-    const visiblePages = 5;
+    const pages = [];
+    const siblings = 1;
+    const totalNumbers = siblings * 2 + 3; // current, siblings, first & last
+    const totalBlocks = totalNumbers + 2; // ... and ...
 
-    for (let i = 1; i <= Math.min(visiblePages, lastPage); i++) {
-      items.push(
+    if (lastPage <= totalBlocks) {
+      for (let i = 1; i <= lastPage; i++) {
+        pages.push(
+          <PaginationButton
+            key={i}
+            page={i}
+            isActive={activePage === i}
+            onClick={handlePageClick}
+          />
+        );
+      }
+    } else {
+      const leftSibling = Math.max(activePage - siblings, 2);
+      const rightSibling = Math.min(activePage + siblings, lastPage - 1);
+
+      pages.push(
         <PaginationButton
-          key={i}
-          page={i}
-          isActive={activePage === i}
+          key={1}
+          page={1}
+          isActive={activePage === 1}
           onClick={handlePageClick}
         />
       );
-    }
 
-    if (lastPage > visiblePages) {
-      items.push(
-        <div
-          key="dots"
-          className={`
-            w-[40px] 
-            h-[40px] 
-            rounded-[10px]
-            flex
-            items-center
-            justify-center
-            text-[18px]
-            leading-[22px]
-            tracking-[-0.5px]
-            font-medium
-            text-neutral-800
-            ${wixMadeforText.className}
-          `}
-        >
-          ...
-        </div>
-      );
+      if (leftSibling > 2) {
+        pages.push(<Dots key="dots-left" />);
+      }
 
-      items.push(
+      for (let i = leftSibling; i <= rightSibling; i++) {
+        pages.push(
+          <PaginationButton
+            key={i}
+            page={i}
+            isActive={activePage === i}
+            onClick={handlePageClick}
+          />
+        );
+      }
+
+      if (rightSibling < lastPage - 1) {
+        pages.push(<Dots key="dots-right" />);
+      }
+
+      pages.push(
         <PaginationButton
           key={lastPage}
           page={lastPage}
@@ -114,16 +125,20 @@ const Pagination: React.FC<PaginationProps> = ({
       );
     }
 
-    return items;
+    return pages;
   };
 
   return (
-    <div
-      className={`w-[298px] flex items-center justify-center gap-[3px] ${className}`}
-    >
+    <div className={`flex items-center justify-center gap-[6px] ${className}`}>
       {renderPageNumbers()}
     </div>
   );
 };
+
+const Dots = () => (
+  <div className="w-[40px] h-[40px] flex items-center justify-center text-[18px] text-neutral-500">
+    ...
+  </div>
+);
 
 export default Pagination;
