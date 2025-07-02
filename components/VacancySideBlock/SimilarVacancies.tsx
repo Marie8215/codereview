@@ -40,7 +40,7 @@ export const SimilarVacancies = ({
           const vacancyLinks = response.response?.items.map((x) => ({
             id: x.id,
             title: x.title,
-            companyName: x.company_name,
+            companyName: x.company.name,
           }));
           const linkedMap = new LinkedMap(vacancyLinks, (x) => x.id);
           setJobsList(linkedMap);

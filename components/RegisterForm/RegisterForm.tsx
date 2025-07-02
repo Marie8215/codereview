@@ -9,6 +9,7 @@ import { Modal } from "../Modal/Modal";
 import { userClientStore } from "@/store/onClient/store";
 import { SuccessModal } from "../SuccessModal/SuccessModal";
 import { ThankYouModal } from "../ThankYouModal/ThankYouModal";
+import { apiClient } from "../../api/ApiClient";
 
 interface RegisterFormProps {
   onLoginClick: () => void;
@@ -19,7 +20,9 @@ export const RegisterFormModal = () => {
   type ModalContentType = "register" | "success" | "thankYou";
 
   const isRegisterOpen = userClientStore((state) => state.isRegisterModalOpen);
-  const setIsRegisterOpen = userClientStore((state) => state.setRegisterModalOpen);
+  const setIsRegisterOpen = userClientStore(
+    (state) => state.setRegisterModalOpen
+  );
   const setIsLoginOpen = userClientStore((state) => state.setLoginModalOpen);
   const [currentContent, setCurrentContent] =
     useState<ModalContentType>("register");
@@ -76,6 +79,26 @@ export const RegisterFormModalContent: React.FC<RegisterFormProps> = ({
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  const onSubmit = async () => {
+    if (!name || !email || !password || !confirmPassword) {
+      setPasswordError("Пожалуйста, заполните все поля");
+      return;
+    }
+
+    const response = await apiClient.auth.register({
+      username: email,
+      password: password,
+    });
+
+    if (response.error) {
+      setPasswordError("Ошибка регистрации");
+      console.error("Ошибка регистрации:", response.error);
+      return;
+    }
+
+    onSuccessRegister();
+  };
+
   const handleConfirmPasswordChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -125,13 +148,13 @@ export const RegisterFormModalContent: React.FC<RegisterFormProps> = ({
           <div>Вы готовы к большему.</div>
           <div>Мы поможем начать.</div>
         </div>
-       <Image
-               src="/images/sophi-auth.png"
-               alt="Sophi Auth"
-               width={278}
-               height={286}
-               className="object-contain w-[75px] h-[75px] md:w-[278px] md:h-[286px]"
-             />
+        <Image
+          src="/images/sophi-auth.png"
+          alt="Sophi Auth"
+          width={278}
+          height={286}
+          className="object-contain w-[75px] h-[75px] md:w-[278px] md:h-[286px]"
+        />
         <div
           className="
           hidden md:block mt-auto mb-[30px] font-semibold text-[22px] leading-[22px] tracking-[-1px] text-[#636469] text-center
@@ -197,7 +220,7 @@ export const RegisterFormModalContent: React.FC<RegisterFormProps> = ({
             />
           </div>
 
-          <AuthButton onClick={onSuccessRegister} className="mb-[15px]">
+          <AuthButton onClick={onSubmit} className="mb-[15px]">
             Зарегистрироваться
           </AuthButton>
 

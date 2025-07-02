@@ -25,8 +25,8 @@ export const JobCards = ({ data, baseUrl, currentPage }: JobCardsProps) => {
       remote: job.remote,
       internship: job.internship,
       salary: job.salary,
-      companyName: job.company_name,
-      location: job.location,
+      companyName: job.company.name,
+      location: job.location?.city || job.location?.raw || "город не указан",
       datePosted: job.date_publication,
       image: job.image,
     })) ?? [];

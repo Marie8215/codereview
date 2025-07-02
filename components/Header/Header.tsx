@@ -36,7 +36,7 @@ export const Header = () => {
   const logoLink = currentStack ? `/${currentStack}` : "/";
 
   // Проверка: путь заканчивается на цифру (например, /jobs/123)
-  const isIdPage = /\d+$/.test(pathname);
+  const shouldShowBackArrow = pathname?.split('/').filter(Boolean).length > 1;
 
   const isDesktop = typeof window !== "undefined" ? window.innerWidth >= 768 : true;
 
@@ -62,7 +62,7 @@ export const Header = () => {
   return (
     <div className="relative w-fit mx-auto md:mt-5 mt-4">
       {/* Абсолютная стрелка */}
-      {isIdPage && isDesktop && (
+      {shouldShowBackArrow && isDesktop && (
         <div
           className="
             hidden md:flex

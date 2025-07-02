@@ -8,7 +8,7 @@ import {
 } from "./models/endpoints";
 import { Question, QuestionCreate, QuestionFilter } from "./models/questions";
 import { Vacancy, VacancyCreate, VacancyFilter } from "./models/vacancy";
-import { TokenResponse, LoginData } from "./models/auth";
+import { TokenResponse, UserCredentialsData } from "./models/auth";
 import { PaginatedResponse } from "./models/pagination";
 import { mockUser } from "./mocks/mockData";
 import { mockQuestions } from "./mocks/questions";
@@ -156,7 +156,7 @@ class MockApiClient {
 
   private createAuthEndpoint(): AuthEndpoint {
     return {
-      login: async (data: LoginData) => {
+      login: async (data: UserCredentialsData) => {
         this.accessToken = "mock_token";
         const tokenResponse: TokenResponse = {
           access_token: this.accessToken,

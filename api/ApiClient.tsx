@@ -6,7 +6,7 @@ import {
 } from "./models/endpoints";
 import { Question, QuestionCreate, QuestionFilter } from "./models/questions";
 import { Vacancy, VacancyCreate, VacancyFilter } from "./models/vacancy";
-import { TokenResponse, LoginData, User } from "./models/auth";
+import { TokenResponse, UserCredentialsData, User, UserRegisterResponse } from "./models/auth";
 import { PaginatedResponse } from "./models/pagination";
 
 class ApiClient {
@@ -303,7 +303,7 @@ class ApiClient {
 
   private createAuthEndpoint(): AuthEndpoint {
     return {
-      login: async (data: LoginData) => {
+      login: async (data: UserCredentialsData) => {
         // todo здесь выполнять запрос без кэша!
         // const tokenData: TokenResponse = {
         //   access_token: "faketoken_ " + data.username,
@@ -347,6 +347,13 @@ class ApiClient {
         };
       },
 
+      register: async (data: UserCredentialsData) => {
+        return this.fetch<UserRegisterResponse>("/auth/register/", {
+          method: "POST",
+          body: JSON.stringify(data),
+        });
+      },
+
       getCurrentUser: () => this.fetch<User>("/auth/users/me/"),
     };
   }
@@ -363,4 +370,4 @@ class ApiClient {
   }
 }
 
-export const apiClient = new ApiClient("http://jobs.yourcodereview.com:8006");
+export const apiClient = new ApiClient("http://jobs.yourcodereview.com:8005");

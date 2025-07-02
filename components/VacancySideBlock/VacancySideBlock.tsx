@@ -106,7 +106,7 @@ const SophyPromo = () => {
       />
 
       <p
-        className={`${wixMadeforDisplay.className} font-bold text-[18px] lg:text-[1px] md:text-[14px] leading-[20px] tracking-[-0.5px] text-[#232325]`}
+        className={`${wixMadeforDisplay.className} font-bold text-[18px] lg:text-[18px] md:text-[14px] leading-[20px] tracking-[-0.5px] text-[#232325]`}
       >
         Не зовут на интервью? Автоматизируй поиск работы своему AI ассистенту
         Софи

@@ -44,7 +44,7 @@ export const JobProperties: React.FC<JobPropertiesProps> = ({
         <IconWithText
           size="small"
           icon={<MoneybagIcon size={18} />}
-          text={`${salary} ₽`}
+          text={`${salary} ${/[0-9]/.test(salary.at(-1) || "") ? "₽" : ""}`}
         />
       )}
       {!salary && (

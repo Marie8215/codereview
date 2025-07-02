@@ -1,7 +1,7 @@
 import { ApiResponse } from "./base";
 import { Question, QuestionFilter, QuestionCreate } from "./questions";
 import { Vacancy, VacancyCreate, VacancyFilter } from "./vacancy";
-import { TokenResponse, LoginData, User } from "./auth";
+import { TokenResponse, UserCredentialsData, User, UserRegisterResponse } from "./auth";
 import { PaginatedResponse } from "./pagination";
 
 export interface QuestionsEndpoint {
@@ -26,6 +26,7 @@ export interface VacanciesEndpoint {
 }
 
 export interface AuthEndpoint {
-  login(data: LoginData): Promise<ApiResponse<TokenResponse>>;
+  login(data: UserCredentialsData): Promise<ApiResponse<TokenResponse>>;
+  register(data: UserCredentialsData): Promise<ApiResponse<UserRegisterResponse>>;
   getCurrentUser(): Promise<ApiResponse<User>>;
 }

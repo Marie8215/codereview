@@ -26,10 +26,10 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${vacancy.title} | ${vacancy.company_name} | Codereview`,
+    title: `${vacancy.title} | ${vacancy.company.name} | Codereview`,
     description: `${vacancy.internship ? "Стажировка" : "Вакансия"} ${
       vacancy.title
-    } в компании ${vacancy.company_name}. ${
+    } в компании ${vacancy.company.name}. ${
       vacancy.remote ? "Удаленная работа" : ""
     } ${vacancy.salary ? `Зарплата ${vacancy.salary}` : ""}`,
   };
@@ -67,8 +67,8 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
             />
             <div className="w-full md:w-[300px]">
               <VacancySideBlock
-                location={vacancy?.location}
-                companyName={vacancy?.company_name}
+                location={vacancy?.location?.city || vacancy?.location?.raw || "город не указан"}
+                companyName={vacancy?.company.name}
                 sourceLink={vacancy?.url}
                 imageSrc={vacancy?.image || undefined}
                 id={Number(vacancyId)}

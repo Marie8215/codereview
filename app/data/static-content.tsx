@@ -133,36 +133,37 @@ export interface StackOption {
   filterId: string;
 }
 
+// todo frontend, backed
 export const stackOptions: StackOption[] = [
   {
     title: "Python",
     linkId: "python",
-    filterId: "Python",
+    filterId: "python,backend",
   },
   {
     title: "Java",
     linkId: "java",
-    filterId: "Java",
+    filterId: "java,backend",
   },
   {
     title: "JavaScript",
     linkId: "javascript",
-    filterId: "JS",
+    filterId: "javascript,frontend",
   },
   {
     title: "Data Science",
     linkId: "data-science",
-    filterId: "ML",
+    filterId: "data",
   },
   {
     title: "QA",
     linkId: "qa",
-    filterId: "QA",
+    filterId: "qa",
   },
   {
     title: "C#",
     linkId: "csharp",
-    filterId: "CSharp",
+    filterId: "c#,backend",
   },
 ];
 

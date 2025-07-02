@@ -3,7 +3,7 @@ export interface TokenResponse {
     token_type: string;
 }
 
-export interface LoginData {
+export interface UserCredentialsData {
     username: string;
     password: string;
 }
@@ -14,4 +14,8 @@ export interface User {
     username: string;
     is_active: boolean;
     is_superuser: boolean;
+}
+
+export interface UserRegisterResponse {
+    details: string;
 }
