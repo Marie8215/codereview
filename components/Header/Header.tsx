@@ -1,5 +1,5 @@
 "use client";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { NavigationMenu } from "../NavigationMenu/NavigationMenu";
 import { LoginFormModal } from "../LoginForm/LoginForm";
 import Logo from "../Logo/Logo";
@@ -10,6 +10,8 @@ import { RegisterFormModal } from "../RegisterForm/RegisterForm";
 import { stackOptionsMap } from "@/app/data/static-content";
 import { userClientStore } from "@/store/onClient/store";
 import HeaderFloatButton from "./HeaderFloatButton";
+import { GoBackArrow } from "./GoBackArrow";
+import { Suspense } from "react";
 
 export const Header = () => {
   const loggedIn = userClientStore((state) => state.loggedIn);
@@ -25,71 +27,22 @@ export const Header = () => {
   };
   const setIsLoginOpen = userClientStore((state) => state.setLoginModalOpen);
 
-  const router = useRouter();
   const pathname = usePathname();
 
-  const showJobsButton = pathname.includes("jobs") && !pathname.includes("jobs/create");
+  const showJobsButton =
+    pathname.includes("jobs") && !pathname.includes("jobs/create");
   const showInterviewsButton = pathname.includes("interviews");
 
   const isHomePage = pathname.split("/").filter(Boolean).length < 2;
   const currentStack = stackOptionsMap.get(pathname.split("/")[1])?.linkId;
   const logoLink = currentStack ? `/${currentStack}` : "/";
 
-  // Проверка: путь заканчивается на цифру (например, /jobs/123)
-  const shouldShowBackArrow = pathname?.split('/').filter(Boolean).length > 1;
-
-  const isDesktop = typeof window !== "undefined" ? window.innerWidth >= 768 : true;
-
-  const host = typeof window !== "undefined" ? window.location.host : "";
-  const referrer = typeof document !== "undefined" ? document.referrer : "";
-
-  const handleBack = () => {
-    if (referrer && referrer.includes(host)) {
-      router.back();
-    } else {
-      // fallback: режем id
-      const parts = pathname.split("/").filter(Boolean);
-      if (parts.length > 1 && /^\d+$/.test(parts[parts.length - 1])) {
-        parts.pop();
-        const basePath = "/" + parts.join("/");
-        router.push(basePath);
-      } else {
-        router.push("/");
-      }
-    }
-  };
-
   return (
     <div className="relative w-fit mx-auto md:mt-5 mt-4">
-      {/* Абсолютная стрелка */}
-      {shouldShowBackArrow && isDesktop && (
-        <div
-          className="
-            hidden md:flex
-            absolute
-            items-center justify-center
-            w-[64px] h-[56px]
-            rounded-[18px]
-            bg-neutral-10
-            shadow-header
-            left-[-74px] top-1/2 -translate-y-1/2
-            z-10
-            cursor-pointer
-          "
-          onClick={handleBack}
-        >
-          <Image
-            src="/images/backspace-arrow.svg"
-            alt="back"
-            width={18}
-            height={18}
-            className="mx-auto"
-            priority
-          />
-        </div>
-      )}
-
-      {/* Основной header */}
+      <Suspense>
+        <GoBackArrow />
+      </Suspense>
+      
       <header className="rounded-[18px] md:py-[17px] md:px-5 py-[13px] px-5 gap-5 bg-neutral-10 shadow-header backdrop-blur-[8px] flex items-center relative z-20">
         <Link href={logoLink} className="contents">
           <Logo monochrome={!isHomePage} />
