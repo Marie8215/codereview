@@ -6,7 +6,7 @@ import GradientButton from "../../../components/GradientButton/GradientButton";
 import Image from "next/image";
 import { apiClient } from "../../../api/ApiClient";
 import { DropdownList } from "../../../components/Dropdown/DropdownList";
-import { stackOptions } from "../../data/static-content";
+import { StackOption, stackOptions } from "../../data/static-content";
 
 export const PostVacancyForm = () => {
   const [title, setTitle] = useState("");
@@ -22,7 +22,7 @@ export const PostVacancyForm = () => {
   const [success, setSuccess] = useState(false);
   const [logo, setLogo] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [stack, setStack] = useState<string>(stackOptions[0].title);
+  const [stack, setStack] = useState<StackOption>(stackOptions[0]);
   const [url, setUrl] = useState("");
 
   // обработчик выбора файла
@@ -63,23 +63,23 @@ export const PostVacancyForm = () => {
 
     const vacancyData = {
       active: true,
-      external_id: null,
-      // company_name: company,
-      company: {
-        name: company,
-        id: 0, // ID компании можно установить позже, если нужно
-        description: "", // Описание компании можно добавить позже
-      },
       title,
       salary,
-      // location: city,
-      speciality: stack,
+      external_id: null,
+      location: city,
+      speciality: stack.postingId,
       internship: isInternship,
       remote: isRemote,
       url,
       description: desc,
       source: "codereview",
       image: imageBase64,
+      company: {
+        name: company,
+        id: 0, // ID компании можно установить позже, если нужно
+        description: "", // Описание компании можно добавить позже
+      },
+      tags: []
     };
 
     console.log("imageBase64", imageBase64);
@@ -130,14 +130,14 @@ export const PostVacancyForm = () => {
             <DropdownList
               relative
               buttonLike
-              trigger={stack || "Стэк"}
-              onSelect={(item) => setStack(item.title)}
+              trigger={stack.title || "Стэк"}
+              onSelect={(item) => setStack(item.data)}
               items={stackOptions.map((item) => ({
-                id: item.title,
+                id: item.postingId,
                 title: item.title,
                 data: item,
               }))}
-              activeIds={[stack]}
+              activeIds={[stack.postingId]}
               multiselect={false}
             />
             <CustomInput

@@ -131,6 +131,7 @@ export interface StackOption {
   title: string;
   linkId: string;
   filterId: string;
+  postingId: string;
 }
 
 // todo frontend, backed
@@ -139,31 +140,37 @@ export const stackOptions: StackOption[] = [
     title: "Python",
     linkId: "python",
     filterId: "python,backend",
+    postingId: "python"
   },
   {
     title: "Java",
     linkId: "java",
     filterId: "java,backend",
+    postingId: "java"
   },
   {
     title: "JavaScript",
     linkId: "javascript",
     filterId: "javascript,frontend",
+    postingId: "javascript"
   },
   {
     title: "Data Science",
     linkId: "data-science",
     filterId: "data",
+    postingId: "data"
   },
   {
     title: "QA",
     linkId: "qa",
     filterId: "qa",
+    postingId: "qa",
   },
   {
     title: "C#",
     linkId: "csharp",
     filterId: "c#,backend",
+    postingId: "c#"
   },
 ];
 

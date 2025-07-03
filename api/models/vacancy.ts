@@ -16,7 +16,9 @@ export interface Vacancy {
   date_publication: string; // ISO 8601 date-time string
 }
 
-export type VacancyCreate = Omit<Vacancy, "date_publication" | "id">;
+export type VacancyCreate = Omit<Vacancy, "date_publication" | "id" | "location"> & {
+  location: string;
+};
 
 export interface VacancyFilter {
   search?: string;
