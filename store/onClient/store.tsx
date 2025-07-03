@@ -23,7 +23,7 @@ export interface QuestionLinkData {
 }
 
 export interface StoreState {
-  selectedStack: StackOption;
+  selectedStack?: StackOption;
   stackOptions: readonly StackOption[];
   interviewsFilter: InterviewsFilterState;
   jobsFilter: JobsFilterState;
@@ -62,7 +62,6 @@ export interface JobsFilterState extends FilterState {
 
 export const userClientStore = create<StoreState>((set) => ({
   stackOptions,
-  selectedStack: null!,
   interviewsFilter: {
     grade: [],
     subStack: [],

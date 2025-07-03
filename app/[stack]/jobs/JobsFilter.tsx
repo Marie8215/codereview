@@ -52,7 +52,7 @@ export const JobsFilter = ({ sources, locations }: JobsFilterProps) => {
       <DropdownList
         relative
         buttonLike
-        trigger={<span>{selectedStack.title}</span>}
+        trigger={<span>{selectedStack?.title || 'стэк'}</span>}
         onSelect={(item) => setSelectedStack(item.data)}
         items={stackOptions.map((item) => ({
           id: item.linkId,

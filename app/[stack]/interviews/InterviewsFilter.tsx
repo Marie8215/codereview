@@ -46,7 +46,7 @@ export const InterviewsFilter = ({
     >
       <DropdownList
         relative
-        trigger={<span>{selectedStack.title}</span>}
+        trigger={<span>{selectedStack?.title || 'стэк'}</span>}
         buttonLike
         items={stackOptions.map((item) => ({
           id: item.linkId,

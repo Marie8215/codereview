@@ -1,5 +1,5 @@
 "use client";
-import { StackOption } from "@/app/data/static-content";
+import { StackOption, stackOptionsMap } from "@/app/data/static-content";
 import { wixMadeforText } from "@/app/fonts";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -16,6 +16,9 @@ const RadioGroup = ({ items, className, size }: RadioGroupProps) => {
 
   const selectedStack = userClientStore((state) => state.selectedStack);
   const setSelectedStack = userClientStore((state) => state.setSelectedStack);
+
+  const shouldEnebleStackLinks =
+    pathname === "/" || stackOptionsMap.get(pathname.split("/")[1]);
 
   const getLink = (linkId: string) => {
     const pathSegments = pathname.split("/").filter(Boolean);
@@ -34,38 +37,49 @@ const RadioGroup = ({ items, className, size }: RadioGroupProps) => {
   const sizeDependingStyles =
     (size || "normal") === "normal" ? normalSizeStyles : smallSizeStyles;
 
+  const getClassname = (linkId: string) => `
+      rounded-xl
+      cursor-pointer
+      tracking-[-0.5px] 
+      font-normal 
+      ${sizeDependingStyles}
+      ${wixMadeforText.className}
+      ${selectedStack?.linkId === linkId ? "text-white" : "bg-[#F6F6F6]"}
+      transition-colors
+    `;
+
+  const getStyle = (linkId: string) =>
+    selectedStack?.linkId === linkId
+      ? {
+          background:
+            "linear-gradient(85.18deg, #2093FE 0.83%, rgba(194, 23, 254, 0.9) 91.48%)",
+        }
+      : undefined;
+
   return (
     <div className={`flex gap-[10px] flex-wrap ${className}`}>
-      {items.map((item) => (
-        <Link
-          href={getLink(item.linkId)}
-          key={item.linkId}
-          onClick={() => handleClick(item)}
-          className={`
-            rounded-xl
-            tracking-[-0.5px] 
-            font-normal 
-            ${sizeDependingStyles}
-            ${wixMadeforText.className}
-            ${
-              selectedStack?.linkId === item.linkId
-                ? "text-white"
-                : "bg-[#F6F6F6]"
-            }
-            transition-colors
-          `}
-          style={
-            selectedStack?.linkId === item.linkId
-              ? {
-                  background:
-                    "linear-gradient(85.18deg, #2093FE 0.83%, rgba(194, 23, 254, 0.9) 91.48%)",
-                }
-              : undefined
-          }
-        >
-          {item.title}
-        </Link>
-      ))}
+      {items.map((item) =>
+        shouldEnebleStackLinks ? (
+          <Link
+            href={getLink(item.linkId)}
+            key={item.linkId}
+            onClick={() => handleClick(item)}
+            className={getClassname(item.linkId)}
+            style={getStyle(item.linkId)}
+          >
+            {item.title}
+          </Link>
+        ) : (
+          <div
+            key={item.linkId}
+            onClick={() => handleClick(item)}
+            className={getClassname(item.linkId)}
+            style={getStyle(item.linkId)}
+          >
+            {item.title}
+          </div>
+        )
+      )}
     </div>
   );
 };

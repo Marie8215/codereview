@@ -5,18 +5,17 @@ import { pageLinks, stackOptions } from "@/app/data/static-content";
 import { NavMenuButton } from "./NavMenuBurron";
 import { StackOptions } from "../StackOptions/StackOptions";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { userClientStore } from "@/store/onClient/store";
 
 export const NavigationMenu = () => {
-  const pathname = usePathname();
   const columnsCount = 2;
   const rowsCount = Math.ceil(pageLinks.length / columnsCount);
+  const selectedStack = userClientStore(store => store.selectedStack);
 
   const getLink = (baseLink: string | undefined) => {
     if (!baseLink) return "#";
 
-    const pathSegments = pathname.split("/").filter(Boolean);
-    const currentStack = pathSegments[0] || stackOptions[0].linkId;
+    const currentStack = selectedStack?.linkId || stackOptions[0].linkId;
 
     return `/${currentStack}/${baseLink}`;
   };

@@ -5,13 +5,12 @@ import { useEffect, useRef } from "react";
 import { stackOptionsMap } from "@/app/data/static-content";
 import { userClientStore } from "@/store/onClient/store";
 
-const excludingPages = ["jobs/create"];
+const excludingPages = ["/jobs/create"];
 
 export const useSyncStackFromRoute = () => {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
-  console.log(pathname);
 
   const selectedStack = userClientStore((state) => state.selectedStack);
   const setSelectedStack = userClientStore((state) => state.setSelectedStack);
@@ -24,20 +23,23 @@ export const useSyncStackFromRoute = () => {
 
     const stackFromUrl = pathname.split("/")[1];
     const stackOption = stackOptionsMap.get(stackFromUrl);
-
-    if (stackOption) {
-      setSelectedStack(stackOption);
+    
+    if (!stackOption) {
+      return;
     }
+
+    console.log("from url to store")
+    setSelectedStack(stackOption);
 
     hasInitialized.current = true;
   }, [pathname, setSelectedStack]);
 
   // 2. Когда selectedStack меняется — обновляем URL, если он не совпадает
   useEffect(() => {
-    if (!selectedStack) return;
+    if (!hasInitialized.current || !selectedStack) return;
 
-    console.log(pathname, "is excluded from stack sync");
     if (excludingPages.includes(pathname)){
+      console.log(pathname, "is excluded from stack sync");
       return;
     }
 
@@ -51,6 +53,8 @@ export const useSyncStackFromRoute = () => {
     const newPath = `/${selectedStack.linkId}/${pathSegments
       .slice(1)
       .join("/")}${currentParams ? `?${currentParams}` : ""}`;
+
+      console.log("from store to url")
 
     router.push(newPath, { scroll: false });
   }, [selectedStack, pathname, searchParams, router]);
