@@ -107,7 +107,7 @@ export const pageLinks: pageLink[] = [
       "Реальные вопросы с интервью, сгруппированные по стеку и уровню сложности — с пояснениями и примерами ответов",
     iconFactory: (size = 20) => <MicrophoneIcon size={size} />,
     orderOnMainPage: 3,
-    baseLink: "/interviews",
+    baseLink: "interviews",
   },
   {
     title: "Пет-проекты",

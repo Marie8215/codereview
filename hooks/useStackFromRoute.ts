@@ -23,12 +23,12 @@ export const useSyncStackFromRoute = () => {
 
     const stackFromUrl = pathname.split("/")[1];
     const stackOption = stackOptionsMap.get(stackFromUrl);
-    
+
     if (!stackOption) {
       return;
     }
 
-    console.log("from url to store")
+    console.log("from url to store", stackOption);
     setSelectedStack(stackOption);
 
     hasInitialized.current = true;
@@ -38,7 +38,7 @@ export const useSyncStackFromRoute = () => {
   useEffect(() => {
     if (!hasInitialized.current || !selectedStack) return;
 
-    if (excludingPages.includes(pathname)){
+    if (excludingPages.includes(pathname)) {
       console.log(pathname, "is excluded from stack sync");
       return;
     }
@@ -48,13 +48,15 @@ export const useSyncStackFromRoute = () => {
     if (currentStackFromPath === selectedStack.linkId) return;
 
     const pathSegments = pathname.split("/").filter(Boolean);
-    const currentParams = searchParams.toString();
+    const params = new URLSearchParams(searchParams);
+    params.delete("page");
+    const currentParams = params.toString();
 
     const newPath = `/${selectedStack.linkId}/${pathSegments
       .slice(1)
       .join("/")}${currentParams ? `?${currentParams}` : ""}`;
 
-      console.log("from store to url")
+    console.log("from store to url", newPath);
 
     router.push(newPath, { scroll: false });
   }, [selectedStack, pathname, searchParams, router]);
