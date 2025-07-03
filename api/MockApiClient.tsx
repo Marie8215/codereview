@@ -8,7 +8,7 @@ import {
 } from "./models/endpoints";
 import { Question, QuestionCreate, QuestionFilter } from "./models/questions";
 import { Vacancy, VacancyCreate, VacancyFilter } from "./models/vacancy";
-import { TokenResponse, UserCredentialsData } from "./models/auth";
+import { TokenResponse, UserCredentialsData, UserRegisterResponse } from "./models/auth";
 import { PaginatedResponse } from "./models/pagination";
 import { mockUser } from "./mocks/mockData";
 import { mockQuestions } from "./mocks/questions";
@@ -113,7 +113,6 @@ class MockApiClient {
         if (filter?.search) {
           filteredData = this.filterData(filteredData, filter.search, [
             "title",
-            "company_name",
             "description",
             "speciality",
           ]);
@@ -166,6 +165,10 @@ class MockApiClient {
       },
       getCurrentUser: () => {
         return Promise.resolve(this.createSuccessResponse(mockUser));
+      },
+
+      register: async (data: UserCredentialsData) => {
+        return Promise.resolve({} as ApiResponse<UserRegisterResponse>);
       },
     };
   }

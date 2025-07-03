@@ -1,3 +1,5 @@
+"use client";
+
 import { FilterState } from "@/store/onClient/store";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";

@@ -7,7 +7,6 @@ import { JobsFilterState, userClientStore } from "@/store/onClient/store";
 import { stackOptions } from "@/app/data/static-content";
 import { useSyncQueryParams } from "@/hooks/useSyncQueryParams";
 import Link from "next/link";
-import { useSyncStackFromRoute } from "../../../hooks/useStackFromRoute";
 import { useSyncStoreFilter } from "@/hooks/useSyncStoreFilter";
 
 interface JobsFilterProps {
@@ -19,7 +18,8 @@ export const JobsFilter = ({ sources, locations }: JobsFilterProps) => {
   const filters = userClientStore((state) => state.jobsFilter);
   const setFilters = userClientStore((state) => state.setJobsFilter);
 
-  const [selectedStack, setSelectedStack] = useSyncStackFromRoute();
+  const selectedStack = userClientStore((state) => state.selectedStack);
+  const setSelectedStack = userClientStore((state) => state.setSelectedStack);
 
   useSyncQueryParams(filters);
   useSyncStoreFilter(filters, setFilters);

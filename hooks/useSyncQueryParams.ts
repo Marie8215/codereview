@@ -3,7 +3,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 
 export const useSyncQueryParams = <
-  T extends Record<string, string | boolean | string[]>
+  T extends Record<string, string | number | boolean | string[]>
 >(
   filters: T
 ) => {

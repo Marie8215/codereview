@@ -28,7 +28,7 @@ export const JobCards = ({ data, baseUrl, currentPage }: JobCardsProps) => {
       companyName: job.company.name,
       location: job.location?.city || job.location?.raw || "город не указан",
       datePosted: job.date_publication,
-      image: job.image,
+      image: job.image || undefined,
     })) ?? [];
 
   const isDesktop =

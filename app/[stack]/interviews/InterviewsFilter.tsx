@@ -5,7 +5,6 @@ import { DropdownList } from "@/components/Dropdown/DropdownList";
 import { stackOptions } from "@/app/data/static-content";
 import { InterviewsFilterState, userClientStore } from "@/store/onClient/store";
 import { useSyncQueryParams } from "@/hooks/useSyncQueryParams";
-import { useSyncStackFromRoute } from "@/hooks/useStackFromRoute";
 import { useSyncStoreFilter } from "@/hooks/useSyncStoreFilter";
 
 interface InterviewsFilterProps {
@@ -20,7 +19,8 @@ export const InterviewsFilter = ({
   const filters = userClientStore((state) => state.interviewsFilter);
   const setFilters = userClientStore((state) => state.setIterviewsFilter);
 
-  const [selectedStack, setSelectedStack] = useSyncStackFromRoute();
+  const selectedStack = userClientStore((state) => state.selectedStack);
+  const setSelectedStack = userClientStore((state) => state.setSelectedStack);
 
   useSyncQueryParams(filters);
   useSyncStoreFilter(filters, setFilters);

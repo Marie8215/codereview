@@ -259,7 +259,7 @@ class ApiClient {
         const locations = [
           ...new Set(
             result.response.items
-              .map((vacancy) => vacancy.location)
+              .map((vacancy) => vacancy.location?.city || vacancy.location?.raw || "город не указан")
               .filter((location) => location) // Remove nulls/undefined
           ),
         ].sort();
