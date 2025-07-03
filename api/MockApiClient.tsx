@@ -7,7 +7,7 @@ import {
   AuthEndpoint,
 } from "./models/endpoints";
 import { Question, QuestionCreate, QuestionFilter } from "./models/questions";
-import { Vacancy, VacancyCreate, VacancyFilter } from "./models/vacancy";
+import { Vacancy, VacancyCompany, VacancyCreate, VacancyFilter } from "./models/vacancy";
 import { TokenResponse, UserCredentialsData, UserRegisterResponse } from "./models/auth";
 import { PaginatedResponse } from "./models/pagination";
 import { mockUser } from "./mocks/mockData";
@@ -133,6 +133,8 @@ class MockApiClient {
       create: (vacancy: VacancyCreate) => {
         const newVacancy = {
           ...vacancy,
+          location: undefined,
+          company: (null as unknown as VacancyCompany),
           id: mockVacancies.length + 1,
           date_publication: new Date().toISOString(),
         };
