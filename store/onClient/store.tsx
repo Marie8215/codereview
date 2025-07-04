@@ -60,7 +60,13 @@ export interface JobsFilterState extends FilterState {
   internship: boolean;
 }
 
-export const userClientStore = create<StoreState>((set) => ({
+export interface NavigationState {
+  history: string[];
+  pushPath: (path: string) => void;
+  getPreviousPath: () => string | null;
+}
+
+export const userClientStore = create<StoreState>((set, get) => ({
   stackOptions,
   interviewsFilter: {
     grade: [],
