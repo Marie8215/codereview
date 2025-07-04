@@ -11,7 +11,7 @@ export const DropdownTrigger: React.FC<DropdownTriggerProps> = ({
 }) => {
   return (
     <div
-      className={`flex items-center gap-[5px] w-max ${wixMadeforText.className}`}
+      className={`flex items-center gap-[5px] w-max cursor-pointer ${wixMadeforText.className}`}
     >
       {children}
       <Image

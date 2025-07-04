@@ -6,8 +6,14 @@ import {
 } from "./models/endpoints";
 import { Question, QuestionCreate, QuestionFilter } from "./models/questions";
 import { Vacancy, VacancyCreate, VacancyFilter } from "./models/vacancy";
-import { TokenResponse, UserCredentialsData, User, UserRegisterResponse } from "./models/auth";
+import {
+  TokenResponse,
+  UserCredentialsData,
+  User,
+  UserRegisterResponse,
+} from "./models/auth";
 import { PaginatedResponse } from "./models/pagination";
+import { fixLocation } from "./utils/fixLocation";
 
 class ApiClient {
   private baseUrl: string;
@@ -45,7 +51,6 @@ class ApiClient {
   ): Promise<ApiResponse<T>> {
     try {
       console.info(`Fetching: ${this.baseUrl}${endpoint}`, options);
-
       const response = await fetch(`${this.baseUrl}${endpoint}`, {
         cache: "force-cache",
         next: {
@@ -57,6 +62,8 @@ class ApiClient {
           ...options?.headers,
         },
       });
+
+      console.info(`[RESPONSE]: ${this.baseUrl}${endpoint}`, response.status);
 
       if (!response.ok) {
         return {
@@ -206,7 +213,7 @@ class ApiClient {
 
   private createVacanciesEndpoint(): VacanciesEndpoint {
     return {
-      get: (filter?: VacancyFilter) => {
+      get: async (filter?: VacancyFilter) => {
         // фильтр по source не будет работать (сервер его не поддерживает)
         const params = new URLSearchParams();
         if (filter) {
@@ -221,16 +228,45 @@ class ApiClient {
         if (!params.has("limit")) params.append("limit", "7");
         if (!params.has("order")) params.append("order", "asc");
 
-        return this.fetch<PaginatedResponse<Vacancy>>(
-          `/vacancies/?${params.toString()}`
+        const response = await this.fetch<PaginatedResponse<Vacancy>>(
+          `/vacancies/?${params.toString()}`,
+          {
+            next: {
+              revalidate: 60,
+              tags: ["vacancies"],
+            },
+          }
         );
+
+        if (!response.isSuccess) return response;
+
+        response.response?.items.forEach((item) => {
+          item.location = fixLocation(item.location);
+        });
+
+        return response;
       },
-      getById: (id: number) => this.fetch<Vacancy>(`/vacancies/${id}`),
-      create: (vacancy: VacancyCreate) =>
-        this.fetch<Vacancy>("/vacancies/", {
+      getById: async (id: number) => {
+        const response = await this.fetch<Vacancy>(`/vacancies/${id}`);
+
+        if (!response.isSuccess) return response;
+
+        if (response.response) {
+          response.response.location = fixLocation(response.response?.location);
+        }
+
+        return response;
+      },
+      create: async (vacancy: VacancyCreate) => {
+        const response = await this.fetch<Vacancy>("/vacancies/", {
           method: "POST",
           body: JSON.stringify(vacancy),
-        }),
+        });
+
+        if (!response.isSuccess) return response;
+
+        return response;
+      },
       update: (id: number, vacancy: Vacancy) =>
         this.fetch<Vacancy>(`/vacancies/${id}`, {
           method: "PUT",
@@ -244,7 +280,12 @@ class ApiClient {
       getLocations: async () => {
         // для этого должен быть отдельный эндпоинт, но пока используем что есть
         const result = await this.fetch<PaginatedResponse<Vacancy>>(
-          "/vacancies/?limit=100"
+          "/vacancies/?limit=200",
+          {
+            next: {
+              revalidate: 3600,
+            },
+          }
         );
         if (!result.isSuccess || !result.response) {
           return {
@@ -259,7 +300,10 @@ class ApiClient {
         const locations = [
           ...new Set(
             result.response.items
-              .map((vacancy) => vacancy.location?.city || vacancy.location?.raw || "город не указан")
+              .map((vacancy) => {
+                const location = fixLocation(vacancy.location);
+                return location?.city || location?.raw || undefined!;
+              })
               .filter((location) => location) // Remove nulls/undefined
           ),
         ].sort();

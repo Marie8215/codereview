@@ -27,7 +27,7 @@ export const Vacancy = ({
   });
 
   return (
-    <div className="w-full md:w-[660px]">
+    <div className="w-full md:w-[660px] md:mb-0 mb-10">
       {date && (
         <p
           className={`${wixMadeforDisplay.className} font-medium text-[16px] md:text-[18px] leading-[20px] md:leading-[22px] tracking-[-0.5px] text-[#636469] mb-[10px]`}

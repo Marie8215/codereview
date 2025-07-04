@@ -126,7 +126,7 @@ export const PostVacancyForm = () => {
         </div>
 
         <div className="mb-[20px]">
-          <div className="flex flex-col md:flex-row gap-[20px] mb-[30px] items-end">
+          <div className="flex flex-row gap-[20px] mb-[30px] items-end">
             <DropdownList
               relative
               buttonLike

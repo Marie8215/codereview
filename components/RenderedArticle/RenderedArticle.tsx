@@ -65,9 +65,11 @@ export const RenderedArticle = ({ content, promo }: RenderedArticleProps) => {
 
   const middleIndex = Math.floor(clean.length / 2);
   const splitIndex = (() => {
-    const p = clean.indexOf("</p>", middleIndex);
-    const d = clean.indexOf("</div>", middleIndex);
-    return p !== -1 ? p + "</p>".length : d + "</div>".length;
+    const nearestParagraph = clean.indexOf("</p>", middleIndex);
+    const nearestDiv = clean.indexOf("</div>", middleIndex);
+
+    if (nearestDiv == -1 && nearestParagraph == -1) return clean.length;
+    return nearestParagraph !== -1 ? nearestParagraph + "</p>".length : nearestDiv + "</div>".length;
   })();
 
   const firstHalf = clean.slice(0, splitIndex);

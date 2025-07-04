@@ -38,26 +38,26 @@ export const Footer = () => {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <div className="py-[20px] md:pt-[60px] max-w-[345px] lg:max-w-[1200px] sm:max-w-[90%] mx-auto">
-          <div className="w-full xl:max-w-[1180px] mx-auto flex flex-col xl:flex-row justify-between items-start md:mb-[60px] mb-[20px] gap-y-[34px]">
-            <div className="w-full md:w-[233px] order-1 xl:order-2 flex flex-col justify-between gap-y-[20px] md:gap-y-0 xl:h-[141px]">
+        <div className="py-[20px] md:pt-[60px] max-w-[345px] lg:max-w-[1024px] xl:max-w-[1200px] sm:max-w-[90%] mx-auto">
+          <div className="w-full xl:max-w-[1180px] mx-auto flex flex-col lg:flex-row justify-between items-start md:mb-[60px] mb-[20px] gap-y-[34px]">
+            <div className="w-full md:w-[233px] order-1 lg:order-2 flex flex-col justify-between gap-y-[20px] md:gap-y-0 lg:h-[141px]">
               <div
-                className={`text-[#86888E] text-[20px] xl:text-[30px] leading-[20px] xl:leading-[30px] font-semibold tracking-[-1px] text-left xl:text-right w-full ${wixMadeforDisplay.className}`}
+                className={`text-[#86888E] text-[20px] lg:text-[30px] leading-[20px] lg:leading-[30px] font-semibold tracking-[-1px] text-left lg:text-right w-full ${wixMadeforDisplay.className}`}
               >
                 <Link href="/">{"<codereview />"}</Link>
               </div>
 
-              <div className="flex flex-col items-start xl:items-end xl:text-right">
-                <div className="text-[#F6F6F6] text-[20px] xl:text-[24px] leading-[24px] xl:leading-[26px] font-semibold tracking-[-0.5px] mt-0 xl:mt-[60px] mb-[3px]">
+              <div className="flex flex-col items-start lg:items-end lg:text-right">
+                <div className="text-[#F6F6F6] text-[20px] lg:text-[24px] leading-[24px] lg:leading-[26px] font-semibold tracking-[-0.5px] mt-0 lg:mt-[60px] mb-[3px]">
                   +7 (499) 110-82-76
                 </div>
-                <div className="text-[#86888E] text-[16px] xl:text-[18px] leading-[18px] xl:leading-[22px] font-semibold tracking-[-0.5px]">
+                <div className="text-[#86888E] text-[16px] lg:text-[18px] leading-[18px] lg:leading-[22px] font-semibold tracking-[-0.5px]">
                   yourcodereview@gmail.com
                 </div>
               </div>
             </div>
 
-            <div className="w-full xl:w-[634px] order-2 xl:order-1 flex flex-col md:flex-row md:justify-between md:items-center items-start">
+            <div className="w-full lg:w-[634px] order-2 lg:order-1 flex flex-col md:flex-row md:justify-between md:items-center items-start">
               <div className="md:flex mb-[30px] md:mb-0 gap-[50px]">
                 <div className="text-[#F6F6F6] md:h-[158px] h-[156px] md:text-[18px] text-[16px] md:leading-[22px] leading-[18px] font-normal tracking-[-0.5px] flex flex-col flex-wrap space-y-4 gap-y-[12px] md:gap-x-[50px] gap-x-[23px]">
                   <Link
@@ -109,7 +109,7 @@ export const Footer = () => {
               </div>
               <Link
                 href="https://mrqz.me/6400c6ab9c4e9c004d2fecfa"
-                className="p-[15px] md:gap-[50px] gap-[30px] bg-[#232325] xl:w-[156px] md:w-[200px] md:h-[152px] h-[114px] w-full rounded-[8px] flex flex-col xl:-translate-x-[3px] sm:-translate-y-[3px]"
+                className="p-[15px] md:gap-[50px] gap-[30px] bg-[#232325] lg:w-[156px] md:w-[200px] md:h-[152px] h-[114px] w-full rounded-[8px] flex flex-col lg:-translate-x-[3px] sm:-translate-y-[3px]"
                 target="_blank"
                 rel="noopener noreferrer"
               >

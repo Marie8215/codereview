@@ -41,8 +41,12 @@ export const DropdownBase = ({
     setIsOpen(outerIsOpen);
   }, [outerIsOpen]);
 
+  const switchOpen = () => {
+    setIsOpen(old => !old);
+  }
+
   const triggerUi = buttonLike ? (
-    <ButtonLikeWrapper>
+    <ButtonLikeWrapper className="cursor-pointer">
       <DropdownTrigger>{trigger}</DropdownTrigger>
     </ButtonLikeWrapper>
   ) : (
@@ -53,12 +57,12 @@ export const DropdownBase = ({
     <div
       ref={dropdownRef}
       className={relative ? "relative" : ""}
-      onClick={() => setIsOpen(true)}
+      onClick={switchOpen}
     >
       {triggerUi}
       {isOpen && (
         <div
-          className={`dropdown-content max-h-[400px] overflow-auto ${
+          className={`dropdown-content max-h-[500px] overflow-auto ${
             align === "center" ? "dropdown-center" : ""
           }`}
         >
